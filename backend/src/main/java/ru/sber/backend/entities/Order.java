@@ -26,8 +26,8 @@ public class Order {
     private long numberOrder;
 
     @ManyToOne
-    @JoinColumn(name = "id_client", nullable = false)
-    private Client client;
+    @JoinColumn(name = "client_id", nullable = false)
+    private User client;
 
     private String street;
 
@@ -48,5 +48,7 @@ public class Order {
     @JoinColumn(name = "dish_id", nullable = false)
     private Dish dish;
 
-    private int evaluation;
+    private byte evaluation;
+    
+    private int quantity;
 }

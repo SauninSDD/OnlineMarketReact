@@ -20,9 +20,11 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
+    private User client;
 
     @ManyToOne
     @JoinColumn(name = "dish_id", nullable = false)
     private Dish dish;
+
+    private int quantity;
 }

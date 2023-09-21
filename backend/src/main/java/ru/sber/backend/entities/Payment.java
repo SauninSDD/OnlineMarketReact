@@ -19,7 +19,7 @@ public class Payment {
     private long id;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    private Client client;
+    private User client;
 
     private long cardNumber;
 }

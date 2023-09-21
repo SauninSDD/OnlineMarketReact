@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import Preloader from "./components/generals/Preloader"
 import './App.css';
 import NavigationMenu from "./components/generals/NavMenu";
+import {FloatButton} from "antd";
 
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 2);
   }, []);
 
   return (
@@ -20,6 +21,7 @@ function App() {
         ) : (
             <div>
               <NavigationMenu/>
+              <FloatButton.BackTop style={{width: "2.5%", height:"5%"}} visibilityHeight={100} />
             </div>
         )}
       </div>

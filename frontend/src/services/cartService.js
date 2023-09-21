@@ -6,7 +6,7 @@ const API_URL = "/cart";
 
 const getCart = (clientId, dispatch) => {
 
-    return axios.get(API_URL + `/${clientId}`,{headers: authHeader()}).then(
+    return axios.get(API_URL + `/${cartId}`,{headers: authHeader()}).then(
         (response) => {
             console.log(response.data)
             dispatch(setCart(response.data))

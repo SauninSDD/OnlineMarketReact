@@ -50,25 +50,10 @@ const updateOrder = (order, dispatch) => {
         });
 };
 
-const deleteOrder = (id, dispatch) => {
-    return axios.delete(API_URL + `/${id}`, {headers: authHeader()}).then(
-        (response) => {
-            getOrders(dispatch)
-        },
-        (error) => {
-            const _content = (error.response && error.response.data) ||
-                error.message ||
-                error.toString();
-
-            console.error(_content)
-        });
-};
-
 const orderService = {
     getOrders,
     createOrder,
     updateOrder,
-    deleteOrder,
 };
 
 export default orderService

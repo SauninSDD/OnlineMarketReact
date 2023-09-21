@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Menu } from 'antd';
 import { AppstoreAddOutlined, SettingOutlined } from '@ant-design/icons';
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import AboutPage from '../../pages/AboutPage';
 import CartPage from '../../pages/CartPage';
 import ClientPage from '../../pages/ClientPage';
@@ -9,41 +9,24 @@ import DishesPage from '../../pages/DishesPage';
 import { NotFoundPage } from '../../pages/NotFoundPage';
 
 const NavigationMenu = () => {
-    const navigate = useNavigate();
 
-    const scrollToElement = (anchorId) => {
-        const element = document.getElementById(anchorId);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
-    const handleMenuItemClick = (to, anchorId) => {
-        navigate(to, {state: {anchorId: anchorId}}); // Затем выполняем переход на указанный маршрут
-        scrollToElement(anchorId); // Сначала прокручиваем к элементу
-    };
-
-    useEffect(() => {
-        // Выполните скролл после монтирования компонента в DOM
-
-    }, []); // Пустой массив зависимостей означает, что useEffect будет выполняться только после монтирования
 
     return (
         <div>
-            <div style={{position: "sticky", top: "0"}}>
+            <div style={{position: "sticky", top: "0", zIndex: "666"}}>
                 <Menu mode="horizontal">
                 <Menu.SubMenu key="restaurant-menu" title="Меню" icon={<SettingOutlined/>}>
                     <Menu.Item key="category:1">
-                        <Link to="/">Категория 1</Link>
+                        <Link to="/" state={{ anchorId: 'category:1' }}>Категория 1</Link>
                     </Menu.Item>
                     <Menu.Item key="category:2">
-                        <a onClick={() => handleMenuItemClick('/', 'category:2')}>Категория 2</a>
+                        <Link to="/" state={{ anchorId: 'category:2' }}>Категория 2</Link>
                     </Menu.Item>
                     <Menu.Item key="category:3">
-                        <a onClick={() => handleMenuItemClick('/', 'category:3')}>Категория 3</a>
+                        <Link to="/" state={{ anchorId: 'category:3' }}>Категория 3</Link>
                     </Menu.Item>
                     <Menu.Item key="category:4">
-                        <a onClick={() => handleMenuItemClick('/', 'category:4')}>Категория 4</a>
+                        <Link to="/" state={{ anchorId: 'category:4' }}>Категория 4</Link>
                     </Menu.Item>
                 </Menu.SubMenu>
                 <Menu.Item key="cart" icon={<AppstoreAddOutlined/>}>
