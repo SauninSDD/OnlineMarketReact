@@ -27,14 +27,17 @@ public class Order {
     @JsonIgnore
     private Client client;
 
+    @Column(nullable = false)
     private Date orderDate;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private EOrderStatus orderStatus;
 
+    @Column(nullable = false)
     private BigDecimal orderTotalPrice;
 
+    @Column
     private String orderTrackNumber;
 
     @ManyToMany(fetch = FetchType.LAZY)

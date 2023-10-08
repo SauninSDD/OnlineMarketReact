@@ -6,35 +6,33 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "receipts")
-public class Receipt {
-
+@Table(name = "client_addresses")
+public class ClientAddresses {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private int receiptTotalValue;
+    private String clientDeliveryDestinationRegion;
 
     @Column(nullable = false)
-    private int receiptCardNumber;
+    private String clientDeliveryDestinationCity;
 
     @Column(nullable = false)
-    private int idClient;
+    private String clientDeliveryDestinationStreet;
 
     @Column(nullable = false)
-    private Date receiptDate;
+    private String clientDeliveryDestinationBuilding;
 
-    @OneToOne
-    @JoinColumn(name = "id_order", nullable = false)
+    @Column
+    private String clientDeliveryDestinationApartment;
+
+    @ManyToOne
+    @JoinColumn(name = "id_client", nullable = false)
     @JsonIgnore
-    private Order order;
-
-
+    private Client client;
 }

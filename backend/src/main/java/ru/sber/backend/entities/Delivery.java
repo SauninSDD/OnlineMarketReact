@@ -17,13 +17,20 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
     private String deliveryDestinationRegion;
 
+    @Column(nullable = false)
     private String deliveryDestinationCity;
 
+    @Column(nullable = false)
     private String deliveryDestinationStreet;
 
+    @Column(nullable = false)
     private String deliveryDestinationBuilding;
+
+    @Column
+    private String deliveryDestinationApartment;
 
     @OneToOne
     @JoinColumn(name = "id_order", nullable = false)

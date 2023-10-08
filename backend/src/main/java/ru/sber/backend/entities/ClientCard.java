@@ -8,33 +8,32 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Entity
 @Data
-@AllArgsConstructor
+@Table(name = "clients_cards")
+@Entity
 @NoArgsConstructor
-@Table(name = "receipts")
-public class Receipt {
+@AllArgsConstructor
 
+public class ClientCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private int receiptTotalValue;
+    private String clientCardNumber;
 
     @Column(nullable = false)
-    private int receiptCardNumber;
+    private int clientCardCvc;
 
     @Column(nullable = false)
-    private int idClient;
+    private Date clientCardExpirationDate;
 
     @Column(nullable = false)
-    private Date receiptDate;
+    private int clientCardOwner;
 
-    @OneToOne
-    @JoinColumn(name = "id_order", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_client", nullable = false)
     @JsonIgnore
-    private Order order;
-
+    private Client client;
 
 }
