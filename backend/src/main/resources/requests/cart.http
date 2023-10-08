@@ -1,0 +1,23 @@
+###Добавление блюда в корзину клиента
+POST localhost:8080/cart/3/dish/4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzbWlybm92cGE0QHlhbmRleC5ydSIsImlhdCI6MTY5NjE5MTcyMSwiZXhwIjoxNjk2Mjc4MTIxfQ.YuyTeFSW8mt5YIJBBMjh7odo_fLOyy4G_Ja9zKKGuJA
+
+###Получение блюд из корзины
+GET localhost:8080/cart/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzbWlybm92cGE0QHlhbmRleC5ydSIsImlhdCI6MTY5NjE5MTcyMSwiZXhwIjoxNjk2Mjc4MTIxfQ.YuyTeFSW8mt5YIJBBMjh7odo_fLOyy4G_Ja9zKKGuJA
+
+###Обновление количества товара в корзине
+PUT localhost:8080/cart/3/dish/4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzbWlybm92cGE0QHlhbmRleC5ydSIsImlhdCI6MTY5NjE5MTcyMSwiZXhwIjoxNjk2Mjc4MTIxfQ.YuyTeFSW8mt5YIJBBMjh7odo_fLOyy4G_Ja9zKKGuJA
+
+{
+  "quantity": 6
+}
+
+###Удаление блюда из корзины
+DELETE localhost:8080/cart/3/dish/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzbWlybm92cGE0QHlhbmRleC5ydSIsImlhdCI6MTY5NjE5MTcyMSwiZXhwIjoxNjk2Mjc4MTIxfQ.YuyTeFSW8mt5YIJBBMjh7odo_fLOyy4G_Ja9zKKGuJA

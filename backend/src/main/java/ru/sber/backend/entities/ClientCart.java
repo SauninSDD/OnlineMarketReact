@@ -5,21 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Сущность платежа
- */
 @Data
-@Table(name = "payments")
+@Table(name = "clients_carts")
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Payment {
+public class ClientCart {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    private User client;
 
-    private long cardNumber;
 }

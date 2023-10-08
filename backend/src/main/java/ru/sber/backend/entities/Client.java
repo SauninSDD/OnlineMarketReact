@@ -1,16 +1,15 @@
 package ru.sber.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.sber.backend.entities.enums.EGender;
 
 import java.util.Date;
 
-/**
- * Сущность клиента ресторана
- */
 @Data
 @Table(name = "clients")
 @Entity
@@ -19,17 +18,29 @@ import java.util.Date;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    private String name;
+    @Column(nullable = false)
+    @Size(max = 20)
+    private String clientLogin;
 
-    private int number;
+    @Column(nullable = false)
+    @Size(max = 50)
+    @Email
+    private String clientEmail;
 
-    private EGender gender;
+    @Column(nullable = false)
+    @Size(max = 120)
+    private String clientPassword;
 
-    private Date dateOfBirth;
+    @Column
+    private String clientSex;
 
-    private String email;
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date clientDateOfBirth;
 
-    private String password;
+    @Column(nullable = false)
+    @Size(max = 20)
+    private String ClientName;
 }

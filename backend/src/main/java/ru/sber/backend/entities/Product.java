@@ -5,18 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Сущность категории блюда
- */
-@Data
-@Table(name = "categories")
 @Entity
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
-public class Category {
+@NoArgsConstructor
+@Table(name = "products")
+public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    private String name;
+    private Long id;
 }

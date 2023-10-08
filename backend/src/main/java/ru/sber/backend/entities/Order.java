@@ -1,21 +1,20 @@
 package ru.sber.backend.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.sber.backend.entities.enums.EStatusOrder;
-import ru.sber.backend.entities.enums.ETypeOrder;
+import ru.sber.backend.entities.enums.EOrderStatus;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Сущность заказа
- */
-@Data
-@Table(name = "orders")
 @Entity
+@Table(name = "orders")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
@@ -23,32 +22,28 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long numberOrder;
-
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
-    private User client;
+    @JsonIgnore
+    private Client client;
 
-    private String street;
+    private Date orderDate;
 
-    private int apartmentNumber;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private EOrderStatus orderStatus;
 
-    private int entranceNumber;
+    private BigDecimal orderTotalPrice;
 
-    private int floor;
+    private String orderTrackNumber;
 
-    private ETypeOrder type;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "orders_products",
+            joinColumns = @JoinColumn(name = "id_order"),
+            inverseJoinColumns = @JoinColumn(name = "id_product"))
+    private Set<Product> products = new HashSet<>();
 
-    private EStatusOrder status;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime date;
-
-    @ManyToOne
-    @JoinColumn(name = "dish_id", nullable = false)
-    private Dish dish;
-
-    private byte evaluation;
-    
-    private int quantity;
+    public Order(EOrderStatus orderStatus){
+        this.orderStatus = orderStatus;
+    }
 }
