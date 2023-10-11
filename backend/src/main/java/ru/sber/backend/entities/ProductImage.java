@@ -17,9 +17,9 @@ public class ProductImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
+  /*  @Lob
     @Column(name = "image", columnDefinition="BLOB")
-    private byte[] image;
+    private byte[] image; */
 
     @ManyToOne
     @JoinColumn(name = "id_product", nullable = false)
