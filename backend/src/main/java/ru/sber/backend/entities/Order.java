@@ -19,6 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Order {
     @Id
+    @Column(name = "id_order")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -40,13 +41,8 @@ public class Order {
     @Column
     private String orderTrackNumber;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "orders_products",
-            joinColumns = @JoinColumn(name = "id_order"),
-            inverseJoinColumns = @JoinColumn(name = "id_product"))
-    private Set<Product> products = new HashSet<>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private Set<OrderProduct> productsInOrder = new HashSet<>();
 
-    public Order(EOrderStatus orderStatus){
-        this.orderStatus = orderStatus;
-    }
+
 }

@@ -1,1 +1,1 @@
-create schema if not exists client_db;
+create schema if not exists market_db;

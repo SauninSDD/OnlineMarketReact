@@ -7,18 +7,19 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+
+@Entity
 @Data
 @Table(name = "clients", uniqueConstraints = {@UniqueConstraint(columnNames = "clientLogin"), @UniqueConstraint(columnNames = "clientEmail")})
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class Client {
     @Id
+    @Column(name = "id_client")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -44,23 +45,15 @@ public class Client {
 
     @Column(nullable = false)
     @Size(max = 20)
-    private String ClientName;
+    private String clientName;
+
+    @OneToMany(mappedBy = "client")
+    private Set<ProductFeedback> productFeedbacks = new HashSet<>();
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "clients_favorites",
             joinColumns = @JoinColumn(name = "id_client"),
             inverseJoinColumns = @JoinColumn(name = "id_product"))
     private Set<Product> productsFavorites = new HashSet<>();
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "products_feedback",
-            joinColumns = @JoinColumn(name = "id_client"),
-            inverseJoinColumns = @JoinColumn(name = "id_product"))
-    private Set<Product> productsFeedbacks = new HashSet<>();
-    @Column(nullable = false)
-    private byte productFeedbackScore;
-
-    @Column
-    private String productFeedbackReview;
-
 }

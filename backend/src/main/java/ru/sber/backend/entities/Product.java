@@ -5,8 +5,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -16,6 +17,7 @@ import java.math.BigDecimal;
 public class Product {
 
     @Id
+    @Column(name = "id_product")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -50,4 +52,13 @@ public class Product {
     @JoinColumn(name = "id_category", nullable = false)
     @JsonIgnore
     private ProductCategory category;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<ProductFeedback> productFeedbacks = new HashSet<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<ClientCartProduct> productsInCart = new HashSet<>();
+
+    @OneToMany(mappedBy = "product")
+    private Set<OrderProduct> productsInOrder = new HashSet<>();
 }

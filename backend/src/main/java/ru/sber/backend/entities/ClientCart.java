@@ -18,26 +18,23 @@ import java.util.Set;
 public class ClientCart {
 
     @Id
+    @Column(name = "id_cart")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column
+    private BigDecimal clientCartTotalPrice;
 
     @Column
-    private int clientCartTotalPrice;
+    private int clientCartProductValue;
 
     @ManyToOne
     @JoinColumn(name = "id_client", nullable = false)
     @JsonIgnore
     private Client client;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "clients_carts_products",
-            joinColumns = @JoinColumn(name = "id_cart"),
-            inverseJoinColumns = @JoinColumn(name = "id_product"))
-    private Set<Product> products = new HashSet<>();
+    @OneToMany(mappedBy = "clientCart", cascade = CascadeType.ALL)
+    private Set<ClientCartProduct> productsInCart = new HashSet<>();
 
-    @Column
-    private int clientCartProductValue;
-    @Column
-    private BigDecimal clientCartProductPrice;
+
 }
