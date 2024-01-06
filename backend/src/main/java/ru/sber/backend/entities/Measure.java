@@ -18,5 +18,4 @@ public class Measure {
     @Column(nullable = false)
     private String measureName;
 
-
 }
