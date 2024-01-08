@@ -1,15 +1,16 @@
 package ru.sber.backend.services.client;
 
 import ru.sber.backend.entities.ClientPhone;
+import ru.sber.backend.models.PhoneRequest;
 
 import java.util.List;
 
 public interface ClientTelephoneService {
-    Long addClientPhone(ClientPhone clientPhone);
+    boolean addClientPhone(PhoneRequest clientPhone);
 
-    ClientPhone getClientPhone(Long idClientPhone);
+    ClientPhone getClientPhone(String clientPhone);
 
-    List<ClientPhone> getAllClientPhonesByClientId(Long idClient);
+    List<String> getAllClientPhonesByClientId();
 
     boolean updateClientPhone(ClientPhone clientPhone);
 
