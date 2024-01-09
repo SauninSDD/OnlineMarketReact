@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.sber.backend.entities.ClientPhone;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Репозиторий для взаимодействия с номерами клиента
@@ -12,10 +13,10 @@ import java.util.List;
 @Repository
 public interface ClientPhoneRepository extends JpaRepository<ClientPhone, Long> {
 
-        List<ClientPhone> findAllClientPhonesByIdClient(String clientId);
+        List<ClientPhone> findAllClientPhonesByIdClient(String idClient);
 
         boolean existsByPhone(String phone);
 
-
+        Optional<ClientPhone> findClientPhoneByPhoneAndIdClient(String phone, String idClient);
 
 }

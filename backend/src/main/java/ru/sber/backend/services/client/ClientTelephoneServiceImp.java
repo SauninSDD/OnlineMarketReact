@@ -4,10 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.sber.backend.entities.ClientPhone;
-import ru.sber.backend.models.PhoneRequest;
+import ru.sber.backend.exceptions.ClientPhoneNotFound;
 import ru.sber.backend.repositories.ClientPhoneRepository;
 
 import java.util.List;
+import java.util.Optional;
+
 
 @Slf4j
 @Service
@@ -22,25 +24,20 @@ public class ClientTelephoneServiceImp implements ClientTelephoneService {
     }
 
     @Override
-    public boolean addClientPhone(PhoneRequest phoneRequest) {
+    public boolean addClientPhone(String clientPhone) {
         log.info("Добавление заказа");
-        var isExistsPhone = clientPhoneRepository.existsByPhone(phoneRequest.getPhone());
+        var isExistsPhone = clientPhoneRepository.existsByPhone(clientPhone);
         if (!isExistsPhone) {
-            ClientPhone clientPhone = ClientPhone.builder()
-                    .phone(phoneRequest.getPhone())
+            ClientPhone addedPhone = ClientPhone.builder()
+                    .phone(clientPhone)
                     .idClient(clientService.getIdClient())
                     .build();
 
-            log.info("Добавляет телефон клиента {}", phoneRequest);
-            clientPhoneRepository.save(clientPhone);
+            log.info("Добавляет телефон клиента {}", clientPhone);
+            clientPhoneRepository.save(addedPhone);
             return true;
         }
         return false;
-    }
-
-    @Override
-    public ClientPhone getClientPhone(String idClientPhone) {
-        return null;
     }
 
     @Override
@@ -50,12 +47,13 @@ public class ClientTelephoneServiceImp implements ClientTelephoneService {
     }
 
     @Override
-    public boolean updateClientPhone(ClientPhone clientPhone) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteClientPhone(Long idClientPhone) {
+    public boolean deleteClientPhone(String clientPhone) {
+        Optional<ClientPhone> deletedPhone = clientPhoneRepository.findClientPhoneByPhoneAndIdClient(clientPhone, clientService.getIdClient());
+        if (deletedPhone.isPresent()) {
+            clientPhoneRepository.delete(deletedPhone.get());
+            log.info("Удален телефон {}", clientPhone);
+            return true;
+        }
         return false;
     }
 }

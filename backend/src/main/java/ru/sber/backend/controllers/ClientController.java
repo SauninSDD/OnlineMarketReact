@@ -19,7 +19,6 @@ import java.util.List;
 @RequestMapping("client")
 public class ClientController {
 
-
     private final ClientTelephoneService clientTelephoneService;
 
     @Autowired
@@ -42,17 +41,40 @@ public class ClientController {
                 .body(clientPhonesList);
     }
 
+    /**
+     * Добавляет номер телефона
+     *
+     * @return результат запроса
+     */
     @PostMapping
     @PreAuthorize("hasRole('client_user')")
     public ResponseEntity<String> addPhone(@RequestBody PhoneRequest phoneRequest) {
         log.info("Создает номер клиента {}", phoneRequest.getPhone());
-        var isAdd = clientTelephoneService.addClientPhone(phoneRequest);
+        var isAdd = clientTelephoneService.addClientPhone(phoneRequest.getPhone());
         if (isAdd) {
-        return ResponseEntity.created(URI.create("phones"))
-                .body("Телефон добавлен");
+            return ResponseEntity.created(URI.create("phones"))
+                    .body("Телефон добавлен");
+        } else {
+            return ResponseEntity.badRequest()
+                    .body("Телефон уже привязан к одному из аккаунтов");
         }
-        return ResponseEntity.badRequest()
-                .body("Телефон уже привязан к одному из аккаунтов");
+    }
+
+    /**
+     * Удаляет номер телефона
+     *
+     * @return результат запроса
+     */
+    @DeleteMapping
+    @PreAuthorize("hasRole('client_user')")
+    public ResponseEntity<String> deletePhone(@RequestBody PhoneRequest phoneRequest) {
+        log.info("Удаляет номер клиента {}", phoneRequest.getPhone());
+        var isDeleted = clientTelephoneService.deleteClientPhone(phoneRequest.getPhone());
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
