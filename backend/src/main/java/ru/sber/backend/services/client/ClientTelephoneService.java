@@ -1,6 +1,5 @@
 package ru.sber.backend.services.client;
 
-import ru.sber.backend.entities.ClientPhone;
 
 import java.util.List;
 
