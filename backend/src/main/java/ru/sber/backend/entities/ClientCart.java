@@ -34,7 +34,7 @@ public class ClientCart {
     private Client client;
 
     @OneToMany(mappedBy = "clientCart", cascade = CascadeType.ALL)
-    private Set<ClientCartProduct> productsInCart = new HashSet<>();
+    private Set<CartProduct> productsInCart = new HashSet<>();
 
 
 }

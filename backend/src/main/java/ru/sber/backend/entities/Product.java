@@ -40,7 +40,7 @@ public class Product {
     private int productLength;
 
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private int productArticle;
 
     @ManyToOne
@@ -57,7 +57,7 @@ public class Product {
     private Set<ProductFeedback> productFeedbacks = new HashSet<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private Set<ClientCartProduct> productsInCart = new HashSet<>();
+    private Set<CartProduct> productsInCart = new HashSet<>();
 
     @OneToMany(mappedBy = "product")
     private Set<OrderProduct> productsInOrder = new HashSet<>();

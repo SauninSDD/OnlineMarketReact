@@ -23,5 +23,5 @@ public class ProductCategory {
     @OneToOne
     @JoinColumn(name = "category_id_parent")
     @JsonIgnore
-    private ProductCategory category;
+    private ProductCategory productCategory;
 }

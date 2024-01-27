@@ -10,9 +10,9 @@ public interface ClientCardService {
 
     ClientCard getClientCardByClientCardNumber(String clientCardNumber);
 
-    ClientCard getClientCardByClientId(Long idClient);
+    ClientCard getClientCardByClientId(Long clientId);
 
-    List<ClientCard> getAllClientCardsByClientId(Long idClient);
+    List<ClientCard> getAllClientCardsByClientId(Long clientId);
 
-    boolean deleteClientCard(Long idClientCard);
+    boolean deleteClientCard(Long clientCardId);
 }

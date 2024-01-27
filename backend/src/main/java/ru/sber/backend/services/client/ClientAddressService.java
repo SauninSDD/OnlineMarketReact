@@ -7,11 +7,11 @@ import java.util.List;
 public interface ClientAddressService {
     Long addClientAddress(ClientAddress clientAddress);
 
-    ClientAddress getClientAddress(Long idClientAddress);
+    ClientAddress getClientAddress(Long clientAddressId);
 
-    List<ClientAddress> getAllClientAddressesByClientId(Long idClient);
+    List<ClientAddress> getAllClientAddressesByClientId(Long clientId);
 
     boolean updateClientAddress(ClientAddress clientAddress);
 
-    boolean deleteClientAddress(Long idClientAddress);
+    boolean deleteClientAddress(Long clientAddressId);
 }

@@ -13,7 +13,7 @@ public interface OrderService {
 
     List<Order> getAllOrders();
 
-    List<Order> getOrdersByClientId(Long idClient);
+    List<Order> getOrdersByClientId(Long clientId);
 
     List<Order> getOrdersByStatus(EOrderStatus orderStatus);
 
@@ -21,7 +21,7 @@ public interface OrderService {
 
     Order getOrderByTrackNumber(String orderTrackNumber);
 
-    boolean changeOrderStatus(Long id, EOrderStatus orderStatus);
+    boolean changeOrderStatus(Long orderId, EOrderStatus orderStatus);
 
     boolean deleteOrder(Long id);
 }

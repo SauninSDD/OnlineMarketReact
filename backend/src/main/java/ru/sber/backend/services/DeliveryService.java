@@ -6,6 +6,6 @@ import ru.sber.backend.entities.Delivery;
 public interface DeliveryService {
     Long addDelivery(Delivery delivery);
 
-    Delivery getDeliveryByOrderId(Long idOrder);
+    Delivery getDeliveryByOrderId(Long orderId);
 
 }

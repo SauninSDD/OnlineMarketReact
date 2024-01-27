@@ -46,7 +46,7 @@ public class ClientController {
      *
      * @return результат запроса
      */
-    @PostMapping
+    @PostMapping("/{id}")
     @PreAuthorize("hasRole('client_user')")
     public ResponseEntity<String> addPhone(@RequestBody PhoneRequest phoneRequest) {
         log.info("Создает номер клиента {}", phoneRequest.getPhone());

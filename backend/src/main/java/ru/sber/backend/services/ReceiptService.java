@@ -5,7 +5,7 @@ import ru.sber.backend.entities.Receipt;
 public interface ReceiptService {
     Long addReceipt(Receipt receipt);
 
-    Receipt getReceiptByOrderId(Long idOrder);
+    Receipt getReceiptByOrderId(Long orderId);
 
     boolean deleteReceipt(Long id);
 }

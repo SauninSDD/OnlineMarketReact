@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Embeddable
 @Table(name = "clients_carts_products")
 @Data
 @NoArgsConstructor
-public class ClientCartProduct {
+public class CartProduct { //некорректный какой-то вроде класс вплане полей-сущностей
     @Id
     @Column(name = "id_client_cart_product")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +26,10 @@ public class ClientCartProduct {
     private Product product;
 
     @Column
-    private byte clientCartProductValue;
+    private int cartProductQuantity;
 
     @Column
-    private int clientCartProductPrice;
+    private BigDecimal cartProductPrice;
 
 
 }

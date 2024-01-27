@@ -19,7 +19,7 @@ public class ClientServiceImp implements ClientService {
 
     public String getIdClient() {
         Jwt jwt = jwtService.getJwtSecurityContext();
-//        Long clientId = Long.parseLong(jwtService.getSubClaim(jwt));
+//        Long clientId = Long.parseLong(jwtService.getSubClaim(jwt), 16); //удалить тире и с охранить либо в 16-ой либо перевети в 10-ую и сохранить
 //        log.info("Парс id клиента к виду: {}", clientId);
         return jwtService.getSubClaim(jwt);
     }
