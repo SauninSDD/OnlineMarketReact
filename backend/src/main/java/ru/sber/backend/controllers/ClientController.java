@@ -46,7 +46,7 @@ public class ClientController {
      *
      * @return результат запроса
      */
-    @PostMapping("/{id}")
+    @PostMapping("/phones")
     @PreAuthorize("hasRole('client_user')")
     public ResponseEntity<String> addPhone(@RequestBody PhoneRequest phoneRequest) {
         log.info("Создает номер клиента {}", phoneRequest.getPhone());
@@ -65,7 +65,7 @@ public class ClientController {
      *
      * @return результат запроса
      */
-    @DeleteMapping
+    @DeleteMapping("/phones")
     @PreAuthorize("hasRole('client_user')")
     public ResponseEntity<String> deletePhone(@RequestBody PhoneRequest phoneRequest) {
         log.info("Удаляет номер клиента {}", phoneRequest.getPhone());
