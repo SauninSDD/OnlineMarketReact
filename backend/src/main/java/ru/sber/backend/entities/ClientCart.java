@@ -28,10 +28,8 @@ public class ClientCart {
     @Column
     private int clientCartProductValue;
 
-    @ManyToOne
-    @JoinColumn(name = "id_client", nullable = false)
-    @JsonIgnore
-    private Client client;
+    @Column(name = "client_id", nullable = false)
+    private String idClient;
 
     @OneToMany(mappedBy = "clientCart", cascade = CascadeType.ALL)
     private Set<CartProduct> productsInCart = new HashSet<>();

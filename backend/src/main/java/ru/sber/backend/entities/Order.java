@@ -23,10 +23,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
-    @JsonIgnore
-    private Client client;
+    @Column(name = "client_id", nullable = false)
+    private String idClient;
 
     @Column(nullable = false)
     private LocalDate orderDate;

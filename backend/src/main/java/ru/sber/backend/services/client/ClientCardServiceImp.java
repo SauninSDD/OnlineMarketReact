@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.sber.backend.entities.ClientCard;
-import ru.sber.backend.models.AddClientCardRequest;
+import ru.sber.backend.models.client.AddClientCardRequest;
 import ru.sber.backend.repositories.ClientCardRepository;
 
 import java.util.List;

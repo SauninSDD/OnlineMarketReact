@@ -5,14 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ru.sber.backend.models.AddClientCardRequest;
+import ru.sber.backend.models.client.AddClientCardRequest;
 import ru.sber.backend.services.client.ClientCardService;
 
 import java.net.URI;
 import java.util.List;
 
 /**
- * Контроллер для обработки запросов к корзине клиента
+ * Контроллер для обработки запросов к банковским картам клиента
  */
 @Slf4j
 @RestController
@@ -33,7 +33,7 @@ public class ClientCardController {
      */
     @PreAuthorize("hasRole('client_user')")
     @GetMapping
-    public ResponseEntity<List<String>> getCards() {
+    public ResponseEntity<List<String>> getClientCards() {
         log.info("Получение карт пользователя");
         List<String> clientCardsList = clientCardService.getAllClientCardsByClientId();
         log.info("Список карт пользователя: {}", clientCardsList);
@@ -48,7 +48,7 @@ public class ClientCardController {
      */
     @PreAuthorize("hasRole('client_user')")
     @PostMapping
-    public ResponseEntity<String> addPhone(@RequestBody AddClientCardRequest addClientCardRequest) {
+    public ResponseEntity<String> addClientCard(@RequestBody AddClientCardRequest addClientCardRequest) {
         log.info("Добавляет карту клиента {}", addClientCardRequest);
         var isAdd = clientCardService.addClientCard(addClientCardRequest);
         if (isAdd) {
@@ -67,7 +67,7 @@ public class ClientCardController {
      */
     @PreAuthorize("hasRole('client_user')")
     @DeleteMapping
-    public ResponseEntity<String> deletePhone(@RequestParam String cardNumber) {
+    public ResponseEntity<String> deleteClientCard(@RequestParam String cardNumber) {
         log.info("Удаляет карту клиента  {}", cardNumber);
         var isDeleted = clientCardService.deleteClientCard(cardNumber);
         if (isDeleted) {

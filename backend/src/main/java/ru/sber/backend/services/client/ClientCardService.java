@@ -1,7 +1,7 @@
 package ru.sber.backend.services.client;
 
 import ru.sber.backend.entities.ClientCard;
-import ru.sber.backend.models.AddClientCardRequest;
+import ru.sber.backend.models.client.AddClientCardRequest;
 
 import java.util.List;
 import java.util.Optional;

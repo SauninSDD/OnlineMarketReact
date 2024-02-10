@@ -15,8 +15,8 @@ import org.springframework.web.client.RestTemplate;
 //import ru.sber.backend.constants.GeneratePassword;
 import ru.sber.backend.entities.request.LoginRequest;
 import ru.sber.backend.entities.request.SignupRequest;
-import ru.sber.backend.models.*;
 //import ru.sber.backend.services.EmailService;
+import ru.sber.backend.models.keycloack.*;
 import ru.sber.backend.services.JwtService;
 
 import java.util.ArrayList;

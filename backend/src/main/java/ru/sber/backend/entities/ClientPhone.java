@@ -18,7 +18,7 @@ public class ClientPhone {
     private Long id;
 
     @Column(nullable = false)
-    private String phone;//странно, что интовый номер телефона, надо проверить все entity
+    private String phone;
 
     @Column(name = "client_id", nullable = false)
     private String idClient;

@@ -1,4 +1,4 @@
-package ru.sber.backend.models;
+package ru.sber.backend.models.client;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
