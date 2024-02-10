@@ -6,7 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Entity
 @Data
@@ -29,7 +30,7 @@ public class Receipt {
     private int idClient;
 
     @Column(nullable = false)
-    private Date receiptDate;
+    private LocalDate receiptDate;
 
     @OneToOne
     @JoinColumn(name = "id_order", nullable = false)

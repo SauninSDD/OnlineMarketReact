@@ -1,18 +1,18 @@
 package ru.sber.backend.services.client;
 
-
 import ru.sber.backend.entities.ClientCard;
+import ru.sber.backend.models.AddClientCardRequest;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClientCardService {
-    Long addClientCard(ClientCard clientCard);
+    boolean addClientCard(AddClientCardRequest addClientCardRequest);
 
-    ClientCard getClientCardByClientCardNumber(String clientCardNumber);
+    Optional<ClientCard> getClientCard(Long clientCardId);
 
-    ClientCard getClientCardByClientId(Long clientId);
+    List<String> getAllClientCardsByClientId();
 
-    List<ClientCard> getAllClientCardsByClientId(Long clientId);
+    boolean deleteClientCard(String clientCardNumber);
 
-    boolean deleteClientCard(Long clientCardId);
 }

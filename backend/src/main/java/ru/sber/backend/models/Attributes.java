@@ -11,4 +11,5 @@ public class Attributes {
     private String phoneNumber;
     private String birthdate;
     private String gender;
+    private String fullName;
 }

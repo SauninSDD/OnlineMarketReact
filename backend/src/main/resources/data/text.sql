@@ -1,0 +1,5 @@
+insert into client_addresses values (1, 23, 4, 5, 45, 7, '1');
+
+-- insert into clients values (5f828be3-cd04-481a-82ca-561f46fa3d35, )
+
+select * from client_addresses

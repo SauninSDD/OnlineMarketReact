@@ -3,7 +3,7 @@ package ru.sber.backend.services;
 import ru.sber.backend.entities.Order;
 import ru.sber.backend.entities.enums.EOrderStatus;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderService {
@@ -17,7 +17,7 @@ public interface OrderService {
 
     List<Order> getOrdersByStatus(EOrderStatus orderStatus);
 
-    List<Order> getOrdersByDate(Date orderDate); //2 метода реализации (сортировка от большего к меньшему и наоборот)
+    List<Order> getOrdersByDate(LocalDate orderDate); //2 метода реализации (сортировка от большего к меньшему и наоборот)
 
     Order getOrderByTrackNumber(String orderTrackNumber);
 

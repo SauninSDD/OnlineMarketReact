@@ -3,17 +3,19 @@ package ru.sber.backend.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Data
 @Table(name = "clients_cards")
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Builder
 public class ClientCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +28,11 @@ public class ClientCard {
     private int clientCardCvc;
 
     @Column(nullable = false)
-    private Date clientCardExpirationDate;
+    private LocalDate clientCardExpirationDate;
 
     @Column(nullable = false)
-    private int clientCardOwner;
+    private String clientCardOwner;
 
-    @ManyToOne
-    @JoinColumn(name = "id_client", nullable = false)
-    @JsonIgnore
-    private Client client;
-
+    @Column(name = "client_id", nullable = false)
+    private String idClient;
 }

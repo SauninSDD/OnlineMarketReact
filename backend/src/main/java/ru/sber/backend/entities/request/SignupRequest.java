@@ -27,6 +27,8 @@ public class SignupRequest {
 
     private String gender;
 
+    private String fullName;
+
     private Set<String> role;
 
     @NotBlank

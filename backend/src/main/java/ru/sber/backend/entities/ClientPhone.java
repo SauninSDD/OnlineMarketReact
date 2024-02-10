@@ -20,11 +20,6 @@ public class ClientPhone {
     @Column(nullable = false)
     private String phone;//странно, что интовый номер телефона, надо проверить все entity
 
-    /*@ManyToOne
-    @JoinColumn(name = "id_client", nullable = false)
-    @JsonIgnore
-    private Client client;*/
-
     @Column(name = "client_id", nullable = false)
     private String idClient;
 }

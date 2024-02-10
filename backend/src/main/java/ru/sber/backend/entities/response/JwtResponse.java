@@ -2,7 +2,7 @@ package ru.sber.backend.entities.response;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -17,13 +17,13 @@ public class JwtResponse {
 
     private String number;
 
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     private String email;
 
     private List<String> roles;
 
-    public JwtResponse(String accessToken, Long id, String username, String number, Date dateOfBirth, String email, List<String> roles) {
+    public JwtResponse(String accessToken, Long id, String username, String number, LocalDate dateOfBirth, String email, List<String> roles) {
         this.accessToken = accessToken;
 
         this.id = id;

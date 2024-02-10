@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import ru.sber.backend.entities.enums.EOrderStatus;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,7 +29,7 @@ public class Order {
     private Client client;
 
     @Column(nullable = false)
-    private Date orderDate;
+    private LocalDate orderDate;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)

@@ -7,7 +7,8 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.Date;
+
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class Client {
 
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date clientDateOfBirth;
+    private LocalDate clientDateOfBirth;
 
     @Column(nullable = false)
     @Size(max = 20)

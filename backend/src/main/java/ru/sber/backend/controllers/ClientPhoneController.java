@@ -16,13 +16,13 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("client")
-public class ClientController {
+@RequestMapping("/client/phones")
+public class ClientPhoneController {
 
     private final ClientTelephoneService clientTelephoneService;
 
     @Autowired
-    public ClientController(ClientTelephoneService clientTelephoneService) {
+    public ClientPhoneController(ClientTelephoneService clientTelephoneService) {
         this.clientTelephoneService = clientTelephoneService;
     }
 
@@ -32,7 +32,7 @@ public class ClientController {
      * @return список телефонов пользователя
      */
     @PreAuthorize("hasRole('client_user')")
-    @GetMapping("/phones")
+    @GetMapping
     public ResponseEntity<List<String>> getPhones() {
         log.info("Получение номеров пользователя");
         List<String> clientPhonesList = clientTelephoneService.getAllClientPhonesByClientId();
@@ -46,7 +46,7 @@ public class ClientController {
      *
      * @return результат запроса
      */
-    @PostMapping("/phones")
+    @PostMapping
     @PreAuthorize("hasRole('client_user')")
     public ResponseEntity<String> addPhone(@RequestBody PhoneRequest phoneRequest) {
         log.info("Создает номер клиента {}", phoneRequest.getPhone());
@@ -65,11 +65,11 @@ public class ClientController {
      *
      * @return результат запроса
      */
-    @DeleteMapping("/phones")
+    @DeleteMapping
     @PreAuthorize("hasRole('client_user')")
-    public ResponseEntity<String> deletePhone(@RequestBody PhoneRequest phoneRequest) {
-        log.info("Удаляет номер клиента {}", phoneRequest.getPhone());
-        var isDeleted = clientTelephoneService.deleteClientPhone(phoneRequest.getPhone());
+    public ResponseEntity<String> deletePhone(@RequestParam String phone) {
+        log.info("Удаляет номер клиента {}", phone);
+        var isDeleted = clientTelephoneService.deleteClientPhone(phone);
         if (isDeleted) {
             return ResponseEntity.noContent().build();
         } else {
