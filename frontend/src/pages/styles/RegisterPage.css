@@ -1,0 +1,44 @@
+.registerPage {
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.registerPage__card {
+    width: 1000px;
+    height: 600px;
+    background: linear-gradient(to right, #007bff 50%, white 50%);
+    border-width: 3px;
+}
+
+.registerPage__card-content {
+    flex: 1;
+    color: white;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 190px;
+}
+
+.registerPage__card-h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.registerPage__card-h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.registerPage__card-p {
+    font-size: 18px;
+    text-align: center;
+}
+
+.registerPage__button {
+    background-color: #0e4acb;
+    color: #FFFFFF;
+}

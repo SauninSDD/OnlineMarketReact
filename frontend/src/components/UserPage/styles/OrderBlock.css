@@ -1,0 +1,136 @@
+.orderBlock {
+    margin-top: -20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orderBlock__card {
+    font-family: Sylfaen, "BPG Glaho", Arial, sans-serif;
+    width: 500px;
+    margin: 50px auto;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.orderBlock__status-bar {
+    margin-top: 20px;
+}
+
+.orderBlock__card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.orderBlock__card-content p {
+    margin: 5px 0;
+}
+
+.orderBlock__card-content p:first-child {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.orderBlock__card_status {
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    color: #1890ff;
+    font-weight: bold;
+}
+
+.orderBlock__card_status p {
+    margin: 10px 0;
+}
+
+.orderBlock__card_dishes {
+    margin-top: 15px;
+}
+
+.orderBlock__card-dishes ul {
+    padding-left: 20px;
+}
+
+.orderBlock__card-dishes ul li {
+    margin-bottom: 5px;
+}
+
+.orderBlock__cancel-button {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.orderBlock__cancel-button button {
+    background-color: #b24344;
+    color: white;
+    border: none;
+    height: auto;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+    transition: background-color 0.3s;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Тень кнопки по умолчанию */
+}
+
+.orderBlock__cancel-button button:hover {
+    background-color: #812626 !important;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3); /* Увеличенная тень при наведении */
+}
+
+.orderBlock__card-info {
+
+    font-size: 16px;
+    color: #000000;
+    margin-top: 0;
+}
+
+.orderBlock__card-status-text {
+
+    font-size: 24px;
+    color: #1890ff;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+}
+
+.orderBlock__card-dish {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.orderBlock__card-dish-name {
+    font-weight: bold;
+}
+
+.orderBlock__card-cost {
+    font-size: 20px;
+    color: #D73E14;
+    font-weight: bold;
+    text-align: right;
+    border-top: 1px solid #D73E14; /* Линия над стоимостью */
+    padding-top: 5px; /* Добавление отступа между текстом и линией */
+    margin-top: 10px; /* Можно изменить в зависимости от требуемого отступа */
+}
+
+.orderBlock__card-title {
+    font-size: 20px;
+    color: #D73E14;
+    font-weight: bold;
+    text-align: left;
+}
+
+
+
+
+.orderBlock__card-number {
+    font-family: Sylfaen, "BPG Glaho", Arial, sans-serif;
+    font-size: 16px;
+    color: black;
+}

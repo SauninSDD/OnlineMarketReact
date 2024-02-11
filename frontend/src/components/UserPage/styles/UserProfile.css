@@ -1,0 +1,110 @@
+.userProfile__card {
+    width: 80%;
+    margin: 10px auto;
+}
+
+
+.userProfile__card p {
+    font-size: 18px;
+    padding: 10px;
+}
+
+.userProfile__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.userProfile__right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 2;
+}
+
+.userProfile__field {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.userProfile__left {
+    flex: 1;
+}
+
+.userProfile__field {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.infoTitle {
+    font-weight: bold;
+    font-family: Sylfaen, "BPG Glaho", Arial, sans-serif;
+}
+
+.userProfile__button_editing {
+    background: #d2e3d1;
+    font-weight: bold;
+    margin: 10px 0 0 0;
+    color: #86582e;
+    outline: none;
+    width: 110px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.userProfile__button_save {
+    background: #fff4e8;
+    font-weight: bold;
+    margin: 30px 0 0 0;
+    color: #754d28;
+    outline: none;
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.userProfile__button_editing:hover {
+    color: #ffc17b !important;
+}
+
+.userProfile__button_save:hover {
+    color: #ffc17b !important;
+}
+
+.userProfile__button_logout:hover {
+    color: #ffc17b !important;
+}
+.userProfile__button_logout {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ffffff;
+    color: #ea0000;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.userProfile__form-fields {
+    padding: 20px;
+    font-size: 18px;
+}
+
+.userProfile__form-fields input,
+.userProfile__form-fields select,
+.userProfile__form-fields textarea {
+    width: 100%;
+    font-size: 18px;
+    padding: 6px;
+    margin: 4px;
+}
+
+
+.userProfile__form-fields label {
+    font-size: 18px;
+}

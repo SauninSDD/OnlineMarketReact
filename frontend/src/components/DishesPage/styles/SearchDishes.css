@@ -1,0 +1,9 @@
+.searchDishes {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.searchDishes__search {
+    padding-top: 20px;
+    width: 800px;
+}

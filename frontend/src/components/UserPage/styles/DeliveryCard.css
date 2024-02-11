@@ -1,0 +1,17 @@
+.deliveryCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deliveryCard__card {
+    width: 500px;
+    margin: 50px auto;
+    overflow: auto;
+}
+
+.deliveryCard__card-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}

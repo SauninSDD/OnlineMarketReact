@@ -1,0 +1,74 @@
+.cartPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+}
+
+
+.cartPage--content {
+    width: 80%;
+    max-width: 1200px;
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+}
+
+.cartPage--content--title-cart{
+    margin: 40px;
+}
+
+.cartPage--content--title-cartIsEmpty{
+    margin-left: 40px;
+}
+
+.cartPage--content--ListDishesFromCart{
+    margin: 40px;
+}
+
+.border-bottom-container{
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.cartPage--content--delivery {
+    margin: 40px;
+    background-color: #fff;
+}
+
+.cartPage--content--payment {
+    margin-top: 40px;
+    background-color: #fff;
+}
+
+.cartPage-img-empty {
+    height: 500px;
+}
+
+.cartPage-total {
+    position: fixed;
+    bottom: 0;
+    z-index: 8;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+    height: 100px;
+    width: 100%;
+    background: azure;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #e1e1e1;
+}
+
+.cartPage-total-title-count {
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+}
+
+.cartEmpty__images__container{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
