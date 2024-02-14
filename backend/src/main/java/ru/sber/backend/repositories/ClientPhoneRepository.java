@@ -2,7 +2,7 @@ package ru.sber.backend.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.sber.backend.entities.ClientPhone;
+import ru.sber.backend.entities.client.ClientPhone;
 
 import java.util.List;
 import java.util.Optional;

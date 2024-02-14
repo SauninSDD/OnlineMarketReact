@@ -5,7 +5,7 @@ import {Dispatch} from "redux";
 import {login, setUserData} from "../slices/authSlice";
 import {AppDispatch} from "../store";
 
-const API_URL = "/api/auth";
+const API_URL = "/Broomstick/api/auth";
 
 /**
  * Запрос для регистрации пользователя

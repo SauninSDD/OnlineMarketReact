@@ -9,24 +9,9 @@ export function buildDevServer(options: BuildOptions): DevServerConfiguration {
         historyApiFallback: true,
         hot: true,
         proxy: {
-            '/api': {
+            '/Broomstick': {
                 target: 'http://localhost:3000',
-                router: () => 'http://localhost:8084',
-                logLevel: 'debug' /*optional*/
-            },
-            '/dishes': {
-                target: 'http://localhost:3000',
-                router: () => 'http://localhost:8084',
-                logLevel: 'debug' /*optional*/
-            },
-            '/cart': {
-                target: 'http://localhost:3000',
-                router: () => 'http://localhost:8084',
-                logLevel: 'debug' /*optional*/
-            },
-            '/orders': {
-                target: 'http://localhost:3000',
-                router: () => 'http://localhost:8084',
+                router: () => 'http://localhost:8085',
                 logLevel: 'debug' /*optional*/
             }
         }

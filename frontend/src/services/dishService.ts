@@ -2,7 +2,7 @@ import axios from "axios";
 import { setDishes} from "../slices/dishesSlice";
 import {AppDispatch} from "../store";
 
-const API_URL: string = "/dishes";
+const API_URL: string = "/Broomstick/dishes";
 
 /**
  * Запрос для получения меню ресторана

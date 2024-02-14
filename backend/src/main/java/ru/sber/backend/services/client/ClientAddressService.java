@@ -1,6 +1,6 @@
 package ru.sber.backend.services.client;
 
-import ru.sber.backend.entities.ClientAddress;
+import ru.sber.backend.entities.client.ClientAddress;
 
 import java.util.List;
 

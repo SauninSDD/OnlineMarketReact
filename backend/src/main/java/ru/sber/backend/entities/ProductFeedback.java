@@ -3,6 +3,7 @@ package ru.sber.backend.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.sber.backend.entities.client.Client;
 
 @Entity
 @Embeddable

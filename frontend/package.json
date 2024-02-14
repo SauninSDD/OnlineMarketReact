@@ -69,5 +69,5 @@
     "redux": "^4.2.1",
     "stripe": "^13.9.0"
   },
-  "proxy": "http://localhost:8084"
+  "proxy": "http://localhost:8085"
 }

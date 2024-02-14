@@ -3,7 +3,7 @@ package ru.sber.backend.services.client;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.sber.backend.entities.ClientPhone;
+import ru.sber.backend.entities.client.ClientPhone;
 import ru.sber.backend.repositories.ClientPhoneRepository;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class ClientTelephoneServiceImp implements ClientTelephoneService {
 
     @Override
     public boolean addClientPhone(String clientPhone) {
-        log.info("Добавление заказа");
+        log.info("Добавление телефона");
         var isExistsPhone = clientPhoneRepository.existsByPhone(clientPhone);
         if (!isExistsPhone) {
             ClientPhone addedPhone = ClientPhone.builder()

@@ -1,6 +1,5 @@
-package ru.sber.backend.entities;
+package ru.sber.backend.entities.client;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

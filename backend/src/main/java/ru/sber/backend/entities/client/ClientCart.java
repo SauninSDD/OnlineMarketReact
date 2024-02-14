@@ -1,10 +1,10 @@
-package ru.sber.backend.entities;
+package ru.sber.backend.entities.client;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.sber.backend.entities.CartProduct;
 
 import java.math.BigDecimal;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package ru.sber.backend.entities;
+package ru.sber.backend.entities.client;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
 package ru.sber.backend.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.sber.backend.entities.ClientCard;
+import ru.sber.backend.entities.client.ClientCard;
 
 import java.util.List;
 import java.util.Optional;
