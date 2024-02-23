@@ -1,39 +1,56 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IDish} from "@/types/types";
+import {IProduct} from "@/types/types";
 
 interface DishesState {
-    dishes: IDish[];
-    currentPage: number;
-    totalPage: number;
-    fetching: boolean;
+    dishes: {
+        [category: string]: IProduct[]
+    };
+    currentPage: {
+        [category: string]: number
+    };
+    totalPage: {
+        [category: string]: number
+    };
+    fetching: {
+        [category: string]: boolean
+    };
+    category: string;
 }
 
 const initialState: DishesState = {
-    dishes: [],
-    currentPage: 0,
-    totalPage: 1,
-    fetching: true,
+    dishes: {},
+    currentPage: {},
+    totalPage: {},
+    fetching: {},
+    category: '',
 };
 
 export const dishesSlice = createSlice({
     name: 'dishes',
     initialState: initialState,
     reducers: {
-        setDishes: (state, action: PayloadAction<IDish[]>) => {
-            state.dishes = [...state.dishes, ...action.payload];
+        setDishes: (state, action: PayloadAction<IProduct[]>) => {
+            if (state.dishes.hasOwnProperty(state.category)) {
+                state.dishes[state.category] = [...state.dishes[state.category], ...action.payload];
+            } else {
+                state.dishes[state.category] = [...action.payload];
+            }
         },
         setCurrentPage: (state, action: PayloadAction<number>) => {
-            state.currentPage = action.payload;
+                state.currentPage[state.category] = action.payload;
         },
         setTotalPage: (state, action: PayloadAction<number>) => {
-            state.totalPage = action.payload;
+            state.totalPage[state.category] = action.payload;
         },
         setFetching: (state, action: PayloadAction<boolean>) => {
-            state.fetching = action.payload;
+            state.fetching[state.category] = action.payload;
         },
+        setCategory: (state, action: PayloadAction<string>) => {
+            state.category = action.payload;
+        }
     },
 })
 
-export const {setDishes, setCurrentPage, setTotalPage, setFetching} = dishesSlice.actions;
+export const {setDishes, setCurrentPage, setTotalPage, setFetching, setCategory} = dishesSlice.actions;
 
 export default dishesSlice.reducer;

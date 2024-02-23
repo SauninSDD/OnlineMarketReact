@@ -1,18 +1,18 @@
 import axios from "axios";
-import { setDishes} from "../slices/dishesSlice";
-import {AppDispatch} from "../store";
+import { setDishes} from "@/slices/dishesSlice";
+import {AppDispatch} from "@/store";
 
-const API_URL: string = "/Broomstick/dishes";
+const API_URL: string = "/Broomstick/products";
 
 /**
  * Запрос для получения меню ресторана
  * @constructor
  */
-const getDishes = (size: number, page: number, dispatch: AppDispatch) => {
-    return axios.get(`${API_URL}/any?page=${page}&size=${size}`).then(
+const getDishes = (category: string, size: number, page: number, dispatch: AppDispatch) => {
+    return axios.get(`${API_URL}?page=${page}&size=${size}&category=${category}`).then(
         (response) => {
-            console.log(response.data)
             console.log('Total Pages Dishes:', response.headers['x-total-pages']);
+            console.log(response.data)
             dispatch(setDishes(response.data));
             return response;
         },

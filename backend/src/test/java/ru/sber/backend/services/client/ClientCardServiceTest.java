@@ -2,15 +2,12 @@ package ru.sber.backend.services.client;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.sber.backend.entities.client.ClientCard;
-import ru.sber.backend.entities.client.ClientPhone;
 import ru.sber.backend.models.client.AddClientCardRequest;
-import ru.sber.backend.repositories.ClientCardRepository;
+import ru.sber.backend.repositories.client.ClientCardRepository;
 
 import java.time.LocalDate;
 import java.util.Arrays;

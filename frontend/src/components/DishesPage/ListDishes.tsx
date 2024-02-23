@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import CardDish from './CardDish';
-import {IDish} from "../../types/types";
+import {IProduct} from "@/types/types";
 
 interface ListDishes {
-    dishes: IDish[];
+    dishes: IProduct[];
 }
 
 /**

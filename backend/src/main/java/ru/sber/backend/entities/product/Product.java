@@ -1,10 +1,14 @@
-package ru.sber.backend.entities;
+package ru.sber.backend.entities.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.sber.backend.entities.CartProduct;
+import ru.sber.backend.entities.Measure;
+import ru.sber.backend.entities.OrderProduct;
+
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +24,9 @@ public class Product {
     @Column(name = "id_product")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private String productName;
 
     @Column(nullable = false)
     private BigDecimal productPrice;

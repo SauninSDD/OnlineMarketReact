@@ -1,4 +1,4 @@
-package ru.sber.backend.entities;
+package ru.sber.backend.entities.product;
 
 import jakarta.persistence.*;
 import lombok.Data;

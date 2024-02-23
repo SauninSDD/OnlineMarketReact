@@ -7,10 +7,10 @@ import {
     IDishFromCart,
     IDishFromOrderResponse,
     IOrderResponse,
-} from "../../types/types";
-import {user} from "../../constants/constants";
+} from "@/types/types";
+import {user} from "@/constants/constants";
 import OrderService from "../../services/orderService";
-import {useAppDispatch} from "../../hooks";
+import {useAppDispatch} from "@/hooks";
 import Payment from "./Payment";
 
 interface DeliveryForm {
@@ -36,7 +36,7 @@ const DeliveryForm: FC<DeliveryForm> = ({
     const listDishesFromOrder: IDishFromOrderResponse[] = listDishesFromCart.map((dish: IDishFromCart) => {
         return {
             dishId: dish.id,
-            dishName: dish.name,
+            dishName: dish.productName,
             quantity: dish.quantity,
         }
     })

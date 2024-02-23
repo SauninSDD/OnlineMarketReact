@@ -1,17 +1,14 @@
-export interface IDish {
+export interface IProduct {
     id: number;
-    name: string;
-    description: string;
+    category: string;
+    productName: string;
+    productDescription: string;
     urlImage: string;
-    category: {
-        id: number;
-        category: string;
-    };
     price: number;
     weight: number;
 }
 
-export interface IDishFromCart extends IDish {
+export interface IDishFromCart extends IProduct {
     quantity: number;
 }
 

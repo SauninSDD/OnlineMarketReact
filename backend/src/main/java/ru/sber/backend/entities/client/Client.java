@@ -7,8 +7,8 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.sber.backend.entities.Product;
-import ru.sber.backend.entities.ProductFeedback;
+import ru.sber.backend.entities.product.Product;
+import ru.sber.backend.entities.product.ProductFeedback;
 
 import java.time.LocalDate;
 import java.util.HashSet;

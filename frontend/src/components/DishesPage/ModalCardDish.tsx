@@ -2,12 +2,12 @@ import React, {FC, useState} from 'react';
 import {Button, InputNumber, Modal, Tooltip} from "antd";
 import {Link} from "react-router-dom";
 import CartService from "../../services/cartService";
-import {user} from "../../constants/constants";
-import { IDish, IDishFromCart} from "../../types/types";
-import {useAppDispatch, useAppSelector} from "../../hooks";
+import {user} from "@/constants/constants";
+import { IProduct, IDishFromCart} from "@/types/types";
+import {useAppDispatch, useAppSelector} from "@/hooks";
 
 interface ModalCardDishProps {
-    dish: IDish | IDishFromCart;
+    dish: IProduct | IDishFromCart;
     isModalOpen: boolean;
     onClose: () => void;
 }
@@ -41,7 +41,7 @@ const ModalCardDish: FC<ModalCardDishProps> =
         }
         return (
             <Modal
-                title={dish.name}
+                title={dish.productName}
                 open={isModalOpen}
                 onCancel={onClose}
                 width={1000}
@@ -51,7 +51,7 @@ const ModalCardDish: FC<ModalCardDishProps> =
                     <div style={{flex: 1}}>
                         <img
                             src={dish.urlImage}
-                            alt={'Фото ' + dish.name}
+                            alt={'Фото ' + dish.productName}
                             style={{
                                 width: "100%",
                                 height: "400px",
@@ -64,7 +64,7 @@ const ModalCardDish: FC<ModalCardDishProps> =
                         <p>{dish.weight} гр.</p>
                         <Tooltip
                             placement={"bottom"}
-                            title={dish.description}
+                            title={dish.productDescription}
                         >
                             <Button type={"link"}>
                                 <span style={{color: "black", textDecoration: "underline", textUnderlineOffset: "3px"}}>

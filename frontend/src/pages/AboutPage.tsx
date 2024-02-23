@@ -1,8 +1,8 @@
 import React, {FC, useRef} from 'react';
 import {Card, Divider, Carousel} from 'antd';
 import {EnvironmentOutlined, PhoneOutlined, MailOutlined} from '@ant-design/icons';
-import ImagePizza from "../images/pizza1.jpg"
-import ImagePizza2 from "../images/pizza2.jpg"
+import ImagePizza from "../assets/pizza1.jpg"
+import ImagePizza2 from "../assets/pizza2.jpg"
 
 const {Meta} = Card;
 

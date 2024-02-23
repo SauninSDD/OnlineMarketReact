@@ -1,4 +1,4 @@
-package ru.sber.backend.entities;
+package ru.sber.backend.entities.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -10,18 +10,19 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "product_category")
+@Table(name = "product_images")
 
-public class ProductCategory {
+public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String categoryName;
+  /*  @Lob
+    @Column(name = "image", columnDefinition="BLOB")
+    private byte[] image; */
 
-    @OneToOne
-    @JoinColumn(name = "category_id_parent")
+    @ManyToOne
+    @JoinColumn(name = "id_product", nullable = false)
     @JsonIgnore
-    private ProductCategory productCategory;
+    private Product product;
 }

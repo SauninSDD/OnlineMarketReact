@@ -1,6 +1,6 @@
 package ru.sber.backend.services.product;
 
-import ru.sber.backend.entities.Product;
+import ru.sber.backend.entities.product.Product;
 
 import java.util.List;
 

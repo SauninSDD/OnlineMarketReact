@@ -3,3 +3,9 @@
     top: 0;
     z-index: 666;
 }
+
+.horizontal-submenu .ant-menu-sub {
+    width: 90vw;
+    display: flex;
+    text-align: center;
+}

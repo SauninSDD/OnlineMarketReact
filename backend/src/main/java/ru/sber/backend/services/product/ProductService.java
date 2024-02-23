@@ -1,14 +1,19 @@
 package ru.sber.backend.services.product;
 
-import ru.sber.backend.entities.Product;
+import org.springframework.data.domain.Page;
+import ru.sber.backend.entities.product.Product;
+import ru.sber.backend.models.product.GetProductResponse;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductService {
-    Product getProductById(Long productId);
+    Optional<Product> getProductById(Long productId);
 
-    Product getProductByArticle(Long productId);
+    GetProductResponse getProductByArticle(int productArticle);
+
+    Page<GetProductResponse> getListProduct(int page, int size, String category);
 
     List<Product> getProductsByName(String productName);
 

@@ -1,4 +1,4 @@
-package ru.sber.backend.repositories;
+package ru.sber.backend.repositories.client;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

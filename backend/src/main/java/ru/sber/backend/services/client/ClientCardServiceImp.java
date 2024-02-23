@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.sber.backend.entities.client.ClientCard;
 import ru.sber.backend.models.client.AddClientCardRequest;
-import ru.sber.backend.repositories.ClientCardRepository;
+import ru.sber.backend.repositories.client.ClientCardRepository;
 
 import java.util.List;
 import java.util.Optional;

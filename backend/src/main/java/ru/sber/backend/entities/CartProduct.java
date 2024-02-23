@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.sber.backend.entities.client.ClientCart;
+import ru.sber.backend.entities.product.Product;
 
 import java.math.BigDecimal;
 

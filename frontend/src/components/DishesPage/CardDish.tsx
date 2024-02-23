@@ -1,11 +1,11 @@
 import React, {FC, useState} from 'react';
 import {Button} from "antd";
 import "./styles/CardDish.css"
-import {IDish, IDishFromCart} from "../../types/types";
+import {IProduct, IDishFromCart} from "@/types/types";
 import ModalCardDish from "./ModalCardDish";
 
 interface DishItemProps {
-    dish: IDish | IDishFromCart,
+    dish: IProduct | IDishFromCart,
     showUseButton: boolean;
     children?: React.ReactNode;
 }
@@ -27,13 +27,13 @@ const CardDish: FC<DishItemProps> =
             <div className={"cardDish"}>
                 <img
                     src={dish.urlImage}
-                    alt={"Изображение блюда:" + dish.name}
+                    alt={"Изображение блюда:" + dish.productName}
                     className={"cardDish__image"}
                     onClick={() => {
                         setIsModalOpen(true)
                     }}
                 />
-                <div className={"cardDish__name"}>{dish.name}</div>
+                <div className={"cardDish__name"}>{dish.productName}</div>
                 <div className={"card__container"}>
                     <div className={"cardDish__price"}>{dish.price} ₽</div>
                     {showUseButton && (

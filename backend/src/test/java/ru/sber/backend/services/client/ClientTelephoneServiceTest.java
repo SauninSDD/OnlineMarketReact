@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import ru.sber.backend.entities.client.ClientPhone;
-import ru.sber.backend.repositories.ClientPhoneRepository;
+import ru.sber.backend.repositories.client.ClientPhoneRepository;
 
 import java.util.ArrayList;
 import java.util.Optional;
