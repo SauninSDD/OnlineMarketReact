@@ -13,19 +13,18 @@ public interface ProductService {
 
     GetProductResponse getProductByArticle(int productArticle);
 
-    Page<GetProductResponse> getListProduct(int page, int size, String category);
+    //если не передана категория, то получает all продукты
+    Page<GetProductResponse> getProductsByCategory(int page, int size, String category);
 
-    List<Product> getProductsByName(String productName);
+    Page<GetProductResponse> getProductsByName(int page, int size, String productName);
 
-    List<Product> getProductsByCategory(String categoryName);
+    Page<GetProductResponse> getProductsByPriceRangeAndCategory(int page, int size, BigDecimal minPrice, BigDecimal maxPrice, String category);
 
-    List<Product> getProductsByPriceRange(BigDecimal minPrice, BigDecimal maxPrice);
+    Page<GetProductResponse> getProductsByPriceRange(int page, int size, BigDecimal minPrice, BigDecimal maxPrice);
 
     List<Product> getProductsByPriceMin(BigDecimal minPrice);
 
     List<Product> getProductsByPriceMax(BigDecimal maxPrice);
-
-    List<Product> getAllProducts();
 
     boolean addProduct(Product product);
 

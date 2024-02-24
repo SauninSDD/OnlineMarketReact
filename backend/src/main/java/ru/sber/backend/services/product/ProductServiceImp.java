@@ -41,7 +41,7 @@ public class ProductServiceImp implements ProductService {
 
 
     @Override
-    public Page<GetProductResponse> getListProduct(int page, int size, String category) {
+    public Page<GetProductResponse> getProductsByCategory(int page, int size, String category) {
         Page<Product> productsPage;
         if (category != null && !category.isEmpty()) {
             productsPage = productRepository.findByCategoryCategoryName(category, PageRequest.of(page, size));
@@ -53,18 +53,21 @@ public class ProductServiceImp implements ProductService {
 
 
     @Override
-    public List<Product> getProductsByName(String productName) {
-        return null;
+    public Page<GetProductResponse> getProductsByName(int page, int size, String productName) {
+        Page<Product> productsByName = productRepository.findByProductName(productName, PageRequest.of(page, size));
+        return productsByName.map(getGetProductResponseFunction());
     }
 
     @Override
-    public List<Product> getProductsByCategory(String categoryName) {
-        return null;
+    public Page<GetProductResponse> getProductsByPriceRangeAndCategory(int page, int size, BigDecimal minPrice, BigDecimal maxPrice, String category) {
+        Page<Product> productsByPriceRangeAndCategory = productRepository.findByPriceRangeAndCategoryName(minPrice, maxPrice, category, PageRequest.of(page, size));
+        return productsByPriceRangeAndCategory.map(getGetProductResponseFunction());
     }
 
     @Override
-    public List<Product> getProductsByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
-        return null;
+    public Page<GetProductResponse> getProductsByPriceRange(int page, int size, BigDecimal minPrice, BigDecimal maxPrice) {
+        Page<Product> productsByPriceRange = productRepository.findByPriceRange(minPrice, maxPrice, PageRequest.of(page, size));
+        return productsByPriceRange.map(getGetProductResponseFunction());
     }
 
     @Override
@@ -74,11 +77,6 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public List<Product> getProductsByPriceMax(BigDecimal maxPrice) {
-        return null;
-    }
-
-    @Override
-    public List<Product> getAllProducts() {
         return null;
     }
 

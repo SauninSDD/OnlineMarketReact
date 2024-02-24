@@ -1,16 +1,18 @@
 
 ###Получение продукта по артиклю
-GET localhost:8085/Broomstick/products/1
+GET localhost:8085/Broomstick/products/searchByArticle/1
 
+###Получение категории продуктов (параметры: номер, размер страницы, категория)
+GET localhost:8085/Broomstick/products/searchByCategory?page=0&size=2&category=1
 
-###Получение категории продуктов постранично (параметры: номер, размер страницы)
-GET localhost:8085/Broomstick/products?page=0&size=2&category=1
+###Поиск продуктов по названию (параметры: номер, размер страницы, название продукта) поиск проработанный
+GET localhost:8085/Broomstick/products/searchByName?page=0&size=50&name=Product 1 2
 
+###Поиск продуктов опр. категории по интервалу цены
+GET localhost:8085/Broomstick/products/searchByPriceRangeAndCategory?page=0&size=50&minPrice=1&maxPrice=10&category=1
 
-
-
-
-
+###Поиск среди всех продуктов по интервалу цены
+GET localhost:8085/Broomstick/products/searchByPriceRange?page=0&size=50&minPrice=1&maxPrice=10
 
 
 ###Добавление продуктов
