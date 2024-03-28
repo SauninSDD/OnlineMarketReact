@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import ru.sber.backend.entities.product.Product;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {

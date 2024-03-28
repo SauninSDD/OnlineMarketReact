@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.sber.backend.entities.OrderProduct;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -20,8 +24,8 @@ public class ProductCategory {
     @Column(nullable = false)
     private String categoryName;
 
-    @OneToOne
-    @JoinColumn(name = "category_id_parent")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
     @JsonIgnore
-    private ProductCategory productCategory;
+    private ProductCategory parentCategory;
 }

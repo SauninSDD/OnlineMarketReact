@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.sber.backend.entities.product.Product;
 import ru.sber.backend.exceptions.ProductNotFound;
 import ru.sber.backend.models.product.GetProductResponse;
+import ru.sber.backend.repositories.product.ProductCategoryRepository;
 import ru.sber.backend.repositories.product.ProductRepository;
 
 import java.math.BigDecimal;
@@ -19,9 +20,12 @@ public class ProductServiceImp implements ProductService {
 
     private final ProductRepository productRepository;
 
+    private final ProductCategoryRepository productCategoryRepository;
+
     @Autowired
-    public ProductServiceImp(ProductRepository productRepository) {
+    public ProductServiceImp(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository) {
         this.productRepository = productRepository;
+        this.productCategoryRepository = productCategoryRepository;
     }
 
     @Override
@@ -42,8 +46,9 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public Page<GetProductResponse> getProductsByCategory(int page, int size, String category) {
+        boolean isExistCategory = productCategoryRepository.existsByCategoryName(category);
         Page<Product> productsPage;
-        if (category != null && !category.isEmpty()) {
+        if (isExistCategory) {
             productsPage = productRepository.findByCategoryCategoryName(category, PageRequest.of(page, size));
         } else {
             productsPage = productRepository.findAll(PageRequest.of(page, size));

@@ -7,3 +7,8 @@ select * from client_addresses;
 select count(*) from products where id_category = 1;
 
 update products set product_name = 'product2' where id_category = 2;
+
+select * from products where product_name like '%Product 1%';
+
+update products set product_price = 9 where id_category = 1;
+update products set product_price = 5 where id_category = 2;
