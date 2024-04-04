@@ -13,10 +13,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 //import ru.sber.backend.constants.GeneratePassword;
+import ru.sber.backend.entities.Logfile;
 import ru.sber.backend.entities.request.LoginRequest;
 import ru.sber.backend.entities.request.SignupRequest;
 //import ru.sber.backend.services.EmailService;
 import ru.sber.backend.models.keycloack.*;
+import ru.sber.backend.repositories.LoggingRepository;
 import ru.sber.backend.services.JwtService;
 
 import java.util.ArrayList;
@@ -35,12 +37,15 @@ public class AuthorizationController {
     private final String clientId = "login-app";
     private final String grantType = "password";
     private final JwtService jwtService;
+    private final LoggingRepository loggingRepository;
+
 //    private final EmailService emailService;
 
     @Autowired
-    public AuthorizationController(JwtService jwtService /*, EmailService emailService*/) {
+    public AuthorizationController(JwtService jwtService, /*, EmailService emailService*/LoggingRepository loggingRepository) {
         this.jwtService = jwtService;
 //        this.emailService = emailService;
+        this.loggingRepository = loggingRepository;
     }
 
 
@@ -48,6 +53,9 @@ public class AuthorizationController {
     @PutMapping
     public ResponseEntity<?> updateUserInfo(@RequestBody SignupRequest signupRequest) throws JsonProcessingException {
         log.info("Выводим новые данные о клиенте {}", signupRequest);
+        loggingRepository.save(new Logfile("Попытка обновления данных пользователя", signupRequest));
+
+
         Jwt jwt = jwtService.getJwtSecurityContext();
 
         UpdateResponse updateResponse = new UpdateResponse();
@@ -77,11 +85,16 @@ public class AuthorizationController {
         HttpEntity<UpdateResponse> userEntity = new HttpEntity<>(updateResponse, userHeaders);
 
         log.info("Http entity: {}", userEntity);
+        loggingRepository.save(new Logfile("Http entity", userEntity));
+
+
         try {
             ResponseEntity<String> userResponseEntity = new RestTemplate().exchange(
                     keycloakUpdateUserUrl + jwtService.getSubClaim(jwtService.getJwtSecurityContext()),
                     HttpMethod.PUT, userEntity, String.class);
             log.info("Результат отправки на keycloak: {}", userResponseEntity.getStatusCode());
+            loggingRepository.save(new Logfile("Результат отправки на keycloak", userResponseEntity));
+
 
             return new ResponseEntity<>(userResponseEntity.getStatusCode());
         } catch (Exception e) {
@@ -92,6 +105,7 @@ public class AuthorizationController {
 
     @PostMapping("/signin")
     public ResponseEntity<String> signInUser(@RequestBody LoginRequest loginRequest) {
+        loggingRepository.save(new Logfile("Попытка авторизации пользователя", loginRequest));
         HttpHeaders tokenHeaders = new HttpHeaders();
         tokenHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
@@ -106,6 +120,7 @@ public class AuthorizationController {
         try {
             ResponseEntity<String> tokenResponseEntity = new RestTemplate().exchange(
                     keycloakTokenUrl, HttpMethod.POST, tokenEntity, String.class);
+            loggingRepository.save(new Logfile("Код ответа авторизации", tokenResponseEntity.getStatusCode()));
 
             return new ResponseEntity<>(tokenResponseEntity.getBody(),
                     tokenResponseEntity.getStatusCode());
@@ -119,6 +134,8 @@ public class AuthorizationController {
     @PostMapping("/signup")
     public ResponseEntity<String> signUpUser(@RequestBody SignupRequest signupRequest) throws JsonProcessingException {
         log.info("Выводим данные о клиенте {}", signupRequest);
+        loggingRepository.save(new Logfile("Попытка регистрации пользователя", signupRequest));
+
         UserRequest userRequest = new UserRequest();
         userRequest.setUsername(signupRequest.getUsername());
         userRequest.setEmail(signupRequest.getEmail());
@@ -143,10 +160,14 @@ public class AuthorizationController {
         HttpEntity<UserRequest> userEntity = new HttpEntity<>(userRequest, userHeaders);
 
         log.info("Http entity: {}", userEntity);
+        loggingRepository.save(new Logfile("Объект пользователя перед сохранением", userEntity));
+
         try {
             ResponseEntity<String> userResponseEntity = new RestTemplate().exchange(
                     keycloakCreateUserUrl, HttpMethod.POST, userEntity, String.class);
             log.info("Результат отправки на keycloak: {}", userResponseEntity.getStatusCode());
+            loggingRepository.save(new Logfile("Результат отправки на keycloak ", userResponseEntity));
+
 
             return new ResponseEntity<>(userResponseEntity.getStatusCode());
         } catch (Exception e) {
@@ -182,6 +203,7 @@ public class AuthorizationController {
     @PreAuthorize("hasRole('client_user')")
     @GetMapping
     public ResponseEntity<UserResponse> getUserDetails() {
+
         HttpHeaders userHeaders = new HttpHeaders();
         userHeaders.setContentType(MediaType.APPLICATION_JSON);
 
@@ -192,6 +214,7 @@ public class AuthorizationController {
                 jwtService.getBirthdate(jwt), jwtService.getGender(jwt)
         );
 
+        loggingRepository.save(new Logfile("Попытка получения данных пользователя", userDetails));
         return new ResponseEntity<>(userDetails, userHeaders, HttpStatus.OK);
     }
 

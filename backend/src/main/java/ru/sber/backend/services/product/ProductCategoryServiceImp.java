@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class ProductCategoryServiceImp implements ProductCategoryService{
-
     private final ProductCategoryRepository productCategoryRepository;
 
     @Autowired
@@ -21,19 +20,19 @@ public class ProductCategoryServiceImp implements ProductCategoryService{
 
     @Override
     public List<String> getCategories() {
-        return productCategoryRepository.findCategories().stream().map(category -> category.getCategoryName()).toList();
+        return productCategoryRepository.findCategories().stream().map(ProductCategory::getCategoryName).toList();
     }
 
     @Override
     public List<String> getSubCategories(Long productCategoryId) {
-        return productCategoryRepository.findByParentCategory_Id(productCategoryId).stream().map(category -> category.getCategoryName()).toList();
+        return productCategoryRepository.findByParentCategory_Id(productCategoryId).stream().map(ProductCategory::getCategoryName).toList();
     }
 
     @Override
     public List<String> getNestedSubCategories(Long parentId) {
         List<ProductCategory> subCategories = new ArrayList<>();
         getNestedSubCategoriesRecursive(parentId, subCategories);
-        return subCategories.stream().map(category -> category.getCategoryName()).toList();
+        return subCategories.stream().map(ProductCategory::getCategoryName).toList();
     }
 
     @Override
