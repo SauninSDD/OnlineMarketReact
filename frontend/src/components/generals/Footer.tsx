@@ -1,95 +1,98 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC} from 'react';
+import {useTranslation} from "react-i18next";
 import {Link as RouterLink} from 'react-router-dom';
 import './styles/Footer.css';
-import {user} from "../../constants/constants";
+
 
 /**
  * Компонент-футер
  * @constructor
  */
 const Footer: FC = () => {
-    const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean>(false);
+    const {t} = useTranslation('Footer');
 
-    useEffect(() => {
-        setIsUserAuthenticated(user != null);
-    }, []);
-
-    return (
+      return (
         <footer className="footer">
             <div className="footer__menu">
                 <div className="footer__menu-section">
-                    <h3>Меню</h3>
+                    <h3>{t('footer.customers.title')}</h3>
                     <ul>
                         <li>
-                            <RouterLink to="/" state={{anchorId: 'category:1'}}>
-                                Салаты
+                            <RouterLink to="/">
+                                {t('footer.customers.how-to-order')}
                             </RouterLink>
                         </li>
                         <li>
-                            <RouterLink to="/" state={{anchorId: 'category:2'}}>
-                                Роллы
+                            <RouterLink to="/">
+                                {t('footer.customers.delivery')}
                             </RouterLink>
                         </li>
                         <li>
-                            <RouterLink to="/" state={{anchorId: 'category:3'}}>
-                                Вторые блюда
+                            <RouterLink to="/">
+                                {t('footer.customers.payment')}
                             </RouterLink>
                         </li>
                         <li>
-                            <RouterLink to="/" state={{anchorId: 'category:4'}}>
-                                Пицца
+                            <RouterLink to="/">
+                                {t('footer.customers.receiving')}
                             </RouterLink>
                         </li>
                         <li>
-                            <RouterLink to="/" state={{anchorId: 'category:5'}}>
-                                Напитки
+                            <RouterLink to="/">
+                                {t('footer.customers.returns')}
+                            </RouterLink>
+                        </li>
+                        <li>
+                            <RouterLink to="/">
+                                {t('footer.customers.customer-support')}
+                            </RouterLink>
+                        </li>
+                        <li>
+                            <RouterLink to="/">
+                                {t('footer.customers.gift-card')}
                             </RouterLink>
                         </li>
                     </ul>
                 </div>
                 <div className="footer__menu-section">
-                    <h3>Клиент</h3>
+                    <h3> {t('footer.company.title')} </h3>
                     <ul>
                         <li>
-                            {isUserAuthenticated ? (
-                                <RouterLink to="/cart">Корзина</RouterLink>
-                            ) : (
-                                <RouterLink to="/api/auth/signin">Корзина</RouterLink>
-                            )}
+                            <RouterLink to="/about">{t('footer.company.about')}</RouterLink>
                         </li>
                         <li>
-                            {isUserAuthenticated ? (
-                                <RouterLink to="/user?tab=profile">Профиль</RouterLink>
-                            ) : (
-                                <RouterLink to="/api/auth/signin">Профиль</RouterLink>
-                            )}
+                            <RouterLink to="/">{t('footer.company.jobs')}</RouterLink>
                         </li>
                         <li>
-                            {isUserAuthenticated ? (
-                                <RouterLink to="/user?tab=delivery">Текущие доставки</RouterLink>
-                            ) : (
-                                <RouterLink to="/api/auth/signin">Текущие доставки</RouterLink>
-                            )}
+                            <RouterLink to="/">{t('footer.company.news')}</RouterLink>
                         </li>
                         <li>
-                            {isUserAuthenticated ? (
-                                <RouterLink to="/user?tab=order">История заказов</RouterLink>
-                            ) : (
-                                <RouterLink to="/api/auth/signin">История заказов</RouterLink>
-                            )}
+                            <RouterLink to="/">{t('footer.company.privacy-policy')}</RouterLink>
+                        </li>
+                        <li>
+                            <RouterLink to="/">{t('footer.company.terms-of-service')}</RouterLink>
                         </li>
                     </ul>
                 </div>
                 <div className="footer__menu-section">
-                    <h3>Другое</h3>
+                    <h3>{t('footer.contacts.title')}</h3>
                     <ul>
                         <li>
-                            <RouterLink to="/about">О компании</RouterLink>
+                            {t('footer.contacts.phone')}
+                        </li>
+                        <li>
+                            {t('footer.contacts.address.0')}
+                        </li>
+                        <li>
+                            {t('footer.contacts.address.1')}
+                        </li>
+                        <li>
+                            <RouterLink to="/about">{t('footer.contacts.all-contacts')}</RouterLink>
                         </li>
                     </ul>
                 </div>
             </div>
-            <p>&copy; {new Date().getFullYear()} Грузинский ресторан</p>
+            <p>&copy; {t('footer.copyright', {year: new Date().getFullYear()})}</p>
         </footer>
     );
 };

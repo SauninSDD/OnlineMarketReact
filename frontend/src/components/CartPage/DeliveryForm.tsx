@@ -42,7 +42,8 @@ const DeliveryForm: FC<DeliveryForm> = ({
     })
 
     const onFinish = () => {
-        let order: IOrderResponse = {
+        console.log("data form", {...form.getFieldsValue()})
+        const order: IOrderResponse = {
             ...form.getFieldsValue(),
             clientId: user?.id ?? 0,
             totalPrice: totalPrice,

@@ -1,7 +1,11 @@
 .navigationMenu {
     position: sticky;
     top: 0;
+    background-color: white;
     z-index: 666;
+    display: flex;
+    justify-content: space-between;
+    flex-shrink: 0
 }
 
 .horizontal-submenu .ant-menu-sub {

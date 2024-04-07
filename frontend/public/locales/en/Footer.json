@@ -1,0 +1,32 @@
+{
+  "footer": {
+    "customers": {
+      "title": "Customers",
+      "how-to-order": "How to order",
+      "delivery": "Delivery",
+      "payment": "Payment",
+      "receiving": "Receiving",
+      "returns": "Returns",
+      "customer-support": "Customer support",
+      "gift-card": "Gift card"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "jobs": "Jobs",
+      "news": "News",
+      "privacy-policy": "Privacy policy",
+      "terms-of-service": "Terms of service"
+    },
+    "contacts": {
+      "title": "Other",
+      "phone": "Phone: 8 800 234 1000",
+      "address": [
+        "Yekaterinburg, ul. Chernyakhovskogo, 86/8",
+        "Moscow, Novodanilovskaya naberezhnaya, d.4, office 31"
+      ],
+      "all-contacts": "All contacts"
+    },
+    "copyright": "{{year}} Household store"
+  }
+}

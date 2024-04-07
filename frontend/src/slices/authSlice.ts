@@ -24,7 +24,6 @@ export const authSlice = createSlice({
             }
         },
         setUserData: (state, action: PayloadAction<any>) => {
-
             state.user = action.payload;
             console.log("Login: "+ action.payload)
             if (action.payload.id) {

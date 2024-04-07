@@ -1,9 +1,9 @@
 import axios from "axios";
-import {ILogin, IRegistration, IUser, IUserResponse} from "../types/types";
+import {ILogin, IRegistration, IUser, IUserResponse} from "@/types/types";
 import authHeader from "./auth-header";
 import {Dispatch} from "redux";
-import {login, setUserData} from "../slices/authSlice";
-import {AppDispatch} from "../store";
+import {login, setUserData} from "@/slices/authSlice";
+import {AppDispatch} from "@/store";
 
 const API_URL = "/Broomstick/api/auth";
 
@@ -12,11 +12,11 @@ const API_URL = "/Broomstick/api/auth";
  * @constructor
  */
 const register = (registration: IRegistration) => {
-    const { username, number, dateOfBirth, email, password } = registration;
+    const { username, number, birthdate, email, password } = registration;
     return axios.post(API_URL + "/signup", {
         username,
         number,
-        dateOfBirth,
+        birthdate,
         email,
         password,
     });
@@ -57,7 +57,7 @@ const refresh = async (refresh_token: String, dispatch: Dispatch): Promise<IUser
     const headers = authHeader();
 
     let detailsResponse = await axios
-        .get<IUser>("api/auth", { headers });
+        .get<IUser>(API_URL, { headers });
     console.log(response)
     dispatch(setUserData(detailsResponse.data));
 
@@ -67,12 +67,12 @@ const refresh = async (refresh_token: String, dispatch: Dispatch): Promise<IUser
 const updateUser = async (user: IUserResponse, dispatch: AppDispatch) => {
     const headers = authHeader();
     let response = await axios
-        .put<IUser>("api/auth", user, {headers});
+        .put<IUser>(API_URL, user, {headers});
     console.log(response);
     console.log(`Обновление данных пользователя ${API_URL}}`, user, {headers: authHeader()})
 
     let detailsResponse = await axios
-        .get<IUser>("api/auth", { headers });
+        .get<IUser>(API_URL, { headers });
     dispatch(setUserData(detailsResponse.data));
     return detailsResponse;
 };

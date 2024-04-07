@@ -1,0 +1,16 @@
+{
+  "logoutSuccess": "Вы успешно вышли! До свидания!",
+  "dataSaved": "Данные успешно сохранены!",
+  "saveError": "Произошла ошибка при сохранении данных.",
+  "enterUsername": "Пожалуйста, введите имя пользователя!",
+  "enterEmail": "Пожалуйста, введите почту!",
+  "enterBirthdate": "Пожалуйста, введите дату рождения!",
+  "enterPhoneNumber": "Введите номер телефона",
+  "phoneInputPlaceholder": "+7-xxx-xxx-xx-xx",
+  "save": "Сохранить",
+  "cancel": "Отменить",
+  "name": "Имя:",
+  "email": "E-mail:",
+  "birthdate": "Дата рождения:",
+  "phoneNumber": "Номер телефона:"
+}

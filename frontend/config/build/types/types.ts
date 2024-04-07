@@ -15,5 +15,4 @@ export interface BuildOptions {
     mode: BuildMode;
     platform: BuildPlatform;
     analyzer?: boolean;
-
 }

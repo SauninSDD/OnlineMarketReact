@@ -12,24 +12,27 @@ import PhoneInput from "react-phone-input-2";
 import AuthService from "../../services/authService";
 import {Link} from "react-router-dom";
 import authService from "../../services/authService";
-import {IUser, IUserResponse} from "../../types/types";
-import {useAppDispatch} from "../../hooks";
+import {IUserResponse} from "@/types/types";
+import {useAppDispatch, useAppSelector} from "@/hooks";
 import './styles/UserProfile.css';
-import {RootState} from "../../store";
-import {useSelector} from "react-redux";
+import {useTranslation} from "react-i18next";
+import UserInfo from "@/components/UserPage/UserInfo";
 
 /**
  * Вкладка профиля пользователя
  * @constructor
  */
 const UserProfile: FC = () => {
+    const {t} = useTranslation('UserProfile');
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const dispatch = useAppDispatch();
-    const user = useSelector((store: RootState) => store.auth.user);
+    const user = useAppSelector((store) => store.auth.user);
+    const [form] = Form.useForm<IUserResponse>();
+
 
     const handleLogout = () => {
         AuthService.logout();
-        message.success("Вы успешно вышли! До свидания!");
+        message.success(t('logoutSuccess'));
         const reloadTime = 1;
         setTimeout(() => {
             window.location.reload();
@@ -40,27 +43,16 @@ const UserProfile: FC = () => {
         setIsEditing(!isEditing);
     };
 
-    const handleSave = (values: IUserResponse) => {
+    const handleSave = () => {
         try {
-            authService.updateUser(values, dispatch);
-            window.location.reload();
+            console.log("data form", {...form.getFieldsValue()})
+            console.log("user", user)
+            authService.updateUser({...form.getFieldsValue()}, dispatch)
             setIsEditing(false);
-            message.success("Данные успешно сохранены!");
-
+            message.success(t('dataSaved'));
         } catch (error) {
-            message.error("Произошла ошибка при сохранении данных.");
+            message.error(t('saveError'));
         }
-    };
-
-    const formatPhoneNumber = (phoneNumber: string | undefined) => {
-        if (!phoneNumber) return "";
-        const countryCode: string = phoneNumber.slice(0, 1);
-        const firstPart: string = phoneNumber.slice(1, 4);
-        const secondPart: string = phoneNumber.slice(4, 7);
-        const thirdPart: string = phoneNumber.slice(7, 9);
-        const fourthPart: string = phoneNumber.slice(9, 12);
-
-        return `+${countryCode} (${firstPart}) ${secondPart}-${thirdPart}-${fourthPart}`;
     };
 
     return (
@@ -70,29 +62,29 @@ const UserProfile: FC = () => {
                     <div className="userProfile__left">
                         <div className={"userProfile__fields"}>
                             <p>
-                                <span className={"infoTitle"}>Имя:</span>
+                                <span className={"infoTitle"}>{t('name')}</span>
                             </p>
                             <p>
-                                <span className={"infoTitle"}>E-mail:</span>
+                                <span className={"infoTitle"}>{t('email')}</span>
                             </p>
                             <p>
-                                <span className={"infoTitle"}>Дата рождения:</span>
+                                <span className={"infoTitle"}>{t('birthdate')}</span>
                             </p>
                             <p>
-                                <span className={"infoTitle"}>Номер телефона:</span>
+                                <span className={"infoTitle"}>{t('phoneNumber')}</span>
                             </p>
 
                         </div>
                     </div>
                     <div className="userProfile__right">
                         {user && isEditing ? (
-                            <Form initialValues={user} onFinish={handleSave} className={"userProfile__form-fields"}>
+                            <Form initialValues={user} form={form} className={"userProfile__form-fields"}>
                                 <Form.Item
                                     name="username"
                                     rules={[
                                         {
                                             required: true,
-                                            message: "Пожалуйста, введите имя пользователя!",
+                                            message: t('enterUsername'),
                                         },
                                     ]}
                                 >
@@ -101,22 +93,22 @@ const UserProfile: FC = () => {
                                 <Form.Item name="email" rules={[
                                     {
                                         required: true,
-                                        message: "Пожалуйста, введите почту!",
+                                        message: t('enterEmail'),
                                     },
                                 ]}>
                                     <Input prefix={<MailOutlined/>}/>
                                 </Form.Item>
                                 <Form.Item
-                                    name="dateOfBirth"
+                                    name="birthdate"
                                     rules={[
                                         {
                                             required: true,
-                                            message: "Пожалуйста, введите дату рождения!",
+                                            message: t('enterBirthdate'),
                                         },
                                     ]}
                                 >
                                     <Input prefix={<CalendarOutlined/>} disabled={true} type="date"
-                                           placeholder="Дата рождения"/>
+                                           placeholder={t('birthdate')}/>
                                 </Form.Item>
                                 <Form.Item
                                     name="number"
@@ -124,25 +116,47 @@ const UserProfile: FC = () => {
                                     rules={[
                                         {
                                             required: true,
-                                            message: "Введите номер телефона",
+                                            message: t('enterPhoneNumber'),
                                         },
                                     ]}
                                 >
-                                    <PhoneInput country="ru" onlyCountries={["ru"]} placeholder="+7-xxx-xxx-xx-xx"/>
+                                    <PhoneInput country="ru" onlyCountries={["ru"]} placeholder={t('phoneInputPlaceholder')}/>
                                 </Form.Item>
 
                                 <Form.Item>
-                                    <Button type="primary" htmlType="submit"
+                                    <Button type="primary" onClick={handleSave}
                                             className={"userProfile__button_save"}
-
                                     >
                                         <SaveOutlined/>
-                                        Сохранить
+                                        {t('save')}
                                     </Button>
                                 </Form.Item>
                             </Form>
                         ) : (
-                            <div>
+                            <UserInfo user={user}/>
+                            /*
+                            <Form initialValues={user ?? {}}  className={"userProfile__form-fields"}>
+                                <Form.Item
+                                    name="username"
+                                >
+                                    <Input readOnly/>
+                                </Form.Item>
+                                <Form.Item name="email" >
+                                    <Input readOnly prefix={<MailOutlined/>}/>
+                                </Form.Item>
+                                <Form.Item
+                                    name="birthdate"
+                                >
+                                    <Input prefix={<CalendarOutlined/>} readOnly type="date"/>
+                                </Form.Item>
+                                <Form.Item
+                                    name="number"
+                                >
+                                    <PhoneInput inputProps={{ readOnly: true }} country="ru" onlyCountries={["ru"]} placeholder={t('phoneInputPlaceholder')} />
+                                </Form.Item>
+                            </Form>*/
+
+                            /*<div>
                                 <p>
                                     <span>{user && user.username}</span>
                                 </p>
@@ -150,17 +164,17 @@ const UserProfile: FC = () => {
                                     <span>{user && user.email}</span>
                                 </p>
                                 <p>
-                                    <span>{user && user.dateOfBirth.toString()}</span>
+                                    <span>{user && user.birthdate.toString()}</span>
                                 </p>
                                 <p>
                                     <span>{user && formatPhoneNumber(user.number)}</span>
                                 </p>
-                            </div>
+                            </div>*/
                         )}
                     </div>
                 </div>
                 <Button className={"userProfile__button_editing"} onClick={toggleEditing}>
-                    {isEditing ? <span>Отменить</span> : <EditOutlined/>}
+                    {isEditing ? <span>{t('cancel')}</span> : <EditOutlined/>}
                 </Button>
                 <Link to="/">
                     <Button

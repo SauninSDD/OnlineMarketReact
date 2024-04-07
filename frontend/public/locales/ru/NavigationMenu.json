@@ -1,0 +1,27 @@
+{
+  "navMenuItems": {
+    "products": "Товары",
+    "cart": "Корзина",
+    "sign-in": "Войти",
+    "about": "О компании",
+    "privateOffice": "Личный кабинет",
+    "user": {
+      "profile": "Профиль",
+      "delivery": "Текущие доставки",
+      "order": "История заказов",
+      "login": "Войти"
+    },
+    "category": {
+      "category1": "Текстиль",
+      "category2": "Мебель",
+      "category3": "Фурнитура",
+      "category4": "Инструменты",
+      "category5": "Химия",
+      "category6": "Дача",
+      "category7": "Мелочь",
+      "category8": "Дороги",
+      "category9": "Свобода",
+      "category10": "Оружие"
+    }
+  }
+}

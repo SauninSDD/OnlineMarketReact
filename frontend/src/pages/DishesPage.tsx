@@ -16,7 +16,7 @@ import {
 } from "@/slices/dishesSlice";
 
 /**
- * Страница меню ресторана
+ * Страница товаров ресторана
  * @constructor
  */
 const DishesPage: FC = () => {

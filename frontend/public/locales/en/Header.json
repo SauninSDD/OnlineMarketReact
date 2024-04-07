@@ -1,0 +1,11 @@
+{
+  "header": {
+    "cityLink": "Select your city",
+    "hotline": "Hotline phone number: +89218493821",
+    "workTime": "Open today from 9:00 to 00:00",
+    "modalTitle": "Select your city",
+    "searchPlaceholder": "Search for a city",
+    "cityUndefined": "Undefined"
+  },
+  "cities": ["Vologda", "Cherepovets", "Yaroslavl"]
+}

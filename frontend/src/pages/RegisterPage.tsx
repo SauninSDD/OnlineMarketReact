@@ -3,7 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {Row, Card, Form, Input, Button, message} from 'antd';
 import {UserOutlined, MailOutlined, CalendarOutlined, LockOutlined} from '@ant-design/icons';
 import authService from '../services/authService';
-import {IRegistration} from "../types/types";
+import {IRegistration} from "@/types/types";
 import './styles/RegisterPage.css';
 import PhoneInput from "react-phone-input-2";
 
@@ -85,7 +85,7 @@ const RegisterPage: FC = () => {
                                 />
                             </Form.Item>
                             <Form.Item
-                                name="dateOfBirth"
+                                name="birthdate"
                                 rules={[
                                     {required: true, message: 'Пожалуйста, введите дату рождения!'},
                                     ({getFieldValue}) => ({

@@ -1,0 +1,28 @@
+{
+  "salutation": "Hello {{name}}!",
+  "navMenuItems": {
+    "products": "Products",
+    "cart": "Cart",
+    "sign-in": "Sign In",
+    "about": "About",
+    "privateOffice": "Private Office",
+    "user": {
+      "profile": "Profile",
+      "delivery": "Current Deliveries",
+      "order": "Order History",
+      "login": "Login"
+    },
+    "category": {
+      "category1": "Textile",
+      "category2": "Furniture",
+      "category3": "Hardware",
+      "category4": "Tools",
+      "category5": "Chemicals",
+      "category6": "Garden",
+      "category7": "Trifles",
+      "category8": "Roads",
+      "category9": "Freedom",
+      "category10": "Weapons"
+    }
+  }
+}

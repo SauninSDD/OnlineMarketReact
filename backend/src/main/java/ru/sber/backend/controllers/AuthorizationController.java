@@ -166,7 +166,7 @@ public class AuthorizationController {
             ResponseEntity<String> userResponseEntity = new RestTemplate().exchange(
                     keycloakCreateUserUrl, HttpMethod.POST, userEntity, String.class);
             log.info("Результат отправки на keycloak: {}", userResponseEntity.getStatusCode());
-            loggingRepository.save(new Logfile("Результат отправки на keycloak ", userResponseEntity));
+            loggingRepository.save(new Logfile("Результат отправки на keycloak ", userResponseEntity.getStatusCode()));
 
 
             return new ResponseEntity<>(userResponseEntity.getStatusCode());
@@ -214,7 +214,7 @@ public class AuthorizationController {
                 jwtService.getBirthdate(jwt), jwtService.getGender(jwt)
         );
 
-        loggingRepository.save(new Logfile("Попытка получения данных пользователя", userDetails));
+        loggingRepository.save(new Logfile("Попытка получения данных пользователя", userDetails.getId()));
         return new ResponseEntity<>(userDetails, userHeaders, HttpStatus.OK);
     }
 

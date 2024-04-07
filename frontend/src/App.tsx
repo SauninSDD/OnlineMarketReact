@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import Preloader from "./components/generals/Preloader"
 import './App.css';
+import './i18n';
 import NavigationMenu from "./components/generals/NavMenu";
 import {FloatButton} from "antd";
 import Header from "./components/generals/Header";
 import authService from "./services/authService";
 import {useAppDispatch, useAppSelector} from "./hooks";
+import {Suspense} from 'react';
 
 
 const App = () => {
@@ -56,17 +58,19 @@ const App = () => {
         }
     };
     return (
-        <div className="App">
-            {loading ? (
-                <Preloader/>
-            ) : (
-                <div>
-                    <Header/>
-                    <NavigationMenu/>
-                    <FloatButton.BackTop style={{width: "2.5%", height: "5%"}} visibilityHeight={100}/>
-                </div>
-            )}
-        </div>
+        <Suspense fallback="...is loading">
+            <div className="App">
+                {loading ? (
+                    <Preloader/>
+                ) : (
+                    <div>
+                        <Header/>
+                        <NavigationMenu/>
+                        <FloatButton.BackTop style={{width: "2.5%", height: "5%"}} visibilityHeight={100}/>
+                    </div>
+                )}
+            </div>
+        </Suspense>
     );
 }
 
