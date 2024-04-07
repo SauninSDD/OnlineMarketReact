@@ -3,6 +3,7 @@ import {Button} from "antd";
 import "./styles/CardDish.css"
 import {IProduct, IDishFromCart} from "@/types/types";
 import ModalCardDish from "./ModalCardDish";
+import {useTranslation} from "react-i18next";
 
 interface DishItemProps {
     dish: IProduct | IDishFromCart,
@@ -20,7 +21,7 @@ const CardDish: FC<DishItemProps> =
          showUseButton,
          children
      }) => {
-
+        const {t} = useTranslation('DishesPage');
         const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
         return (
@@ -44,7 +45,7 @@ const CardDish: FC<DishItemProps> =
                                 setIsModalOpen(true)
                             }}
                         >
-                            Выбрать
+                            {t('use')}
                         </Button>
                     )}
                 </div>

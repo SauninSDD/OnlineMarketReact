@@ -1,0 +1,15 @@
+{
+  "success": "You have successfully logged in! Hello!",
+  "incorrect": "Incorrect login or password!",
+  "welcome": "Hello!",
+  "firstTimeGuests": "If you are new here and don't have an account, you can register on our website.",
+  "register": "Register",
+  "authentication": "Authentication",
+  "username": "Username",
+  "password": "Password",
+  "pleaseEnterUsername": "Please enter username!",
+  "pleaseEnterPassword": "Please enter password!",
+  "loginButton": "Login",
+  "forgotPassword": "Forgot your password?",
+  "restore": "Recover"
+}

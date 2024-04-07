@@ -5,6 +5,7 @@ import {OrderBlock} from './OrderBlock';
 import './styles/OrderHistory.css';
 import OrderService from "../../services/orderService";
 import {useAppDispatch} from "../../hooks";
+import {useTranslation} from "react-i18next";
 
 interface OrderHistory {
     listOrdersFromHistory: IOrderFromHistory[];
@@ -16,8 +17,8 @@ interface OrderHistory {
  */
 const OrderHistory: FC<OrderHistory> =
     ({listOrdersFromHistory}) => {
+        const {t} = useTranslation('UserPage');
     const dispatch = useAppDispatch();
-
 
     useEffect(() => {
         const getCart = () => {
@@ -38,7 +39,7 @@ const OrderHistory: FC<OrderHistory> =
                         ))}
                     </Space>
                 ) : (
-                    <div>Нет выполненных заказов</div>
+                    <div>{t('notHistoryOrder')}</div>
                 )}
             </div>
         );

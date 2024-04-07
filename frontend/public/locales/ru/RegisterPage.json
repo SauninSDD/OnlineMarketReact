@@ -1,0 +1,22 @@
+{
+  "welcome": "Добро пожаловать!",
+  "alreadyRegistered": "Если вы уже зарегистрированы на нашем сайте, то эта форма не для вас.",
+  "register": "Регистрация",
+  "email": "Email",
+  "phoneNumber": "Номер телефона",
+  "birthdate": "Дата рождения",
+  "password": "Пароль",
+  "pleaseEnterUsername": "Пожалуйста, введите имя пользователя!",
+  "pleaseEnterPassword": "Пожалуйста, введите пароль!",
+  "pleaseEnterEmail": "Пожалуйста, введите email!",
+  "pleaseEnterPhoneNumber": "Пожалуйста, введите номер телефона!",
+  "pleaseEnterBirthdate": "Пожалуйста, введите дату рождения!",
+  "yearOfBirthCannotBeBefore": "Год рождения не может быть раньше 1901.",
+  "yearOfBirthCannotExceedCurrentDate": "Год рождения не может превышать текущую дату.",
+  "registerButton": "Зарегистрироваться",
+  "authButton": "Авторизоваться",
+  "registerSuccess": "Вы успешно зарегистрированы.",
+  "registerError": "Ошибка при регистрации.",
+  "phoneInputPlaceholder": "+7-xxx-xxx-xx-xx",
+  "nameUserPlaceholder": "Имя пользователя"
+}

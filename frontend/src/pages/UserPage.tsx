@@ -7,6 +7,7 @@ import {Tabs} from 'antd';
 import {IOrderFromHistory} from "../types/types";
 import {useAppSelector} from "../hooks";
 import './styles/UserPage.css'
+import {useTranslation} from "react-i18next";
 const {TabPane} = Tabs;
 
 /**
@@ -14,6 +15,7 @@ const {TabPane} = Tabs;
  * @constructor
  */
 const UserPage: FC = () => {
+    const {t} = useTranslation('UserPage');
     const location = useLocation();
     const navigate = useNavigate();
     const anchorId = location.state ? location.state.anchorId : null;
@@ -35,16 +37,16 @@ const UserPage: FC = () => {
     return (
         <div>
             <Tabs  className="userProfile__tabs" tabPosition="left" activeKey={activeTabParam} onChange={handleTabChange}>
-                <TabPane tab="Профиль" key="profile">
-                    <h3>Профиль</h3>
+                <TabPane tab={t('profileTab')} key="profile">
+                    <h3>{t('profileTab')}</h3>
                     <UserProfile/>
                 </TabPane>
-                <TabPane tab="Текущие доставки" key="delivery">
-                    <h3>Текущие доставки</h3>
+                <TabPane tab={t('currentDeliveriesTab')} key="delivery">
+                    <h3>{t('currentDeliveriesTab')}</h3>
                     <CurrentOrders listOfCurrentOrders={listOrders.filter(order => order.status !== "COMPLETED" && order.status !== "CANCELLED")} />
                 </TabPane>
-                <TabPane tab="История заказов" key="order">
-                    <h3>История заказов</h3>
+                <TabPane tab={t('orderHistoryTab')} key="order">
+                    <h3>{t('orderHistoryTab')}</h3>
                     <OrderHistory listOrdersFromHistory={listOrders.filter(order => order.status === "COMPLETED" || order.status === "CANCELLED")} />
                 </TabPane>
             </Tabs>

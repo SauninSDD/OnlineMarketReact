@@ -26,7 +26,6 @@ const ListDishes: FC<ListDishes> =
                 {dishes.map((dish) =>
                     <CardDish dish={dish} key={dish.id} showUseButton={true}/>
                 )}
-
             </div>
         );
     };

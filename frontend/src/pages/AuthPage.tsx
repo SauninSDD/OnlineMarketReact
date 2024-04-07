@@ -1,18 +1,19 @@
 import React, {FC} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {Row, Card, Form, Input, Button, message} from 'antd';
-import {LockOutlined, MailOutlined} from '@ant-design/icons';
-import {login} from "../slices/authSlice";
+import {LockOutlined} from '@ant-design/icons';
 import authService from "../services/authService";
 import {useDispatch} from "react-redux";
-import {ILogin} from "../types/types";
+import {ILogin} from "@/types/types";
 import './styles/AuthPage.css';
+import {useTranslation} from "react-i18next";
 
 /**
  * Страница аутентификации пользователя
  * @constructor
  */
 const AuthPage: FC = () => {
+    const {t} = useTranslation('AuthPage');
     const [form] = Form.useForm();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const AuthPage: FC = () => {
         authService.loginUser(values, dispatch).then((user) => {
             console.log(user)
             //dispatch(login(user))
-            message.success("Вы успешно вошли в систему! Здравствуйте!")
+            message.success(t('success'))
              navigate("/")
             const reloadTime = 1;
             setTimeout(() => {
@@ -31,7 +32,7 @@ const AuthPage: FC = () => {
         }, (error) => {
             const _content = (error.response && error.response.data) || error.message || error.toString();
             console.log(_content);
-            message.error("Неверно указан логин или пароль!")
+            message.error(t('incorrect'))
         });
     };
 
@@ -41,24 +42,23 @@ const AuthPage: FC = () => {
                 <div style={{display: 'flex'}}>
                     <div className={"authPage__card-content"}>
                         <h1 className={"authPage__card-h1"}>
-                            Здравствуйте!
+                            {t('welcome')}
                         </h1>
                         <p className={"authPage__card-p"}>
-                            Если вы впервые у нас в гостях, и у вас нет аккаунта, то вы можете зарегистрироваться на
-                            нашем сайте.
+                            {t('firstTimeGuests')}
                         </p>
                         <Link to="/api/auth/signup" style={{marginTop: '20px'}}>
                             <Button
                                 type="primary"
                                 shape="round" size="large"
                                 className={"authPage__button"}>
-                                Зарегистрироваться
+                                {t('register')}
                             </Button>
                         </Link>
                     </div>
                     <div style={{flex: 1, padding: '50px'}}>
                         <h2 className={"authPage__card-h2"}>
-                            Авторизация
+                            {t('authentication')}
                         </h2>
                         <Form
                             name="normal_login"
@@ -68,24 +68,24 @@ const AuthPage: FC = () => {
                         >
                             <Form.Item
                                 name="username"
-                                rules={[{required: true, message: 'Пожалуйста, введите username!'}]}
+                                rules={[{required: true, message:t('pleaseEnterUsername')}]}
                             >
                                 <Input/>
                             </Form.Item>
                             <Form.Item
                                 name="password"
-                                rules={[{required: true, message: 'Пожалуйста, введите пароль!'}]}
+                                rules={[{required: true, message:t('pleaseEnterPassword')}]}
                             >
-                                <Input.Password prefix={<LockOutlined/>} placeholder="Пароль"/>
+                                <Input.Password prefix={<LockOutlined/>} placeholder={t('password')}/>
                             </Form.Item>
                             <Form.Item>
                                 <Button type="primary" htmlType="submit" style={{backgroundColor: '#0e4acb'}}>
-                                    Войти
+                                    {t('loginButton')}
                                 </Button>
                             </Form.Item>
                         </Form>
-                        <p style={{fontSize: '18px', textAlign: 'center'}}>Забыли пароль? <Link
-                            to="/forgot">Восстановите</Link></p>
+                        <p style={{fontSize: '18px', textAlign: 'center'}}> {t('forgotPassword')} <Link
+                            to="/forgot"> {t('restore')} </Link></p>
                     </div>
                 </div>
             </Card>

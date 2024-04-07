@@ -5,6 +5,7 @@ import CartService from "../../services/cartService";
 import {user} from "@/constants/constants";
 import { IProduct, IDishFromCart} from "@/types/types";
 import {useAppDispatch, useAppSelector} from "@/hooks";
+import {useTranslation} from "react-i18next";
 
 interface ModalCardDishProps {
     dish: IProduct | IDishFromCart;
@@ -20,7 +21,7 @@ const ModalCardDish: FC<ModalCardDishProps> =
     ({
          dish, isModalOpen, onClose
      }) => {
-
+        const {t} = useTranslation('DishesPage');
         const [isLogged] = useState<boolean>(user !== null);
         const dispatch = useAppDispatch();
         const dishFromCartById: IDishFromCart | undefined = useAppSelector((state) => state.cart.cartItems.find(item => item.id === dish.id))
@@ -68,7 +69,7 @@ const ModalCardDish: FC<ModalCardDishProps> =
                         >
                             <Button type={"link"}>
                                 <span style={{color: "black", textDecoration: "underline", textUnderlineOffset: "3px"}}>
-                                    Состав
+                                    {t('compositionTooltip')}
                                 </span>
                             </Button>
                         </Tooltip>
@@ -90,9 +91,9 @@ const ModalCardDish: FC<ModalCardDishProps> =
                                     size="large"
                                 >
                                     {isLogged ? (
-                                        <div>Добавить в корзину</div>
+                                        <div> {t('addToCart')} </div>
                                     ) : (
-                                        <Link to="/api/auth/signin">Войти</Link>
+                                        <Link to="/api/auth/signin"> {t('login')} </Link>
                                     )}
                                 </Button>
                             )}

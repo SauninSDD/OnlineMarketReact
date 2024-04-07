@@ -6,6 +6,7 @@ import authService from '../services/authService';
 import {IRegistration} from "@/types/types";
 import './styles/RegisterPage.css';
 import PhoneInput from "react-phone-input-2";
+import {useTranslation} from "react-i18next";
 
 
 /**
@@ -13,6 +14,7 @@ import PhoneInput from "react-phone-input-2";
  * @constructor
  */
 const RegisterPage: FC = () => {
+    const {t} = useTranslation('RegisterPage');
     const [form] = Form.useForm();
     const navigate = useNavigate();
     const currentDate = new Date();
@@ -21,11 +23,11 @@ const RegisterPage: FC = () => {
         authService
             .register(values)
             .then(() => {
-                message.success('Вы успешно зарегистрированы');
+                message.success(t('registerSuccess'));
                 navigate('/api/auth/signin');
             })
             .catch((error) => {
-                message.error('Ошибка при регистрации');
+                message.error(t('registerError'));
                 console.error(error);
             });
     };
@@ -36,10 +38,10 @@ const RegisterPage: FC = () => {
                 <div style={{display: 'flex'}}>
                     <div className={"registerPage__card-content"}>
                         <h1 className={"registerPage__card-h1"}>
-                            Добро пожаловать!
+                            {t('welcome')}
                         </h1>
                         <p className={"registerPage__card-p"}>
-                            Если вы уже зарегистрированы на нашем сайте, то эта форма не для вас.
+                            {t('alreadyRegistered')}
                         </p>
                         <Link to="/api/auth/signin" style={{marginTop: '20px'}}>
                             <Button
@@ -47,24 +49,24 @@ const RegisterPage: FC = () => {
                                 shape="round"
                                 size="large"
                                 className={"registerPage__button"}>
-                                Авторизироваться
+                                {t('authButton')}
                             </Button>
                         </Link>
                     </div>
                     <div style={{flex: 1, padding: '50px'}}>
                         <h2 className={"registerPage__card-h2"}>
-                            Регистрация
+                            {t('register')}
                         </h2>
                         <Form form={form} layout="vertical" name="register" onFinish={onFinish}>
                             <Form.Item
                                 name="username"
-                                rules={[{required: true, message: 'Пожалуйста, введите имя пользователя!'}]}
+                                rules={[{required: true, message: t('pleaseEnterUsername')}]}
                             >
-                                <Input prefix={<UserOutlined/>} placeholder="Имя пользователя"/>
+                                <Input prefix={<UserOutlined/>} placeholder={t('nameUserPlaceholder')}/>
                             </Form.Item>
                             <Form.Item
                                 name="email"
-                                rules={[{required: true, message: 'Пожалуйста, введите email!'}]}
+                                rules={[{required: true, message: t('pleaseEnterEmail')}]}
                             >
                                 <Input prefix={<MailOutlined/>} type="email" placeholder="Email"/>
                             </Form.Item>
@@ -74,20 +76,20 @@ const RegisterPage: FC = () => {
                                 rules={[
                                     {
                                         required: true,
-                                        message: "Пожалуйста, введите номер телефона",
+                                        message: t('pleaseEnterPhoneNumber'),
                                     },
                                 ]}
                             >
                                 <PhoneInput
                                     country="ru"
                                     onlyCountries={["ru"]}
-                                    placeholder="+7-xxx-xxx-xx-xx"
+                                    placeholder={t('phoneInputPlaceholder')}
                                 />
                             </Form.Item>
                             <Form.Item
                                 name="birthdate"
                                 rules={[
-                                    {required: true, message: 'Пожалуйста, введите дату рождения!'},
+                                    {required: true, message: t('pleaseEnterBirthdate')},
                                     ({getFieldValue}) => ({
                                         validator(_, value) {
                                             const selectedDate = new Date(value);
@@ -97,11 +99,11 @@ const RegisterPage: FC = () => {
                                             }
 
                                             if (selectedDate.getFullYear() < 1901) {
-                                                return Promise.reject('Год рождения не может быть раньше 1901.');
+                                                return Promise.reject(t('yearOfBirthCannotBeBefore'));
                                             }
 
                                             if (selectedDate > currentDate) {
-                                                return Promise.reject('Год рождения не может превышать текущую дату');
+                                                return Promise.reject(t('yearOfBirthCannotExceedCurrentDate'));
                                             }
                                         },
                                     }),
@@ -111,13 +113,13 @@ const RegisterPage: FC = () => {
                             </Form.Item>
                             <Form.Item
                                 name="password"
-                                rules={[{required: true, message: 'Пожалуйста, введите пароль!'}]}
+                                rules={[{required: true, message: t('pleaseEnterPassword')}]}
                             >
-                                <Input.Password prefix={<LockOutlined/>} placeholder="Пароль"/>
+                                <Input.Password prefix={<LockOutlined/>} placeholder={t('password')}/>
                             </Form.Item>
                             <Form.Item>
                                 <Button type="primary" htmlType="submit" style={{backgroundColor: '#0e4acb'}}>
-                                    Зарегистрироваться
+                                    {t('registerButton')}
                                 </Button>
                             </Form.Item>
                         </Form>

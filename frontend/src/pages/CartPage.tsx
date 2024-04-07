@@ -3,14 +3,16 @@ import ListDishesFromCart from '../components/CartPage/ListDishesFromCart';
 import DeliveryForm from '../components/CartPage/DeliveryForm';
 import CartService from "../services/cartService";
 import './styles/CartPage.css';
-import { IDishFromCart} from "../types/types";
+import {IDishFromCart} from "../types/types";
 import {useAppDispatch, useAppSelector} from "../hooks";
+import {useTranslation} from "react-i18next";
 
 /**
  * Страница корзины пользователя
  * @constructor
  */
 const CartPage: FC = () => {
+        const {t} = useTranslation('Cart');
         const listDishesFromCart: IDishFromCart[] = useAppSelector((state) => state.cart.cartItems);
         const isCartEmpty: boolean = listDishesFromCart.length === 0;
         const dispatch = useAppDispatch();
@@ -51,10 +53,10 @@ const CartPage: FC = () => {
         return (
             <div className="cartPage">
                 <div className="cartPage--content">
-                    <h2 className="cartPage--content--title-cart">Корзина</h2>
+                    <h2 className="cartPage--content--title-cart"> {t('cartTitle')} </h2>
                     {isCartEmpty ? (
                         <div className={"cartEmpty"}>
-                            <h2 className="cartPage--content--title-cartIsEmpty">Ваша корзина пуста :(</h2>
+                            <h2 className="cartPage--content--title-cartIsEmpty"> {t('cartIsEmpty')} </h2>
                             <div className={"cartEmpty__images__container"}><img
                                 className="cartPage-img-empty"
                                 src="https://ne-kurim.ru/forum/attachments/orig-gif.1566829/"
@@ -70,14 +72,14 @@ const CartPage: FC = () => {
                     ) : (
                         <div>
                             <div className="border-bottom-container"><ListDishesFromCart dishes={listDishesFromCart}/></div>
-                                <DeliveryForm listDishesFromCart={listDishesFromCart}
-                                              totalPrice={totalPrice}/>
+                            <DeliveryForm listDishesFromCart={listDishesFromCart}
+                                          totalPrice={totalPrice}/>
                         </div>
                     )}
                 </div>
                 {isTotalVisible && !isCartEmpty && (
                     <div className="cartPage-total">
-                        <h4 className="cartPage-total-title-count">К оплате: {totalPrice} ₽</h4>
+                        <h4 className="cartPage-total-title-count">{t('paymentTotal')} {totalPrice} ₽</h4>
                     </div>
                 )}
             </div>

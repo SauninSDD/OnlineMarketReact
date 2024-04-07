@@ -23,7 +23,7 @@ import UserInfo from "@/components/UserPage/UserInfo";
  * @constructor
  */
 const UserProfile: FC = () => {
-    const {t} = useTranslation('UserProfile');
+    const {t} = useTranslation('UserPage');
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const dispatch = useAppDispatch();
     const user = useAppSelector((store) => store.auth.user);

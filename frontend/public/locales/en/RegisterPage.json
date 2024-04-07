@@ -1,0 +1,22 @@
+{
+  "welcome": "Welcome!",
+  "alreadyRegistered": "If you are already registered on our site, then this form is not for you.",
+  "register": "Register",
+  "email": "Email",
+  "phoneNumber": "Phone Number",
+  "birthdate": "Birthdate",
+  "password": "Password",
+  "pleaseEnterUsername": "Please enter username!",
+  "pleaseEnterPassword": "Please enter password!",
+  "pleaseEnterEmail": "Please enter email!",
+  "pleaseEnterPhoneNumber": "Please enter phone number!",
+  "pleaseEnterBirthdate": "Please enter birthdate!",
+  "yearOfBirthCannotBeBefore": "Year of birth cannot be before 1901.",
+  "yearOfBirthCannotExceedCurrentDate": "Year of birth cannot exceed the current date.",
+  "registerButton": "Register",
+  "authButton": "Authenticate",
+  "registerSuccess": "You have successfully registered.",
+  "registerError": "Error during registration.",
+  "phoneInputPlaceholder": "+7-xxx-xxx-xx-xx",
+  "nameUserPlaceholder": "Username"
+}

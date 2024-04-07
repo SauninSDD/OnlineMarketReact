@@ -14,12 +14,14 @@ import {
     setFetching,
     setTotalPage
 } from "@/slices/dishesSlice";
+import {useTranslation} from "react-i18next";
 
 /**
  * Страница товаров ресторана
  * @constructor
  */
 const DishesPage: FC = () => {
+    const {t} = useTranslation();
     const [size] = useState<number>(10)
     const currentCategory = useAppSelector((state) => state.dishes.category);
     const [scrollValueInPercent] = useState<number>(50)
@@ -75,7 +77,7 @@ const DishesPage: FC = () => {
                 <SearchDishes onSearch={handleSearch}/>
                 <div className="category-section">
                     {listDishes?.length === 0 && <p className="dishPage__content_p">
-                        Блюда не найдены
+                        {t('dishNotFound')}
                     </p>}
                     <div>
                         <h2 id="category:1">{category}</h2>

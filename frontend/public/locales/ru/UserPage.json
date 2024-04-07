@@ -12,5 +12,10 @@
   "name": "Имя:",
   "email": "E-mail:",
   "birthdate": "Дата рождения:",
-  "phoneNumber": "Номер телефона:"
+  "phoneNumber": "Номер телефона:",
+  "profileTab": "Профиль",
+  "currentDeliveriesTab": "Текущие доставки",
+  "orderHistoryTab": "История заказов",
+  "notCurrentOrder": "Нет текущих заказов",
+  "notHistoryOrder": "Нет выполненных заказов"
 }

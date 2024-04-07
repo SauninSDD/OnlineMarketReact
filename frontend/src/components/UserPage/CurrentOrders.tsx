@@ -5,6 +5,7 @@ import {IOrderFromHistory} from "../../types/types";
 import {OrderBlock} from "./OrderBlock";
 import OrderService from "../../services/orderService";
 import {useAppDispatch} from "../../hooks";
+import {useTranslation} from "react-i18next";
 
 interface CurrentOrders {
     listOfCurrentOrders: IOrderFromHistory[];
@@ -15,6 +16,7 @@ interface CurrentOrders {
  * @constructor
  */
 const CurrentOrders: FC<CurrentOrders> = ({listOfCurrentOrders}) => {
+    const {t} = useTranslation('UserPage');
     const dispatch = useAppDispatch();
     useEffect(() => {
         const getCart = () => {
@@ -34,7 +36,7 @@ const CurrentOrders: FC<CurrentOrders> = ({listOfCurrentOrders}) => {
                     ))}
                 </Space>
             ) : (
-                <div>Нет текущих заказов</div>
+                <div>{t('notCurrentOrder')}</div>
             )}
         </div>
     );

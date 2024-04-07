@@ -54,7 +54,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.5.1",
     "@types/styled-components": "^5.1.34",
-    "antd": "^5.10.0",
+    "antd": "^5.16.1",
     "axios": "^1.5.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
