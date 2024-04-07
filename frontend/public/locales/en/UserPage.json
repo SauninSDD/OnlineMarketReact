@@ -1,0 +1,21 @@
+{
+  "logoutSuccess": "You have successfully logged out! Goodbye!",
+  "dataSaved": "Data successfully saved!",
+  "saveError": "An error occurred while saving data.",
+  "enterUsername": "Please enter a username!",
+  "enterEmail": "Please enter an email!",
+  "enterBirthdate": "Please enter a birthdate!",
+  "enterPhoneNumber": "Enter phone number",
+  "phoneInputPlaceholder": "+7-xxx-xxx-xx-xx",
+  "save": "Save",
+  "cancel": "Cancel",
+  "name": "Name:",
+  "email": "E-mail:",
+  "birthdate": "Birthdate:",
+  "phoneNumber": "Phone Number:",
+  "profileTab": "Profile",
+  "currentDeliveriesTab": "Current Deliveries",
+  "orderHistoryTab": "Order History",
+  "notCurrentOrder": "No current orders",
+  "notHistoryOrder": "No history orders"
+}
