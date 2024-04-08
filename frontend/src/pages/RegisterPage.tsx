@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useParams, useSearchParams} from 'react-router-dom';
 import {Row, Card, Form, Input, Button, message} from 'antd';
 import {UserOutlined, MailOutlined, CalendarOutlined, LockOutlined} from '@ant-design/icons';
 import authService from '../services/authService';
@@ -18,16 +18,17 @@ const RegisterPage: FC = () => {
     const [form] = Form.useForm();
     const navigate = useNavigate();
     const currentDate = new Date();
-
+    const searchParams = new URLSearchParams(location.search);
+    const context = searchParams.get('target') || '';
     const onFinish = (values: IRegistration) => {
         authService
             .register(values)
             .then(() => {
-                message.success(t('registerSuccess'));
+                message.success(t('registerSuccess', { context }));
                 navigate('/api/auth/signin');
             })
             .catch((error) => {
-                message.error(t('registerError'));
+                message.error(t('registerError', { context }));
                 console.error(error);
             });
     };
@@ -38,10 +39,10 @@ const RegisterPage: FC = () => {
                 <div style={{display: 'flex'}}>
                     <div className={"registerPage__card-content"}>
                         <h1 className={"registerPage__card-h1"}>
-                            {t('welcome')}
+                            {t('welcome', { context })}
                         </h1>
                         <p className={"registerPage__card-p"}>
-                            {t('alreadyRegistered')}
+                            {t('alreadyRegistered', { context })}
                         </p>
                         <Link to="/api/auth/signin" style={{marginTop: '20px'}}>
                             <Button
@@ -49,24 +50,24 @@ const RegisterPage: FC = () => {
                                 shape="round"
                                 size="large"
                                 className={"registerPage__button"}>
-                                {t('authButton')}
+                                {t('authButton', { context })}
                             </Button>
                         </Link>
                     </div>
                     <div style={{flex: 1, padding: '50px'}}>
                         <h2 className={"registerPage__card-h2"}>
-                            {t('register')}
+                            {t('register', { context })}
                         </h2>
                         <Form form={form} layout="vertical" name="register" onFinish={onFinish}>
                             <Form.Item
                                 name="username"
-                                rules={[{required: true, message: t('pleaseEnterUsername')}]}
+                                rules={[{required: true, message: t('pleaseEnterUsername', { context })}]}
                             >
-                                <Input prefix={<UserOutlined/>} placeholder={t('nameUserPlaceholder')}/>
+                                <Input prefix={<UserOutlined/>} placeholder={t('nameUserPlaceholder', { context })}/>
                             </Form.Item>
                             <Form.Item
                                 name="email"
-                                rules={[{required: true, message: t('pleaseEnterEmail')}]}
+                                rules={[{required: true, message: t('pleaseEnterEmail', { context })}]}
                             >
                                 <Input prefix={<MailOutlined/>} type="email" placeholder="Email"/>
                             </Form.Item>
@@ -76,20 +77,20 @@ const RegisterPage: FC = () => {
                                 rules={[
                                     {
                                         required: true,
-                                        message: t('pleaseEnterPhoneNumber'),
+                                        message: t('pleaseEnterPhoneNumber', { context }),
                                     },
                                 ]}
                             >
                                 <PhoneInput
                                     country="ru"
                                     onlyCountries={["ru"]}
-                                    placeholder={t('phoneInputPlaceholder')}
+                                    placeholder={t('phoneInputPlaceholder', { context })}
                                 />
                             </Form.Item>
                             <Form.Item
                                 name="birthdate"
                                 rules={[
-                                    {required: true, message: t('pleaseEnterBirthdate')},
+                                    {required: true, message: t('pleaseEnterBirthdate', { context })},
                                     ({getFieldValue}) => ({
                                         validator(_, value) {
                                             const selectedDate = new Date(value);
@@ -99,27 +100,27 @@ const RegisterPage: FC = () => {
                                             }
 
                                             if (selectedDate.getFullYear() < 1901) {
-                                                return Promise.reject(t('yearOfBirthCannotBeBefore'));
+                                                return Promise.reject(t('yearOfBirthCannotBeBefore', { context }));
                                             }
 
                                             if (selectedDate > currentDate) {
-                                                return Promise.reject(t('yearOfBirthCannotExceedCurrentDate'));
+                                                return Promise.reject(t('yearOfBirthCannotExceedCurrentDate', { context }));
                                             }
                                         },
                                     }),
                                 ]}
                             >
-                                <Input prefix={<CalendarOutlined/>} type="date" placeholder="Дата рождения"/>
+                                <Input prefix={<CalendarOutlined/>} type="date" placeholder={t('birthdate', { context })}/>
                             </Form.Item>
                             <Form.Item
                                 name="password"
-                                rules={[{required: true, message: t('pleaseEnterPassword')}]}
+                                rules={[{required: true, message: t('pleaseEnterPassword', { context })}]}
                             >
-                                <Input.Password prefix={<LockOutlined/>} placeholder={t('password')}/>
+                                <Input.Password prefix={<LockOutlined/>} placeholder={t('password', { context })}/>
                             </Form.Item>
                             <Form.Item>
                                 <Button type="primary" htmlType="submit" style={{backgroundColor: '#0e4acb'}}>
-                                    {t('registerButton')}
+                                    {t('registerButton', { context })}
                                 </Button>
                             </Form.Item>
                         </Form>

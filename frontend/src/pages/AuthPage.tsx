@@ -47,7 +47,7 @@ const AuthPage: FC = () => {
                         <p className={"authPage__card-p"}>
                             {t('firstTimeGuests')}
                         </p>
-                        <Link to="/api/auth/signup" style={{marginTop: '20px'}}>
+                        <Link to="/api/auth/signup?target=Добавили_какой-то_контекст" style={{marginTop: '20px'}}>
                             <Button
                                 type="primary"
                                 shape="round" size="large"
