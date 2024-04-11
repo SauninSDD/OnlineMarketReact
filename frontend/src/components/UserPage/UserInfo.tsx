@@ -1,11 +1,17 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {IUserResponse} from "@/types/types";
+import Cookies from 'js-cookie';
+import {Checkbox, Form, Input} from "antd";
 
 interface UserInfoProps {
     user: IUserResponse | null; // уточняем тип для user
 }
 
 const UserInfo: FC<UserInfoProps> = ({user}) => {
+
+    const [color, setColor] = useState(Cookies.get('color') ?? '');
+    const [interest, setInterest] = useState(Cookies.get('interest') ?? '');
+    const [isHuman, setIsHuman] = useState(Cookies.get('isHuman') === 'true');
 
     //раньше нужно было, чтобы внутри span номер отображался корректно
     const formatPhoneNumber = (phoneNumber: string | undefined) => {
@@ -20,8 +26,10 @@ const UserInfo: FC<UserInfoProps> = ({user}) => {
     };
 
     useEffect(() => {
-        console.log("user change")
-    }, [user])
+        Cookies.set('color', color, {expires: 3650});
+        Cookies.set('interest', interest, {expires: 3650});
+        Cookies.set('isHuman', isHuman.toString(), {expires: 3650});
+    }, [user, color, interest, isHuman])
 
     return (
         <div>
@@ -37,6 +45,35 @@ const UserInfo: FC<UserInfoProps> = ({user}) => {
             <p>
                 <span>{user && formatPhoneNumber(user.number)}</span>
             </p>
+
+            <Form>
+                <Form.Item label="Любимый цвет">
+
+                    <Input
+                        type="text"
+                        value={color}
+                        onChange={e => setColor(e.target.value)}
+                        placeholder="Введите ваш любимый цвет"
+                    />
+                </Form.Item>
+
+                <Form.Item label="Хобби">
+                    <Input
+                        type="text"
+                        value={interest}
+                        onChange={e => setInterest(e.target.value)}
+                        placeholder="Введите ваше хобби"
+                    />
+                </Form.Item>
+
+                <Form.Item label="Вы человек?">
+                    <Checkbox
+                        checked={isHuman}
+                        onChange={e => setIsHuman(e.target.checked)}
+                    />
+                </Form.Item>
+            </Form>
+
         </div>
     );
 };
