@@ -1,12 +1,17 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import { IUser} from "../types/types";
+import {ILanguages, IUser} from "@/types/types";
 
 interface UsersState {
     users: IUser[];
+    languages: ILanguages;
 }
 
 const initialState: UsersState = {
     users: [],
+    languages: {
+        ru: {nativeName: 'Русский'},
+        en: {nativeName: 'English'}
+    },
 };
 export const UserSlice = createSlice({
     name: 'user',

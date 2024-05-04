@@ -86,5 +86,9 @@ export interface ILogin {
     password: string;
 }
 
+export type ILanguages = {
+    [key: string]: { nativeName: string };
+};
+
 
 

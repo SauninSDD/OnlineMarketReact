@@ -20,7 +20,7 @@ const Header: FC = () => {
     }, []);
 
     const getUserGeolocationDetails = () => {
-        fetch('http://ipwho.is/')
+        fetch('https://ipwho.is/')
             .then((response) => response.json())
             .then((data) => setDetails(data));
     };

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { setDishes} from "@/slices/dishesSlice";
 import {AppDispatch} from "@/store";
+import i18n from "i18next";
 
 const API_URL: string = "/Broomstick/products";
 
@@ -9,7 +10,9 @@ const API_URL: string = "/Broomstick/products";
  * @constructor
  */
 const getDishes = (category: string, size: number, page: number, dispatch: AppDispatch) => {
-    return axios.get(`${API_URL}/searchByCategory?page=${page}&size=${size}&category=${category}`).then(
+    const language = i18n.resolvedLanguage
+    //TODO поменять на добавление квери-параметров через buildQuery
+    return axios.get(`${API_URL}/searchByCategory?page=${page}&size=${size}&category=${category}&language=${language}`).then(
         (response) => {
             console.log('Total Pages Dishes:', response.headers['x-total-pages']);
             console.log(response.data)

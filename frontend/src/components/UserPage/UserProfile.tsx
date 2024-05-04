@@ -29,7 +29,6 @@ const UserProfile: FC = () => {
     const user = useAppSelector((store) => store.auth.user);
     const [form] = Form.useForm<IUserResponse>();
 
-
     const handleLogout = () => {
         AuthService.logout();
         message.success(t('logoutSuccess'));

@@ -14,8 +14,9 @@ import {user} from "@/constants/constants";
 import ResetPassword from "../AuthPage/ResetPassword";
 import ForgotPassword from "../AuthPage/ForgotPassword";
 import {useTranslation} from "react-i18next";
-import {ILanguagesModel} from "@/components/generals/models/NavMenuModel";
 import {Container, StyledButton} from "@/components/generals/styles/SwitcherLanguages";
+import {useAppDispatch, useAppSelector} from "@/hooks";
+import {clearState, setFetching} from "@/slices/dishesSlice";
 
 /**
  * Навигационное меню
@@ -24,15 +25,12 @@ import {Container, StyledButton} from "@/components/generals/styles/SwitcherLang
 const NavigationMenu: FC = () => {
     const {t, i18n} = useTranslation('NavigationMenu');
     const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean>(false);
+    const languages = useAppSelector((state) => state.user.languages);
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         setIsUserAuthenticated(user != null);
     }, []);
-
-    const languages: ILanguagesModel = {
-        ru: {nativeName: 'Русский'},
-        en: {nativeName: 'English'}
-    };
 
     return (
         <div>
@@ -104,7 +102,11 @@ const NavigationMenu: FC = () => {
                         <StyledButton
                             type="primary"
                             key={language}
-                            onClick={() => i18n.changeLanguage(language)}
+                            onClick={() => {
+                                i18n.changeLanguage(language)
+                                dispatch(clearState())
+                                dispatch(setFetching(true))
+                            }}
                             disabled={i18n.resolvedLanguage === language}
                         >
                             {languages[language].nativeName}

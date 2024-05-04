@@ -4,6 +4,7 @@ import {BuildOptions} from "./types/types";
 export function buildDevServer(options: BuildOptions): DevServerConfiguration {
     return {
         port: options.port ?? 3000,
+        https: true,
         open: true,
         historyApiFallback: true,
         hot: true,
@@ -12,7 +13,7 @@ export function buildDevServer(options: BuildOptions): DevServerConfiguration {
                 target: 'http://localhost:3000',
                 router: () => 'http://localhost:8085',
                 logLevel: 'debug' /*optional*/
-            }
+            },
         }
     }
 }

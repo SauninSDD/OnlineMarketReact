@@ -47,10 +47,14 @@ export const dishesSlice = createSlice({
         },
         setCategory: (state, action: PayloadAction<string>) => {
             state.category = action.payload;
+        },
+        clearState: (state) => {
+            state.dishes = {};
+            state.currentPage = {}
         }
     },
 })
 
-export const {setDishes, setCurrentPage, setTotalPage, setFetching, setCategory} = dishesSlice.actions;
+export const {setDishes, setCurrentPage, setTotalPage, setFetching, setCategory, clearState} = dishesSlice.actions;
 
 export default dishesSlice.reducer;

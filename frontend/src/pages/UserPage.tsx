@@ -1,11 +1,11 @@
 import React, {FC, useEffect} from 'react';
-import {UserProfile} from '../components/UserPage/UserProfile';
+import {UserProfile} from '@/components/UserPage/UserProfile';
 import OrderHistory from '../components/UserPage/OrderHistory';
 import {useLocation, useNavigate} from 'react-router-dom';
 import CurrentOrders from '../components/UserPage/CurrentOrders';
 import {Tabs} from 'antd';
-import {IOrderFromHistory} from "../types/types";
-import {useAppSelector} from "../hooks";
+import {IOrderFromHistory} from "@/types/types";
+import {useAppSelector} from "@/hooks";
 import './styles/UserPage.css'
 import {useTranslation} from "react-i18next";
 const {TabPane} = Tabs;

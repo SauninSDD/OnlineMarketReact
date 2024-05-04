@@ -3,7 +3,7 @@
 GET localhost:8085/Broomstick/products/searchByArticle/1
 
 ###Получение категории продуктов (параметры: номер, размер страницы, категория)
-GET localhost:8085/Broomstick/products/searchByCategory?page=0&size=1&category=2
+GET localhost:8085/Broomstick/products/searchByCategory?page=0&size=1&category=5&language=en
 
 ###Поиск продуктов по названию (параметры: номер, размер страницы, название продукта) поиск проработанный
 GET localhost:8085/Broomstick/products/searchByName?page=0&size=50&name=Product 1 2
@@ -24,9 +24,16 @@ Content-Type: application/json
   "phone": "88005553535"
 }
 
+###test
+POST https://translateRequest.api.cloud.yandex.net/translateRequest/v2/translateRequest
+Authorization: Bearer t1.9euelZqeiomNj8jLipDMi4ycy5iezu3rnpWalcvPmJKJzouQjJXHxsuSzZfl8_c5PTxO-e9ANUxO_d3z93lrOU7570A1TE79zef1656VmpCMjZfOmszHi8eRx86Pzc-T7_zF656VmpCMjZfOmszHi8eRx86Pzc-T.Tz6VFLoGFnHxWHye0r0RO26TwHDuUkMFBLsx1lxY6LpTcicl8TT9LXpC8sG2JDf3VKCj6mD2wEV_9wfITeSJDQ
+Content-Type: application/json
 
-
-
+{
+  "folderId": "b1gb2hm3gdhbk25ki2ju",
+  "texts": ["get", "car"],
+  "targetLanguageCode": "ru"
+}
 
 
 

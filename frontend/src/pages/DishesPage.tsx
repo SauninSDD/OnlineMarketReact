@@ -34,6 +34,17 @@ const DishesPage: FC = () => {
     const listDishes: IProduct[] = useAppSelector((state) => state.dishes.dishes[category]) ?? [];
     const [searchText, setSearchText] = useState('');
 
+    const scrollHandler = () => {
+        if ((document.documentElement.scrollTop / (document.documentElement.scrollHeight - window.innerHeight))
+            * 100 > scrollValueInPercent && currentPage < totalPage) {
+            dispatch(setFetching(true))
+        }
+    }
+
+    const handleSearch = (value: string) => {
+        setSearchText(value);
+    };
+
      useEffect(() => {
          if (currentCategory !== category && currentCategory !== null) {
              dispatch((setCategory(category)))
@@ -45,11 +56,11 @@ const DishesPage: FC = () => {
             DishService.getDishes(category, size, currentPage, dispatch)
                 .then((response) => {
                     dispatch(setCurrentPage(currentPage + 1))
-                    dispatch(setTotalPage(parseInt(response ? response.headers['x-total-pages'] : '0')))
+                    dispatch(setTotalPage(parseInt(response?.headers['x-total-pages'] ?? '0')))
                 })
                 .finally(() => dispatch(setFetching(false)))
         }
-    }, [category, fetching]);
+    }, [category, fetching, listDishes]);
 
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler)
@@ -57,18 +68,6 @@ const DishesPage: FC = () => {
             document.removeEventListener('scroll', scrollHandler)
         };
     }, [])
-
-    const scrollHandler = () => {
-        if ((document.documentElement.scrollTop / (document.documentElement.scrollHeight - window.innerHeight)) * 100 > scrollValueInPercent && currentPage < totalPage) {
-            dispatch(setFetching(true))
-        }
-    }
-
-
-    const handleSearch = (value: string) => {
-        setSearchText(value);
-    };
-
 
     return (
         <div className="dishPage">
