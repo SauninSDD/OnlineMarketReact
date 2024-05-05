@@ -60,6 +60,8 @@ const DishesPage: FC = () => {
                     dispatch(setTotalPage(parseInt(response?.headers['x-total-pages'] ?? '0')))
                 })
                 .finally(() => dispatch(setFetching(false)))
+        } else {
+            dispatch(setFetching(false))
         }
     }, [category, fetching, currentPage]);
 
@@ -79,7 +81,7 @@ const DishesPage: FC = () => {
                     <div>
                         <h2 id="category:1">{category}</h2>
                         <ListDishes dishes={listDishes}/>
-                        {listDishes?.length === 0 && <p className="dishPage__content_p">
+                        {listDishes?.length === 0 && !fetching && <p className="dishPage__content_p">
                             {t('dishNotFound')}
                         </p>}
                         {currentPage < totalPage ?

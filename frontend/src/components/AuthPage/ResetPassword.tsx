@@ -43,7 +43,7 @@ const ResetPassword: FC = () => {
                     <div className="resetPassword__success-message">
                         Пароль успешно обновлен
                     </div>
-                    <Link to="/api/auth/signin">
+                    <Link to="/signin">
                         <Button type="primary" className="resetPassword__button">
                             Войти в аккаунт
                         </Button>

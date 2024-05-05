@@ -29,6 +29,9 @@ interface Resources {
     "cartIsEmpty": "Ваша корзина пуста :(",
     "paymentTotal": "К оплате:"
   },
+  "DefaultNS": {
+    "dishNotFound": "Блюда не найдены"
+  },
   "DishesPage": {
     "dishNotFound": "Блюда не найдены",
     "use": "Выбрать",
@@ -127,6 +130,7 @@ interface Resources {
     "pleaseEnterEmail": "Пожалуйста, введите email!",
     "pleaseEnterPhoneNumber": "Пожалуйста, введите номер телефона!",
     "pleaseEnterBirthdate": "Пожалуйста, введите дату рождения!",
+    "invalidPhoneNumber": "Некорректно введен номер телефона!",
     "yearOfBirthCannotBeBefore": "Год рождения не может быть раньше 1901.",
     "yearOfBirthCannotExceedCurrentDate": "Год рождения не может превышать текущую дату.",
     "registerButton": "Зарегистрироваться",

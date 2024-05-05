@@ -142,8 +142,8 @@ public class AuthorizationController {
         userRequest.setEnabled(true);
 
         Attributes attributes = new Attributes();
-        attributes.setPhoneNumber(signupRequest.getNumber()
-        );
+        attributes.setPhoneNumber(signupRequest.getNumber());
+
         attributes.setBirthdate(signupRequest.getBirthdate().toString());
         attributes.setGender(signupRequest.getGender());
         userRequest.setAttributes(attributes);

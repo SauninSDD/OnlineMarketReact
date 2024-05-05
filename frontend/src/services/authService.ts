@@ -84,6 +84,7 @@ const updateUser = async (user: IUserResponse, dispatch: AppDispatch) => {
 const logout = () => {
     console.log("logout");
     localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
 };
 
 const authService = {

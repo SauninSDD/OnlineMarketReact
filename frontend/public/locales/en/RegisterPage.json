@@ -11,6 +11,7 @@
   "pleaseEnterEmail": "Please enter email!",
   "pleaseEnterPhoneNumber": "Please enter phone number!",
   "pleaseEnterBirthdate": "Please enter birthdate!",
+  "invalidPhoneNumber": "Phone number entered incorrectly!",
   "yearOfBirthCannotBeBefore": "Year of birth cannot be before 1901.",
   "yearOfBirthCannotExceedCurrentDate": "Year of birth cannot exceed the current date.",
   "registerButton": "Register",

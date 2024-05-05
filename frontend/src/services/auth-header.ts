@@ -1,6 +1,3 @@
-import {user} from "../constants/constants";
-import header from "../components/generals/Header";
-
 /**
  * Аутентификационный заголовок
  * @constructor

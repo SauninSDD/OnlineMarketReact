@@ -74,7 +74,7 @@ const NavigationMenu: FC = () => {
                         {isUserAuthenticated ? (
                             <Link to="/cart">{t('navMenuItems.cart')}</Link>
                         ) : (
-                            <Link to="/api/auth/signin">{t('navMenuItems.cart')}</Link>
+                            <Link to="/signin">{t('navMenuItems.cart')}</Link>
                         )}
                     </Menu.Item>
                     {isUserAuthenticated ? (
@@ -91,7 +91,7 @@ const NavigationMenu: FC = () => {
                         </Menu.SubMenu>
                     ) : (
                         <Menu.Item key="login" icon={<UserOutlined/>}>
-                            <Link to="/api/auth/signin">{t('navMenuItems.sign-in')}</Link>
+                            <Link to="/signin">{t('navMenuItems.sign-in')}</Link>
                         </Menu.Item>
                     )}
                     <Menu.Item key="about-company" icon={<InfoCircleOutlined/>}>
@@ -123,8 +123,8 @@ const NavigationMenu: FC = () => {
                     </>
                 ) : (
                     <>
-                        <Route path="/api/auth/signup" element={<RegisterPage/>}/>
-                        <Route path="/api/auth/signin" element={<AuthPage/>}/>
+                        <Route path="/signup" element={<RegisterPage/>}/>
+                        <Route path="/signin" element={<AuthPage/>}/>
                     </>
                 )}
                 <Route path="*" element={<NotFoundPage/>}/>

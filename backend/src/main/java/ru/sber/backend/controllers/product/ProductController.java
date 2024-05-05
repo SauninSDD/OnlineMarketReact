@@ -65,6 +65,7 @@ public class ProductController {
         List<GetProductResponse> body = listProduct.getContent();
         if (language.equals("en") && !body.isEmpty()) {
             body = translateProducts(body);
+            log.info("Переводы: {}", body);
         }
         return ResponseEntity.ok()
                 .headers(headers)
@@ -153,9 +154,10 @@ public class ProductController {
             TranslateResponse translateResponse = responseTranslate.getBody();
             log.info("translateResponse {}", translateResponse);
             List<String> translates= Objects.requireNonNull(translateResponse).getTranslations().stream().map(TranslateResponseAttributes::getText).toList();
-            for (int i = 0; i < productsForTranslate.size(); i+=2) {
-                productsForTranslate.get(i/2).setProductName(translates.get(i));
-                productsForTranslate.get(i/2).setProductDescription(translates.get(i+1));
+            for (int i = 0; i < productsForTranslate.size(); i++) {
+                int translateIndex = i * 2;
+                productsForTranslate.get(i).setProductName(translates.get(translateIndex));
+                productsForTranslate.get(i).setProductDescription(translates.get(translateIndex + 1));
             }
             return productsForTranslate;
 

@@ -6,8 +6,6 @@ import authService from '../services/authService';
 import {IRegistration} from "@/types/types";
 import './styles/RegisterPage.css';
 import {useTranslation} from "react-i18next";
-import PhoneInput from "react-phone-input-2";
-
 
 /**
  * Страница регистрации пользователя
@@ -19,11 +17,14 @@ const RegisterPage: FC = () => {
     const navigate = useNavigate();
     const currentDate = new Date();
     const onFinish = (values: IRegistration) => {
+        if (values.number.startsWith('+')) {
+            values.number = values.number.substring(1);
+        }
         authService
             .register(values)
             .then(() => {
                 message.success(t('registerSuccess'));
-                navigate('/api/auth/signin');
+                navigate('/signin');
             })
             .catch((error) => {
                 message.error(t('registerError'));
@@ -42,7 +43,7 @@ const RegisterPage: FC = () => {
                         <p className={"registerPage__card-p"}>
                             {t('alreadyRegistered')}
                         </p>
-                        <Link to="/api/auth/signin" style={{marginTop: '20px'}}>
+                        <Link to="/signin" style={{marginTop: '20px'}}>
                             <Button
                                 type="primary"
                                 shape="round"
@@ -53,9 +54,11 @@ const RegisterPage: FC = () => {
                         </Link>
                     </div>
                     <div style={{flex: 1, padding: '50px'}}>
+
                         <h2 className={"registerPage__card-h2"}>
                             {t('register')}
                         </h2>
+
                         <Form form={form} layout="vertical" name="register" onFinish={onFinish}>
                             <Form.Item
                                 name="username"
@@ -69,22 +72,19 @@ const RegisterPage: FC = () => {
                             >
                                 <Input prefix={<MailOutlined/>} type="email" placeholder={t('email')}/>
                             </Form.Item>
+
                             <Form.Item
                                 name="number"
                                 validateTrigger={["onBlur"]}
                                 rules={[
-                                    {
-                                        required: true,
-                                        message: t('pleaseEnterPhoneNumber'),
-                                    },
+                                    { required: true, message: t('pleaseEnterPhoneNumber') },
+                                    { pattern: /^(\+7|8)\d{10}$/, message: t('invalidPhoneNumber') }
                                 ]}
                             >
-                                <PhoneInput
-                                    country="ru"
-                                    onlyCountries={["ru"]}
-                                    placeholder="+7-xxx-xxx-xx-xx"
-                                />
+                                <Input type="tel" placeholder={t('phoneNumber')} maxLength={12} />
                             </Form.Item>
+
+
                             <Form.Item
                                 name="birthdate"
                                 rules={[

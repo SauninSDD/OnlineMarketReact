@@ -11,6 +11,7 @@
   "pleaseEnterEmail": "Пожалуйста, введите email!",
   "pleaseEnterPhoneNumber": "Пожалуйста, введите номер телефона!",
   "pleaseEnterBirthdate": "Пожалуйста, введите дату рождения!",
+  "invalidPhoneNumber": "Некорректно введен номер телефона!",
   "yearOfBirthCannotBeBefore": "Год рождения не может быть раньше 1901.",
   "yearOfBirthCannotExceedCurrentDate": "Год рождения не может превышать текущую дату.",
   "registerButton": "Зарегистрироваться",

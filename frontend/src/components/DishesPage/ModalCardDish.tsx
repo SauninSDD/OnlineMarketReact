@@ -93,7 +93,7 @@ const ModalCardDish: FC<ModalCardDishProps> =
                                     {isLogged ? (
                                         <div> {t('addToCart')} </div>
                                     ) : (
-                                        <Link to="/api/auth/signin"> {t('login')} </Link>
+                                        <Link to="/signin"> {t('login')} </Link>
                                     )}
                                 </Button>
                             )}
