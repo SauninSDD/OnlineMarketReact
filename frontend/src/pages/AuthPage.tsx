@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {Row, Card, Form, Input, Button, message} from 'antd';
-import {LockOutlined} from '@ant-design/icons';
+import {LockOutlined, UserOutlined} from '@ant-design/icons';
 import authService from "../services/authService";
 import {useDispatch} from "react-redux";
 import {ILogin} from "@/types/types";
@@ -47,7 +47,7 @@ const AuthPage: FC = () => {
                         <p className={"authPage__card-p"}>
                             {t('firstTimeGuests')}
                         </p>
-                        <Link to="/api/auth/signup?target=Добавили_какой-то_контекст" style={{marginTop: '20px'}}>
+                        <Link to="/api/auth/signup" style={{marginTop: '20px'}}>
                             <Button
                                 type="primary"
                                 shape="round" size="large"
@@ -70,7 +70,7 @@ const AuthPage: FC = () => {
                                 name="username"
                                 rules={[{required: true, message:t('pleaseEnterUsername')}]}
                             >
-                                <Input/>
+                                <Input prefix={<UserOutlined/>} placeholder={t('username')}/>
                             </Form.Item>
                             <Form.Item
                                 name="password"

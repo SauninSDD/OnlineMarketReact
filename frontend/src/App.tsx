@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import Preloader from "./components/generals/Preloader"
 import './App.css';
 import './i18n';
@@ -11,28 +11,8 @@ import {Suspense} from 'react';
 
 
 const App = () => {
-    const [loading, setLoading] = useState<boolean>(true);
     const user = useAppSelector((state) => state.auth.user);
     const dispatch = useAppDispatch();
-
-
-    useEffect(() => {
-        const refreshInterval = setInterval(() => {
-            refreshToken();
-        }, 4 * 60 * 1000);
-
-        return () => clearInterval(refreshInterval);
-    }, [user]);
-
-    useEffect(() => {
-        refreshToken();
-    }, []);
-
-    useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 2);
-    }, []);
 
     const refreshToken = () => {
         console.log("Check for refresh");
@@ -57,18 +37,27 @@ const App = () => {
                 });
         }
     };
+
+    useEffect(() => {
+        const refreshInterval = setInterval(() => {
+            refreshToken();
+        }, 4 * 60 * 1000);
+
+        return () => clearInterval(refreshInterval);
+    }, [user]);
+
+    useEffect(() => {
+        refreshToken();
+    }, []);
+
     return (
-        <Suspense fallback="...is loading">
+        <Suspense fallback={<Preloader className="preloader"/>}>
             <div className="App">
-                {loading ? (
-                    <Preloader/>
-                ) : (
-                    <div>
-                        <Header/>
-                        <NavigationMenu/>
-                        <FloatButton.BackTop style={{width: "2.5%", height: "5%"}} visibilityHeight={100}/>
-                    </div>
-                )}
+                <div>
+                    <Header/>
+                    <NavigationMenu/>
+                    <FloatButton.BackTop style={{width: "2.5%", height: "5%"}} visibilityHeight={100}/>
+                </div>
             </div>
         </Suspense>
     );

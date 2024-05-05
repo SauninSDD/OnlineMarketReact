@@ -15,19 +15,20 @@ import {
     setTotalPage
 } from "@/slices/dishesSlice";
 import {useTranslation} from "react-i18next";
+import Preloader from "@/components/generals/Preloader";
 
 /**
  * Страница товаров ресторана
  * @constructor
  */
 const DishesPage: FC = () => {
-    const {t} = useTranslation();
-    const [size] = useState<number>(10)
+    const {t} = useTranslation('DishesPage');
+    const [size] = useState<number>(15)
     const currentCategory = useAppSelector((state) => state.dishes.category);
     const [scrollValueInPercent] = useState<number>(50)
     const dispatch = useAppDispatch()
     const location = useLocation();
-    const category: string = location.state ? location.state.category : '';
+    const category: string = location.state?.category ?? '';
     const fetching = useAppSelector((state) => state.dishes.fetching[category]) ?? true;
     const totalPage = useAppSelector((state) => state.dishes.totalPage[category]) ?? 1;
     const currentPage = useAppSelector((state) => state.dishes.currentPage[category]) ?? 0;
@@ -45,11 +46,11 @@ const DishesPage: FC = () => {
         setSearchText(value);
     };
 
-     useEffect(() => {
-         if (currentCategory !== category && currentCategory !== null) {
-             dispatch((setCategory(category)))
-         }
-     }, [category]);
+    useEffect(() => {
+        if (currentCategory !== category && currentCategory !== null) {
+            dispatch((setCategory(category)))
+        }
+    }, [category]);
 
     useEffect(() => {
         if (fetching && currentPage < totalPage) {
@@ -60,7 +61,7 @@ const DishesPage: FC = () => {
                 })
                 .finally(() => dispatch(setFetching(false)))
         }
-    }, [category, fetching, listDishes]);
+    }, [category, fetching, currentPage]);
 
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler)
@@ -75,12 +76,16 @@ const DishesPage: FC = () => {
                 <Slider/>
                 <SearchDishes onSearch={handleSearch}/>
                 <div className="category-section">
-                    {listDishes?.length === 0 && <p className="dishPage__content_p">
-                        {t('dishNotFound')}
-                    </p>}
                     <div>
                         <h2 id="category:1">{category}</h2>
                         <ListDishes dishes={listDishes}/>
+                        {listDishes?.length === 0 && <p className="dishPage__content_p">
+                            {t('dishNotFound')}
+                        </p>}
+                        {currentPage < totalPage ?
+                            <Preloader className={"dishPreloader"}/>
+                            : null
+                        }
                     </div>
                 </div>
             </div>

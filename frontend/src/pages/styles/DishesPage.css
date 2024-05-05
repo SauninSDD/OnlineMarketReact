@@ -18,5 +18,11 @@
 .dishPage__content_p {
     font-size: 32px;
     text-align: center;
-    padding-top: 20px;
+}
+
+.dishPreloader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
 }

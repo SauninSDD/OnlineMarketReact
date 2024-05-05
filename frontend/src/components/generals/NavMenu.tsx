@@ -1,22 +1,23 @@
-import React, {useState, useEffect, FC} from 'react';
+import React, {useState, useEffect, FC, lazy} from 'react';
 import {Menu} from 'antd';
 import {ShoppingCartOutlined, UserOutlined, InfoCircleOutlined, MenuOutlined} from '@ant-design/icons';
 import {Link, Route, Routes} from 'react-router-dom';
-import AboutPage from '../../pages/AboutPage';
 import CartPage from '../../pages/CartPage';
-import UserPage from '../../pages/UserPage';
 import DishesPage from '../../pages/DishesPage';
 import {NotFoundPage} from '@/pages/NotFoundPage';
 import './styles/NavMenu.css';
-import RegisterPage from "../../pages/RegisterPage";
-import AuthPage from "../../pages/AuthPage";
 import {user} from "@/constants/constants";
 import ResetPassword from "../AuthPage/ResetPassword";
 import ForgotPassword from "../AuthPage/ForgotPassword";
 import {useTranslation} from "react-i18next";
 import {Container, StyledButton} from "@/components/generals/styles/SwitcherLanguages";
 import {useAppDispatch, useAppSelector} from "@/hooks";
-import {clearState, setFetching} from "@/slices/dishesSlice";
+import {clearState} from "@/slices/dishesSlice";
+
+const AboutPage = lazy(() => import('../../pages/AboutPage'));
+const UserPage = lazy(() => import('../../pages/UserPage'));
+const RegisterPage = lazy(() => import('../../pages/RegisterPage'));
+const AuthPage = lazy(() => import('../../pages/AuthPage'));
 
 /**
  * Навигационное меню
@@ -36,16 +37,16 @@ const NavigationMenu: FC = () => {
         <div>
             <div className="navigationMenu">
                 <Menu mode="horizontal">
-                    <Menu.SubMenu key="restaurant-menu" title={t('navMenuItems.products')} popupClassName="horizontal-submenu"
+                    <Menu.SubMenu key="categories" title={t('navMenuItems.products')} popupClassName="horizontal-submenu"
                                   icon={<MenuOutlined/>}>
                         <Menu.Item key="category:1">
-                            <Link to="/" state={{category: '1'}}>{t('navMenuItems.category.category1')}</Link>
+                            <Link to="/" state={{category: 'category:1'}}>{t('navMenuItems.category.category1')}</Link>
                         </Menu.Item>
                         <Menu.Item key="category:2">
-                            <Link to="/" state={{category: '2'}}>{t('navMenuItems.category.category2')}</Link>
+                            <Link to="/" state={{category: 'category:2'}}>{t('navMenuItems.category.category2')}</Link>
                         </Menu.Item>
                         <Menu.Item key="category:3">
-                            <Link to="/" state={{anchorId: 'category:3'}}>{t('navMenuItems.category.category3')}</Link>
+                            <Link to="/" state={{category: 'category:3'}}>{t('navMenuItems.category.category3')}</Link>
                         </Menu.Item>
                         <Menu.Item key="category:4">
                             <Link to="/" state={{category: 'category:4'}}>{t('navMenuItems.category.category4')}</Link>
@@ -103,9 +104,7 @@ const NavigationMenu: FC = () => {
                             type="primary"
                             key={language}
                             onClick={() => {
-                                i18n.changeLanguage(language)
-                                dispatch(clearState())
-                                dispatch(setFetching(true))
+                                i18n.changeLanguage(language).then(() => dispatch(clearState()))
                             }}
                             disabled={i18n.resolvedLanguage === language}
                         >
@@ -120,7 +119,7 @@ const NavigationMenu: FC = () => {
                 <Route path="/about" element={<AboutPage/>}/>
                 {isUserAuthenticated ? (
                     <>
-                        <Route path="/user" element={<UserPage/>}/>
+                            <Route path="/user" element={<UserPage/>}/>
                     </>
                 ) : (
                     <>

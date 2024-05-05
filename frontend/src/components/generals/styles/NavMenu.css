@@ -8,8 +8,13 @@
     flex-shrink: 0
 }
 
+.navigationMenu .ant-menu-horizontal{
+    min-width: 445px;
+}
+
 .horizontal-submenu .ant-menu-sub {
-    width: 90vw;
+    width: 10vw;
     display: flex;
+    flex-wrap: wrap;
     text-align: center;
 }

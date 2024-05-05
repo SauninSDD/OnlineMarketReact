@@ -2,12 +2,16 @@ import {Space, Spin} from 'antd';
 import React, {FC} from "react";
 import './styles/Preloader.css';
 
+interface PreloaderProps {
+    className?: string;
+}
+
 /**
- * Спиннер во время загрузки приложения
+ * Спиннер
  * @constructor
  */
-const Preloader: FC = () => (
-    <Space size="middle" className={"preloader"}>
+const Preloader: FC<PreloaderProps> = ({ className }) => (
+    <Space size="middle" className={className}>
         <Spin size="large"/>
         <Spin/>
         <Spin size="large"/>

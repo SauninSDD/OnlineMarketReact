@@ -1,9 +1,9 @@
 
 ###Получение продукта по артиклю
-GET localhost:8085/Broomstick/products/searchByArticle/1
+GET localhost:8085/Broomstick/products/searchByArticle/174
 
 ###Получение категории продуктов (параметры: номер, размер страницы, категория)
-GET localhost:8085/Broomstick/products/searchByCategory?page=0&size=1&category=5&language=en
+GET localhost:8085/Broomstick/products/searchByCategory?page=0&size=1&category=1&language=en
 
 ###Поиск продуктов по названию (параметры: номер, размер страницы, название продукта) поиск проработанный
 GET localhost:8085/Broomstick/products/searchByName?page=0&size=50&name=Product 1 2

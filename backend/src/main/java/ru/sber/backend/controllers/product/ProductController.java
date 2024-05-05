@@ -19,6 +19,7 @@ import ru.sber.backend.services.product.ProductService;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 @Slf4j
 @RestController
@@ -58,18 +59,12 @@ public class ProductController {
      */
     @GetMapping("/searchByCategory")
     public ResponseEntity<List<GetProductResponse>> getListProduct(@RequestParam int page, @RequestParam int size, @RequestParam String category, @RequestParam String language) {
-        log.info("Получение страницы продуктов");
         Page<GetProductResponse> listProduct = productService.getProductsByCategory(page, size, category);
-        log.info("Суммарное кол-во страниц: {}", listProduct.getTotalPages());
         HttpHeaders headers = new HttpHeaders();
         headers.add("x-total-pages", String.valueOf(listProduct.getTotalPages()));
         List<GetProductResponse> body = listProduct.getContent();
-        if (language.equals("en")) {
-            log.info(String.valueOf(body.get(0)));
-            body.forEach(productResponse -> {
-                productResponse.setProductName(translateForEnglish(productResponse.getProductName()));
-                productResponse.setProductDescription(translateForEnglish(productResponse.getProductDescription()));
-            });
+        if (language.equals("en") && !body.isEmpty()) {
+            body = translateProducts(body);
         }
         return ResponseEntity.ok()
                 .headers(headers)
@@ -131,19 +126,13 @@ public class ProductController {
     }
 
     @Cacheable("translationCache")
-    public String translateForEnglish(String text) {
-        log.info("Перевод {}", text);
-        log.info("Значение в кеше перевода {}", Objects.requireNonNull(cacheManager.getCache("translationCache")));
-        log.info("Значение в кеше токена {}", Objects.requireNonNull(cacheManager.getCache("tokenCache")));
-        log.info("Значение некор в кеше токена {}", cacheManager.getCache("todkenCache"));
+    public List<GetProductResponse> translateProducts(List<GetProductResponse> productsForTranslate) {
+        List<String> listOfNames = productsForTranslate.stream().map(GetProductResponse::getProductName).toList();
+        List<String> listOfDescriptions = productsForTranslate.stream().map(GetProductResponse::getProductDescription).toList();
+        List<String> listForTranslate = Stream.concat(listOfNames.stream(), listOfDescriptions.stream())
+                .toList();
 
-        Cache.ValueWrapper tokenCacheValueWrapper = cacheManager.getCache("tokenCache").get("token");
-        if (tokenCacheValueWrapper != null) {
-            String tokenValue = (String) tokenCacheValueWrapper.get();
-            log.info("Значение в кеше токена: {}", tokenValue);
-        } else {
-            log.info("Значение в кеше токена отсутствует");
-        }
+        log.info("Массив для перевода {}", listForTranslate);
 
         String urlTranslate = "https://translate.api.cloud.yandex.net/translate/v2/translate";
         HttpHeaders headers = new HttpHeaders();
@@ -151,7 +140,7 @@ public class ProductController {
 
         try {
             headers.add("Authorization", "Bearer " + getTranslateToken());
-            HttpEntity<TranslateRequest> translateEntity = new HttpEntity<>(new TranslateRequest(List.of(text)), headers);
+            HttpEntity<TranslateRequest> translateEntity = new HttpEntity<>(new TranslateRequest(listForTranslate), headers);
 
             ResponseEntity<TranslateResponse> responseTranslate = new RestTemplate().exchange(
                     urlTranslate,
@@ -163,7 +152,12 @@ public class ProductController {
 
             TranslateResponse translateResponse = responseTranslate.getBody();
             log.info("translateResponse {}", translateResponse);
-            return Objects.requireNonNull(translateResponse).getTranslations().get(0).getText();
+            List<String> translates= Objects.requireNonNull(translateResponse).getTranslations().stream().map(TranslateResponseAttributes::getText).toList();
+            for (int i = 0; i < productsForTranslate.size(); i+=2) {
+                productsForTranslate.get(i/2).setProductName(translates.get(i));
+                productsForTranslate.get(i/2).setProductDescription(translates.get(i+1));
+            }
+            return productsForTranslate;
 
 
         } catch (Exception e) {

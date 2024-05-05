@@ -51,6 +51,7 @@ export const dishesSlice = createSlice({
         clearState: (state) => {
             state.dishes = {};
             state.currentPage = {}
+            state.fetching[state.category] = true;
         }
     },
 })

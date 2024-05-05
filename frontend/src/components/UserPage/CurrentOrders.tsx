@@ -1,10 +1,10 @@
 import {Space} from "antd";
 import React, {FC, useEffect} from "react";
 import './styles/DeliveryCard.css';
-import {IOrderFromHistory} from "../../types/types";
+import {IOrderFromHistory} from "@/types/types";
 import {OrderBlock} from "./OrderBlock";
 import OrderService from "../../services/orderService";
-import {useAppDispatch} from "../../hooks";
+import {useAppDispatch} from "@/hooks";
 import {useTranslation} from "react-i18next";
 
 interface CurrentOrders {
