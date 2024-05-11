@@ -1,8 +1,8 @@
-import {setOrders} from "../slices/ordersSlice";
+import {setOrders} from "@/slices/ordersSlice";
 import axios, {AxiosResponse} from "axios";
 import authHeader from "./auth-header";
-import {AppDispatch} from "../store";
-import {IOrderFromHistory, IOrderResponse} from "../types/types";
+import {AppDispatch} from "@/store";
+import {IOrderFromHistory, IOrderResponse} from "@/types/types";
 import CartService from "./cartService";
 
 const API_URL = "/orders";

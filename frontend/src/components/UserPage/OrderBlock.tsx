@@ -1,9 +1,9 @@
 import {Button, Card, Modal, message, Steps} from 'antd';
 import React, {FC, useState} from 'react';
-import {IOrderFromHistory} from '../../types/types';
+import {IOrderFromHistory} from '@/types/types';
 import TextArea from 'antd/es/input/TextArea';
 import OrderService from '../../services/orderService';
-import {useAppDispatch} from '../../hooks'
+import {useAppDispatch} from '@/hooks'
 import './styles/OrderBlock.css';
 import {
     DollarOutlined,
@@ -130,7 +130,7 @@ const OrderBlock: FC<OrderBlockProps> = ({order}) => {
 
             <Modal
                 title="Причина отмены заказа"
-                visible={isModalVisible}
+                open={isModalVisible}
                 onOk={handleOk}
                 onCancel={handleCancel}
             >

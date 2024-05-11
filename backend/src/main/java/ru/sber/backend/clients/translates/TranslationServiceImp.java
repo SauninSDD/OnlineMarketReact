@@ -24,6 +24,7 @@ public class TranslationServiceImp implements TranslationService {
     }
 
     @Override
+    @Cacheable("translationTexts")
     public List<String> translateTexts(List<String> texts) {
         log.warn("texts {}", texts);
         TranslateResponse translateResponse = translationClient.getTranslates(new TranslateRequest(texts));
