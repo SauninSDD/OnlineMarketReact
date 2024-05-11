@@ -10,6 +10,11 @@ export interface IProduct {
     weight: number;
 }
 
+export interface IProductCategory {
+    id: number;
+    categoryName: string;
+}
+
 export interface IDishFromCart extends IProduct {
     quantity: number;
 }
@@ -39,7 +44,7 @@ export interface IDeliveryInfo {
 
 export interface IOrderFromHistory extends IDeliveryInfo {
     id: number;
-    clientId: number;
+    clientId: string;
     totalPrice: number;
     listDishesFromOrder: IDishFromOrderHistory[];
     status: string;
@@ -48,29 +53,23 @@ export interface IOrderFromHistory extends IDeliveryInfo {
 }
 
 export interface IOrderResponse extends IDeliveryInfo {
-    clientId: number;
+    clientId?: string;
     totalPrice: number;
     weight: number;
     listDishesFromOrder: IDishFromOrderResponse[];
 }
 
 export interface IUser {
-    id: number;
+    id: string;
     username: string;
     number: string;
     birthdate: Date;
     email: string;
 }
 
-export interface IUserResponse {
-    refresh_token: Boolean;
-    accessToken: string;
-    id: number;
-    username: string;
-    number: string;
-    birthdate: Date;
-    email: string;
-    roles: string;
+export interface ITokens {
+    refresh_token: string;
+    access_token: string;
 }
 
 export interface IRegistration {

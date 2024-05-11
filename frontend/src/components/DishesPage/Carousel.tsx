@@ -10,10 +10,6 @@ const Slider: FC = () => {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [userActive, setUserActive] = useState<boolean>(false);
     const slides: string[] = [
-        'https://tvil.ru/blog/sites/blog/files/image/ckeditor/kulinarnie_turi_v_gr.jpg',
-        'https://static.tildacdn.com/tild6264-3132-4630-b937-663332313063/photo.jpg',
-        'http://папамихо.рф/wp-content/uploads/2020/04/244_402_20210922160529_2850-1536x1024.jpg',
-
     ];
 
     const goToPrevSlide = () => {

@@ -14,7 +14,7 @@ public interface ProductService {
     GetProductResponse getProductByArticle(int productArticle);
 
     //если не передана категория, то получает all продукты
-    Page<GetProductResponse> getProductsByCategory(int page, int size, String category);
+    Page<GetProductResponse> getProductsByCategoryId(int page, int size, Long category);
 
     Page<GetProductResponse> getProductsByName(int page, int size, String productName);
 

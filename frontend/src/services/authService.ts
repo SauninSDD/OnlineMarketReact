@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ILogin, IRegistration, IUser, IUserResponse} from "@/types/types";
+import {ILogin, IRegistration, IUser, ITokens} from "@/types/types";
 import authHeader from "./auth-header";
 import {Dispatch} from "redux";
 import {login, setUserData} from "@/slices/authSlice";
@@ -34,47 +34,66 @@ const loginUser = async (loginData: ILogin, dispatch: Dispatch) => {
             password,
         })
     console.log(response);
-    dispatch(login(response.data));
+    dispatch(login());
+    const {access_token, refresh_token} = response.data;
 
-    const headers = authHeader();
-    console.log(headers);
-    let detailsResponse = await axios
-        .get<IUser>(API_URL, {headers});
-    console.log(detailsResponse);
-    dispatch(setUserData(detailsResponse.data));
+    if (access_token && refresh_token) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+    }
 
-    return detailsResponse.data;
-
+    return fetchUserDetails(dispatch);
 };
-const refresh = async (refresh_token: String, dispatch: Dispatch): Promise<IUser> => {
+
+const refresh = async (refreshToken: String, dispatch: Dispatch): Promise<IUser> => {
     let response = await axios
-        .post<IUser>(API_URL + "/refresh", {
-            refresh_token
+        .post<ITokens>(API_URL + "/refresh", {
+            refresh_token: refreshToken
         });
-    console.log(response)
-    dispatch(login(response.data));
+    console.log('Refresh', response)
+    dispatch(login());
 
-    const headers = authHeader();
+    const {access_token, refresh_token} = response.data;
 
-    let detailsResponse = await axios
-        .get<IUser>(API_URL, { headers });
-    console.log(response)
-    dispatch(setUserData(detailsResponse.data));
+    if (access_token && refresh_token) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+    }
 
-    return detailsResponse.data;
+    return fetchUserDetails(dispatch);
 };
 
-const updateUser = async (user: IUserResponse, dispatch: AppDispatch) => {
+const updateUser = async (user: IUser, dispatch: AppDispatch) => {
     const headers = authHeader();
     let response = await axios
-        .put<IUser>(API_URL, user, {headers});
+        .put<IUser>(API_URL, user, {headers}).then(()=> {
+
+        })
     console.log(response);
     console.log(`Обновление данных пользователя ${API_URL}}`, user, {headers: authHeader()})
 
-    let detailsResponse = await axios
-        .get<IUser>(API_URL, { headers });
-    dispatch(setUserData(detailsResponse.data));
-    return detailsResponse;
+    //TODO вынести логику с получением и парсом токена пользователя в отдельную функцию (в App дублируется)
+    const userStr = localStorage.getItem("user");
+    let userS = null;
+    if (userStr) {
+        userS = JSON.parse(userStr);
+    }
+    console.log(userStr);
+    if (userS) {
+        const refresh_token = userS.refresh_token;
+        await refresh(refresh_token, dispatch)
+    }
+};
+
+const fetchUserDetails = async (dispatch: Dispatch) => {
+    const headers = authHeader();
+    try {
+        const response = await axios.get<IUser>(API_URL, { headers });
+        console.log('fetchUserDetailsResponse', response)
+        dispatch(setUserData(response.data));
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching user details:", error);
+        throw error;
+    }
 };
 
 /**
@@ -84,10 +103,9 @@ const updateUser = async (user: IUserResponse, dispatch: AppDispatch) => {
 const logout = () => {
     console.log("logout");
     localStorage.removeItem("user");
-    sessionStorage.removeItem("user");
 };
 
-const authService = {
+const AuthService = {
     register,
     loginUser,
     logout,
@@ -95,4 +113,4 @@ const authService = {
     refresh
 };
 
-export default authService;
+export default AuthService;

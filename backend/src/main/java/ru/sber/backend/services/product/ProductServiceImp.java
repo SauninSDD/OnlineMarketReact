@@ -45,11 +45,11 @@ public class ProductServiceImp implements ProductService {
 
 
     @Override
-    public Page<GetProductResponse> getProductsByCategory(int page, int size, String category) {
-        boolean isExistCategory = productCategoryRepository.existsByCategoryName(category);
+    public Page<GetProductResponse> getProductsByCategoryId(int page, int size, Long categoryId) {
+        boolean isExistCategory = productCategoryRepository.existsById(categoryId);
         Page<Product> productsPage;
         if (isExistCategory) {
-            productsPage = productRepository.findByCategoryCategoryName(category, PageRequest.of(page, size));
+            productsPage = productRepository.findByCategoryId(categoryId, PageRequest.of(page, size));
         } else {
             productsPage = productRepository.findAll(PageRequest.of(page, size));
         }

@@ -41,7 +41,8 @@ interface Resources {
     "addToCart": "Добавить в корзину",
     "login": "Войти",
     "photoAlt": "Фото",
-    "modalTitle": "Подробная информация о"
+    "modalTitle": "Подробная информация о",
+    "allProductsTitle": "Все продукты"
   },
   "Footer": {
     "footer": {
@@ -90,7 +91,7 @@ interface Resources {
       "Ярославль"
     ]
   },
-  "NavigationMenu": {
+  "NavMenu": {
     "navMenuItems": {
       "products": "Товары",
       "cart": "Корзина",
@@ -104,16 +105,16 @@ interface Resources {
         "login": "Войти"
       },
       "category": {
-        "category1": "Текстиль",
-        "category2": "Мебель",
-        "category3": "Фурнитура",
-        "category4": "Инструменты",
-        "category5": "Химия",
-        "category6": "Дача",
-        "category7": "Мелочь",
-        "category8": "Дороги",
-        "category9": "Свобода",
-        "category10": "Оружие"
+        "category:1": "Текстиль",
+        "category:2": "Мебель",
+        "category:3": "Фурнитура",
+        "category:4": "Инструменты",
+        "category:5": "Химия",
+        "category:6": "Дача",
+        "category:7": "Мелочь",
+        "category:8": "Дороги",
+        "category:9": "Свобода",
+        "category:10": "Оружие"
       }
     }
   },
@@ -163,7 +164,8 @@ interface Resources {
     "currentDeliveriesTab": "Текущие доставки",
     "orderHistoryTab": "История заказов",
     "notCurrentOrder": "Нет текущих заказов",
-    "notHistoryOrder": "Нет выполненных заказов"
+    "notHistoryOrder": "Нет выполненных заказов",
+    "invalidPhoneNumber": "Некорректно введен номер телефона!"
   }
 }
 

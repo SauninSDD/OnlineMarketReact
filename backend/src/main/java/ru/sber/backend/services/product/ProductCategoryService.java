@@ -7,7 +7,7 @@ import ru.sber.backend.models.product.AddProductCategoryRequest;
 import java.util.List;
 
 public interface ProductCategoryService {
-    List<String> getCategories();
+    List<ProductCategory> getCategories();
 
     List<String> getSubCategories(Long productCategoryId);
 

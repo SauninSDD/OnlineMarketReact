@@ -1,41 +1,35 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {IUserResponse} from "@/types/types";
+import {ILanguages, IUser} from "@/types/types";
 import {user} from "@/constants/constants";
 
 interface AuthState {
     isLoggedIn: boolean;
-    user: IUserResponse | null;
+    user?: IUser;
+    languages: ILanguages;
 }
 
 const initialState: AuthState = {
     isLoggedIn: Boolean(user),
-    user: user || null,
+    user: undefined,
+    languages: {
+        ru: {nativeName: 'Русский'},
+        en: {nativeName: 'English'}
+    },
 };
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState: initialState,
     reducers: {
-        login: (state, action: PayloadAction<any>) => {
+        login: (state) => {
             state.isLoggedIn = true;
-            console.log(action.payload.access_token)
-            if (action.payload.access_token && action.payload.refresh_token) {
-                sessionStorage.setItem('user', JSON.stringify(action.payload));
-            }
         },
-        setUserData: (state, action: PayloadAction<any>) => {
+        setUserData: (state, action: PayloadAction<IUser>) => {
             state.user = action.payload;
-            console.log("Login: "+ action.payload)
-            if (action.payload.id) {
-                localStorage.setItem('user', JSON.stringify(action.payload));
-            }
         },
         logout: (state) => {
             state.isLoggedIn = false;
-            state.user = null;
-            localStorage.removeItem('user');
-            sessionStorage.removeItem('user');
-            window.location.reload();
+            state.user = undefined;
         }
     },
 })

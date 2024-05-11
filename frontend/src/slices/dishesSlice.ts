@@ -14,7 +14,7 @@ interface DishesState {
     fetching: {
         [category: string]: boolean
     };
-    category: string;
+    category: number;
 }
 
 const initialState: DishesState = {
@@ -22,7 +22,7 @@ const initialState: DishesState = {
     currentPage: {},
     totalPage: {},
     fetching: {},
-    category: '',
+    category: 0,
 };
 
 export const dishesSlice = createSlice({
@@ -45,7 +45,7 @@ export const dishesSlice = createSlice({
         setFetching: (state, action: PayloadAction<boolean>) => {
             state.fetching[state.category] = action.payload;
         },
-        setCategory: (state, action: PayloadAction<string>) => {
+        setCategory: (state, action: PayloadAction<number>) => {
             state.category = action.payload;
         },
         clearState: (state) => {

@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import {Form, Input, Button, message} from 'antd';
-import resetPasswordService from '../../services/resetPasswordService';
+import ResetPasswordService from '../../services/resetPasswordService';
 import '../../pages/styles/ResetPassword.css';
 import {Link} from "react-router-dom";
 
@@ -26,7 +26,7 @@ const ResetPassword: FC = () => {
         }
 
         try {
-            await resetPasswordService.resetPassword(token, values.password, values.confirmPassword);
+            await ResetPasswordService.resetPassword(token, values.password, values.confirmPassword);
             setSuccess(true);
         } catch (error) {
             message.error('Ошибка при сбросе пароля');

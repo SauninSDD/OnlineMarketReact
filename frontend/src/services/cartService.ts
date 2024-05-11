@@ -89,11 +89,11 @@ const deleteFromCart = (dishId: number, dispatch: AppDispatch) => {
         });
 };
 
-const cartService = {
+const CartService = {
     getCart,
     addToCart,
     updateQuantity,
     deleteFromCart,
 };
 
-export default cartService
+export default CartService

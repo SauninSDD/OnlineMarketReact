@@ -1,4 +1,4 @@
-import React, {useState, useEffect, FC, lazy} from 'react';
+import React, {FC, lazy, useEffect} from 'react';
 import {Menu} from 'antd';
 import {ShoppingCartOutlined, UserOutlined, InfoCircleOutlined, MenuOutlined} from '@ant-design/icons';
 import {Link, Route, Routes} from 'react-router-dom';
@@ -6,13 +6,13 @@ import CartPage from '../../pages/CartPage';
 import DishesPage from '../../pages/DishesPage';
 import {NotFoundPage} from '@/pages/NotFoundPage';
 import './styles/NavMenu.css';
-import {user} from "@/constants/constants";
 import ResetPassword from "../AuthPage/ResetPassword";
 import ForgotPassword from "../AuthPage/ForgotPassword";
 import {useTranslation} from "react-i18next";
 import {Container, StyledButton} from "@/components/generals/styles/SwitcherLanguages";
 import {useAppDispatch, useAppSelector} from "@/hooks";
 import {clearState} from "@/slices/dishesSlice";
+import CategoryService from "@/services/categoryService";
 
 const AboutPage = lazy(() => import('../../pages/AboutPage'));
 const UserPage = lazy(() => import('../../pages/UserPage'));
@@ -23,62 +23,44 @@ const AuthPage = lazy(() => import('../../pages/AuthPage'));
  * Навигационное меню
  * @constructor
  */
-const NavigationMenu: FC = () => {
-    const {t, i18n} = useTranslation('NavigationMenu');
-    const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean>(false);
-    const languages = useAppSelector((state) => state.user.languages);
+const NavMenu: FC = () => {
+    const {t, i18n} = useTranslation('NavMenu');
+    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+    const languages = useAppSelector((state) => state.auth.languages);
+    const categories = useAppSelector((state) => state.categories.categories);
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        setIsUserAuthenticated(user != null);
-    }, []);
+        CategoryService.getCategories(i18n.resolvedLanguage ?? 'ru', dispatch)
+    }, [i18n.language])
 
     return (
         <div>
             <div className="navigationMenu">
                 <Menu mode="horizontal">
-                    <Menu.SubMenu key="categories" title={t('navMenuItems.products')} popupClassName="horizontal-submenu"
+                    <Menu.SubMenu key="categories" title={t('navMenuItems.products')}
+                                  popupClassName="horizontal-submenu"
                                   icon={<MenuOutlined/>}>
-                        <Menu.Item key="category:1">
-                            <Link to="/" state={{category: 'category:1'}}>{t('navMenuItems.category.category1')}</Link>
-                        </Menu.Item>
-                        <Menu.Item key="category:2">
-                            <Link to="/" state={{category: 'category:2'}}>{t('navMenuItems.category.category2')}</Link>
-                        </Menu.Item>
-                        <Menu.Item key="category:3">
-                            <Link to="/" state={{category: 'category:3'}}>{t('navMenuItems.category.category3')}</Link>
-                        </Menu.Item>
-                        <Menu.Item key="category:4">
-                            <Link to="/" state={{category: 'category:4'}}>{t('navMenuItems.category.category4')}</Link>
-                        </Menu.Item>
-                        <Menu.Item key="category:5">
-                            <Link to="/" state={{category: 'category:5'}}>{t('navMenuItems.category.category5')}</Link>
-                        </Menu.Item>
-                        <Menu.Item key="category:6">
-                            <Link to="/" state={{category: 'category:6'}}>{t('navMenuItems.category.category6')}</Link>
-                        </Menu.Item>
-                        <Menu.Item key="category:7">
-                            <Link to="/" state={{category: 'category:7'}}>{t('navMenuItems.category.category7')}</Link>
-                        </Menu.Item>
-                        <Menu.Item key="category:8">
-                            <Link to="/" state={{category: 'category:8'}}>{t('navMenuItems.category.category8')}</Link>
-                        </Menu.Item>
-                        <Menu.Item key="category:9">
-                            <Link to="/" state={{category: 'category:9'}}>{t('navMenuItems.category.category9')}</Link>
-                        </Menu.Item>
-                        <Menu.Item key="category:10">
-                            <Link to="/" state={{category: 'category:10'}}>{t('navMenuItems.category.category10')}</Link>
-                        </Menu.Item>
+
+                        {categories.map((category) => <Menu.Item key={category.id}>
+                                <Link to="/" state={{category: category}}>
+                                    {category.categoryName}
+                                </Link>
+
+                            </Menu.Item>
+                        )}
+
                     </Menu.SubMenu>
                     <Menu.Item key="cart" icon={<ShoppingCartOutlined/>}>
-                        {isUserAuthenticated ? (
+                        {isLoggedIn ? (
                             <Link to="/cart">{t('navMenuItems.cart')}</Link>
                         ) : (
                             <Link to="/signin">{t('navMenuItems.cart')}</Link>
                         )}
                     </Menu.Item>
-                    {isUserAuthenticated ? (
-                        <Menu.SubMenu key="personal-account" title={t('navMenuItems.privateOffice')} icon={<UserOutlined/>}>
+                    {isLoggedIn ? (
+                        <Menu.SubMenu key="personal-account" title={t('navMenuItems.privateOffice')}
+                                      icon={<UserOutlined/>}>
                             <Menu.Item key="user-profile">
                                 <Link to="/user?tab=profile">{t('navMenuItems.user.profile')}</Link>
                             </Menu.Item>
@@ -117,9 +99,9 @@ const NavigationMenu: FC = () => {
                 <Route path="/" element={<DishesPage/>}/>
                 <Route path="/cart" element={<CartPage/>}/>
                 <Route path="/about" element={<AboutPage/>}/>
-                {isUserAuthenticated ? (
+                {isLoggedIn ? (
                     <>
-                            <Route path="/user" element={<UserPage/>}/>
+                        <Route path="/user" element={<UserPage/>}/>
                     </>
                 ) : (
                     <>
@@ -135,4 +117,4 @@ const NavigationMenu: FC = () => {
     );
 };
 
-export default NavigationMenu;
+export default NavMenu;

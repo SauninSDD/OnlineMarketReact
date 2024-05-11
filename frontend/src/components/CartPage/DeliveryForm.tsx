@@ -8,9 +8,8 @@ import {
     IDishFromOrderResponse,
     IOrderResponse,
 } from "@/types/types";
-import {user} from "@/constants/constants";
 import OrderService from "../../services/orderService";
-import {useAppDispatch} from "@/hooks";
+import {useAppDispatch, useAppSelector} from "@/hooks";
 import Payment from "./Payment";
 
 interface DeliveryForm {
@@ -27,7 +26,9 @@ const DeliveryForm: FC<DeliveryForm> = ({
                                             totalPrice,
                                         }) => {
     const [form] = Form.useForm<IDeliveryInfo>();
+    const user = useAppSelector((store) => store.auth.user);
     const dispatch = useAppDispatch();
+
     const totalWeight: number = listDishesFromCart.reduce(
         (accumulator: number, item: IDishFromCart | undefined) =>
             accumulator + (item?.weight ?? 0) * (item?.quantity ?? 0), 0
@@ -45,7 +46,7 @@ const DeliveryForm: FC<DeliveryForm> = ({
         console.log("data form", {...form.getFieldsValue()})
         const order: IOrderResponse = {
             ...form.getFieldsValue(),
-            clientId: user?.id ?? 0,
+            clientId: user?.id,
             totalPrice: totalPrice,
             weight: totalWeight,
             listDishesFromOrder: listDishesFromOrder

@@ -19,8 +19,8 @@ public class ProductCategoryServiceImp implements ProductCategoryService{
     }
 
     @Override
-    public List<String> getCategories() {
-        return productCategoryRepository.findCategories().stream().map(ProductCategory::getCategoryName).toList();
+    public List<ProductCategory> getCategories() {
+        return productCategoryRepository.findCategories();
     }
 
     @Override

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {Row, Card, Form, Input, Button, message} from 'antd';
 import {UserOutlined, MailOutlined, CalendarOutlined, LockOutlined} from '@ant-design/icons';
-import authService from '../services/authService';
+import AuthService from '../services/authService';
 import {IRegistration} from "@/types/types";
 import './styles/RegisterPage.css';
 import {useTranslation} from "react-i18next";
@@ -20,7 +20,7 @@ const RegisterPage: FC = () => {
         if (values.number.startsWith('+')) {
             values.number = values.number.substring(1);
         }
-        authService
+        AuthService
             .register(values)
             .then(() => {
                 message.success(t('registerSuccess'));
@@ -83,7 +83,6 @@ const RegisterPage: FC = () => {
                             >
                                 <Input type="tel" placeholder={t('phoneNumber')} maxLength={12} />
                             </Form.Item>
-
 
                             <Form.Item
                                 name="birthdate"

@@ -13,16 +13,16 @@
       "login": "Login"
     },
     "category": {
-      "category1": "Textile",
-      "category2": "Furniture",
-      "category3": "Hardware",
-      "category4": "Tools",
-      "category5": "Chemicals",
-      "category6": "Garden",
-      "category7": "Trifles",
-      "category8": "Roads",
-      "category9": "Freedom",
-      "category10": "Weapons"
+      "category:1": "Textile",
+      "category:2": "Furniture",
+      "category:3": "Hardware",
+      "category:4": "Tools",
+      "category:5": "Chemicals",
+      "category:6": "Garden",
+      "category:7": "Trifles",
+      "category:8": "Roads",
+      "category:9": "Freedom",
+      "category:10": "Weapons"
     }
   }
 }

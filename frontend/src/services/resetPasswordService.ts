@@ -26,9 +26,9 @@ const resetPassword = (token: string | undefined, password: string, confirmPassw
         });
 };
 
-const resetPasswordService = {
+const ResetPasswordService = {
     forgotPassword,
     resetPassword,
 };
 
-export default resetPasswordService;
+export default ResetPasswordService;

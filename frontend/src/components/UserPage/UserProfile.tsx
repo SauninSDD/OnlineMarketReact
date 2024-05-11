@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {Button, Card, Input, Form, message} from "antd";
 import {
     CalendarOutlined,
@@ -8,15 +8,14 @@ import {
     SaveOutlined,
 } from "@ant-design/icons";
 import "react-phone-input-2/lib/style.css";
-import PhoneInput from "react-phone-input-2";
-import AuthService from "../../services/authService";
 import {Link} from "react-router-dom";
-import authService from "../../services/authService";
-import {IUserResponse} from "@/types/types";
+import AuthService from "../../services/authService";
+import {IUser} from "@/types/types";
 import {useAppDispatch, useAppSelector} from "@/hooks";
 import './styles/UserProfile.css';
 import {useTranslation} from "react-i18next";
 import UserInfo from "@/components/UserPage/UserInfo";
+import {logout} from "@/slices/authSlice";
 
 /**
  * Вкладка профиля пользователя
@@ -27,32 +26,28 @@ const UserProfile: FC = () => {
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const dispatch = useAppDispatch();
     const user = useAppSelector((store) => store.auth.user);
-    const [form] = Form.useForm<IUserResponse>();
+    const [form] = Form.useForm<IUser>();
 
     const handleLogout = () => {
-        AuthService.logout();
+        localStorage.removeItem('user');
+        dispatch(logout())
         message.success(t('logoutSuccess'));
-        const reloadTime = 1;
-        setTimeout(() => {
-            window.location.reload();
-        }, reloadTime);
-    };
-
-    const toggleEditing = () => {
-        setIsEditing(!isEditing);
     };
 
     const handleSave = () => {
         try {
             console.log("data form", {...form.getFieldsValue()})
             console.log("user", user)
-            authService.updateUser({...form.getFieldsValue()}, dispatch)
-            setIsEditing(false);
-            message.success(t('dataSaved'));
+            AuthService.updateUser({...form.getFieldsValue()}, dispatch)
+            setIsEditing(false)
+            message.success(t('dataSaved'))
         } catch (error) {
             message.error(t('saveError'));
         }
     };
+
+    useEffect(() => {
+    }, [isEditing])
 
     return (
         <div className={"userProfile"}>
@@ -109,17 +104,16 @@ const UserProfile: FC = () => {
                                     <Input prefix={<CalendarOutlined/>} disabled={true} type="date"
                                            placeholder={t('birthdate')}/>
                                 </Form.Item>
+                                //TODO надо будет поправить логику добавления номера
                                 <Form.Item
                                     name="number"
                                     validateTrigger={["onBlur"]}
                                     rules={[
-                                        {
-                                            required: true,
-                                            message: t('enterPhoneNumber'),
-                                        },
+                                        {required: true, message: t('enterPhoneNumber')},
+                                        {pattern: /^(\+7|8)\d{10}$/, message: t('invalidPhoneNumber')}
                                     ]}
                                 >
-                                    <PhoneInput country="ru" onlyCountries={["ru"]} placeholder={t('phoneInputPlaceholder')}/>
+                                    <Input type="tel" placeholder={t('phoneNumber')} maxLength={12}/>
                                 </Form.Item>
 
                                 <Form.Item>
@@ -133,46 +127,10 @@ const UserProfile: FC = () => {
                             </Form>
                         ) : (
                             <UserInfo user={user}/>
-                            /*
-                            <Form initialValues={user ?? {}}  className={"userProfile__form-fields"}>
-                                <Form.Item
-                                    name="username"
-                                >
-                                    <Input readOnly/>
-                                </Form.Item>
-                                <Form.Item name="email" >
-                                    <Input readOnly prefix={<MailOutlined/>}/>
-                                </Form.Item>
-                                <Form.Item
-                                    name="birthdate"
-                                >
-                                    <Input prefix={<CalendarOutlined/>} readOnly type="date"/>
-                                </Form.Item>
-                                <Form.Item
-                                    name="number"
-                                >
-                                    <PhoneInput inputProps={{ readOnly: true }} country="ru" onlyCountries={["ru"]} placeholder={t('phoneInputPlaceholder')} />
-                                </Form.Item>
-                            </Form>*/
-
-                            /*<div>
-                                <p>
-                                    <span>{user && user.username}</span>
-                                </p>
-                                <p>
-                                    <span>{user && user.email}</span>
-                                </p>
-                                <p>
-                                    <span>{user && user.birthdate.toString()}</span>
-                                </p>
-                                <p>
-                                    <span>{user && formatPhoneNumber(user.number)}</span>
-                                </p>
-                            </div>*/
                         )}
                     </div>
                 </div>
-                <Button className={"userProfile__button_editing"} onClick={toggleEditing}>
+                <Button className={"userProfile__button_editing"} onClick={() => setIsEditing(!isEditing)}>
                     {isEditing ? <span>{t('cancel')}</span> : <EditOutlined/>}
                 </Button>
                 <Link to="/">

@@ -12,16 +12,16 @@
       "login": "Войти"
     },
     "category": {
-      "category1": "Текстиль",
-      "category2": "Мебель",
-      "category3": "Фурнитура",
-      "category4": "Инструменты",
-      "category5": "Химия",
-      "category6": "Дача",
-      "category7": "Мелочь",
-      "category8": "Дороги",
-      "category9": "Свобода",
-      "category10": "Оружие"
+      "category:1": "Текстиль",
+      "category:2": "Мебель",
+      "category:3": "Фурнитура",
+      "category:4": "Инструменты",
+      "category:5": "Химия",
+      "category:6": "Дача",
+      "category:7": "Мелочь",
+      "category:8": "Дороги",
+      "category:9": "Свобода",
+      "category:10": "Оружие"
     }
   }
 }

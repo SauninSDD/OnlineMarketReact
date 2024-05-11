@@ -17,5 +17,6 @@
   "currentDeliveriesTab": "Текущие доставки",
   "orderHistoryTab": "История заказов",
   "notCurrentOrder": "Нет текущих заказов",
-  "notHistoryOrder": "Нет выполненных заказов"
+  "notHistoryOrder": "Нет выполненных заказов",
+  "invalidPhoneNumber": "Некорректно введен номер телефона!"
 }

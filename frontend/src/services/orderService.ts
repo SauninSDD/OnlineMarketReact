@@ -85,11 +85,11 @@ const paymentOfOrderById = (orderId: number) => {
         });
 };
 
-const orderService = {
+const OrderService = {
     getOrders,
     createOrder,
     cancelOrder,
     paymentOfOrderById,
 };
 
-export default orderService
+export default OrderService

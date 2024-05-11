@@ -1,9 +1,12 @@
 package ru.sber.backend.controllers.product;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.sber.backend.clients.translates.TranslationService;
+import ru.sber.backend.entities.product.ProductCategory;
 import ru.sber.backend.services.product.ProductCategoryService;
 
 import java.util.List;
@@ -12,23 +15,28 @@ import java.util.List;
 @RestController
 @RequestMapping("/categories")
 public class ProductCategoryController {
-
     private final ProductCategoryService productCategoryService;
+    private final TranslationService translationService;
 
     @Autowired
-    public ProductCategoryController( ProductCategoryService productCategoryService) {
+    public ProductCategoryController(ProductCategoryService productCategoryService, TranslationService translationService) {
         this.productCategoryService = productCategoryService;
+        this.translationService = translationService;
     }
 
     /**
-     * Получает катгории (без парент id)
+     * Получает категории (без парент id)
      *
      * @return List<String>
      */
     @GetMapping("/getCategories")
-    public ResponseEntity<List<String>> getCategories() {
+    public ResponseEntity<List<ProductCategory>> getCategories(@RequestParam @NotBlank String language) {
         log.info("Получение категорий");
-        List<String> categories = productCategoryService.getCategories();
+        List<ProductCategory> categories = productCategoryService.getCategories();
+        if (language.equals("en") && !categories.isEmpty()) {
+            categories = translationService.translateCategories(categories);
+            log.info("Переводы категорий: {}", categories);
+        }
         log.info("список категорий: {}", categories);
         return ResponseEntity.ok()
                 .body(categories);

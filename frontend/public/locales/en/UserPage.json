@@ -17,5 +17,6 @@
   "currentDeliveriesTab": "Current Deliveries",
   "orderHistoryTab": "Order History",
   "notCurrentOrder": "No current orders",
-  "notHistoryOrder": "No history orders"
+  "notHistoryOrder": "No history orders",
+  "invalidPhoneNumber": "Phone number entered incorrectly!"
 }

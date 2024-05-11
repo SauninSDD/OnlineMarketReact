@@ -3,10 +3,9 @@
  * @constructor
  */
 export default function authHeader() {
-
-    const userStr = sessionStorage.getItem("user");
-    console.log("header: " + userStr)
+    const userStr = localStorage.getItem("user");
     let user = null;
+
     if (userStr) {
         user = JSON.parse(userStr);
     }

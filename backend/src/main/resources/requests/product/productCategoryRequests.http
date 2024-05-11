@@ -1,5 +1,5 @@
 ###Получает список категорий
-GET localhost:8085/Broomstick/categories/getCategories
+GET localhost:8085/Broomstick/categories/getCategories?language=en
 
 ###Получает список подкатгорий по categoryId (без вложенных)
 GET localhost:8085/Broomstick/categories/getSubCategories?categoryId=1

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {Row, Card, Form, Input, Button, message} from 'antd';
 import {LockOutlined, UserOutlined} from '@ant-design/icons';
-import authService from "../services/authService";
+import AuthService from "../services/authService";
 import {useDispatch} from "react-redux";
 import {ILogin} from "@/types/types";
 import './styles/AuthPage.css';
@@ -19,15 +19,10 @@ const AuthPage: FC = () => {
     const dispatch = useDispatch();
 
     const onFinish = (values: ILogin) => {
-        authService.loginUser(values, dispatch).then((user) => {
-            console.log(user)
-            //dispatch(login(user))
+        AuthService.loginUser(values, dispatch).then((user) => {
+            console.log("Залогинился")
             message.success(t('success'))
-             navigate("/")
-            const reloadTime = 1;
-            setTimeout(() => {
-                 window.location.reload();
-             }, reloadTime);
+            navigate("/")
 
         }, (error) => {
             const _content = (error.response && error.response.data) || error.message || error.toString();
@@ -68,13 +63,13 @@ const AuthPage: FC = () => {
                         >
                             <Form.Item
                                 name="username"
-                                rules={[{required: true, message:t('pleaseEnterUsername')}]}
+                                rules={[{required: true, message: t('pleaseEnterUsername')}]}
                             >
                                 <Input prefix={<UserOutlined/>} placeholder={t('username')}/>
                             </Form.Item>
                             <Form.Item
                                 name="password"
-                                rules={[{required: true, message:t('pleaseEnterPassword')}]}
+                                rules={[{required: true, message: t('pleaseEnterPassword')}]}
                             >
                                 <Input.Password prefix={<LockOutlined/>} placeholder={t('password')}/>
                             </Form.Item>

@@ -9,10 +9,10 @@ const API_URL: string = "/Broomstick/products";
  * Запрос для получения меню ресторана
  * @constructor
  */
-const getDishes = (category: string, size: number, page: number, dispatch: AppDispatch) => {
+const getDishes = (categoryId: number, size: number, page: number, dispatch: AppDispatch) => {
     const language = i18n.resolvedLanguage
     //TODO поменять на добавление квери-параметров через buildQuery
-    return axios.get(`${API_URL}/searchByCategory?page=${page}&size=${size}&category=${category}&language=${language}`).then(
+    return axios.get(`${API_URL}/searchByCategory?page=${page}&size=${size}&categoryId=${categoryId}&language=${language}`).then(
         (response) => {
             console.log('Total Pages Dishes:', response.headers['x-total-pages']);
             console.log(response.data)
@@ -30,8 +30,8 @@ const getDishes = (category: string, size: number, page: number, dispatch: AppDi
         });
 };
 
-const dishService = {
+const DishService = {
     getDishes,
 };
 
-export default dishService
+export default DishService

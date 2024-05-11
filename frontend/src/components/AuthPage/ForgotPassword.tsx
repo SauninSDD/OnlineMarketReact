@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import {Form, Input, Button, message} from 'antd';
-import resetPasswordService from '../../services/resetPasswordService';
+import ResetPasswordService from '../../services/resetPasswordService';
 import '../../pages/styles/ForgotPassword.css';
 
 /**
@@ -15,7 +15,7 @@ const ForgotPassword: FC = () => {
         setLoading(true);
 
         try {
-            await resetPasswordService.forgotPassword(values.email);
+            await ResetPasswordService.forgotPassword(values.email);
             setSuccess(true);
         } catch (err) {
             message.error("Пользователя с такой почтой не существует");

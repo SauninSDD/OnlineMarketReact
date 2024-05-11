@@ -1,8 +1,7 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {Button, InputNumber, Modal, Tooltip} from "antd";
 import {Link} from "react-router-dom";
 import CartService from "../../services/cartService";
-import {user} from "@/constants/constants";
 import { IProduct, IDishFromCart} from "@/types/types";
 import {useAppDispatch, useAppSelector} from "@/hooks";
 import {useTranslation} from "react-i18next";
@@ -22,11 +21,11 @@ const ModalCardDish: FC<ModalCardDishProps> =
          dish, isModalOpen, onClose
      }) => {
         const {t} = useTranslation('DishesPage');
-        const [isLogged] = useState<boolean>(user !== null);
+        const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
         const dispatch = useAppDispatch();
         const dishFromCartById: IDishFromCart | undefined = useAppSelector((state) => state.cart.cartItems.find(item => item.id === dish.id))
         const handleAddClick = () => {
-            isLogged && (
+            isLoggedIn && (
                 CartService.addToCart(dish.id, dispatch)
             )
         }
@@ -90,7 +89,7 @@ const ModalCardDish: FC<ModalCardDishProps> =
                                     shape="round"
                                     size="large"
                                 >
-                                    {isLogged ? (
+                                    {isLoggedIn ? (
                                         <div> {t('addToCart')} </div>
                                     ) : (
                                         <Link to="/signin"> {t('login')} </Link>

@@ -1,3 +1,3 @@
-import {IUserResponse} from "../types/types";
+import {ITokens} from "@/types/types";
 
-export const user: IUserResponse | null = JSON.parse(localStorage.getItem('user') || "null");
+export const user: ITokens | null = JSON.parse(localStorage.getItem('user') || "null");

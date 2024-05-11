@@ -2,7 +2,7 @@ import {Button, Card, Modal, message, Steps} from 'antd';
 import React, {FC, useState} from 'react';
 import {IOrderFromHistory} from '../../types/types';
 import TextArea from 'antd/es/input/TextArea';
-import orderService from '../../services/orderService';
+import OrderService from '../../services/orderService';
 import {useAppDispatch} from '../../hooks'
 import './styles/OrderBlock.css';
 import {
@@ -32,7 +32,7 @@ const OrderBlock: FC<OrderBlockProps> = ({order}) => {
         if (cancelReason) {
             const orderId = order.id;
 
-            orderService
+            OrderService
                 .cancelOrder(orderId, cancelReason, dispatch)
                 .then(() => {
                     setIsModalVisible(false);

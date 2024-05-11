@@ -5,7 +5,7 @@ import DishService from "../services/dishService";
 import Footer from "../components/generals/Footer";
 import "./styles/DishesPage.css";
 import Slider from "../components/DishesPage/Carousel";
-import {IProduct} from "@/types/types";
+import {IProductCategory} from "@/types/types";
 import {useAppDispatch, useAppSelector} from "@/hooks";
 import SearchDishes from "../components/DishesPage/SearchDishes";
 import {
@@ -28,11 +28,11 @@ const DishesPage: FC = () => {
     const [scrollValueInPercent] = useState<number>(50)
     const dispatch = useAppDispatch()
     const location = useLocation();
-    const category: string = location.state?.category ?? '';
-    const fetching = useAppSelector((state) => state.dishes.fetching[category]) ?? true;
-    const totalPage = useAppSelector((state) => state.dishes.totalPage[category]) ?? 1;
-    const currentPage = useAppSelector((state) => state.dishes.currentPage[category]) ?? 0;
-    const listDishes: IProduct[] = useAppSelector((state) => state.dishes.dishes[category]) ?? [];
+    const category: IProductCategory = location.state?.category ?? {id: -1, category: ''};
+    const fetching = useAppSelector((state) => state.dishes.fetching[category.id]) ?? true;
+    const totalPage = useAppSelector((state) => state.dishes.totalPage[category.id]) ?? 1;
+    const currentPage = useAppSelector((state) => state.dishes.currentPage[category.id]) ?? 0;
+    const listDishes = useAppSelector((state) => state.dishes.dishes[category.id]) ?? [];
     const [searchText, setSearchText] = useState('');
 
     const scrollHandler = () => {
@@ -47,14 +47,15 @@ const DishesPage: FC = () => {
     };
 
     useEffect(() => {
-        if (currentCategory !== category && currentCategory !== null) {
-            dispatch((setCategory(category)))
+        if (currentCategory !== category.id && currentCategory !== null) {
+            dispatch((setCategory(category.id)))
         }
     }, [category]);
 
     useEffect(() => {
         if (fetching && currentPage < totalPage) {
-            DishService.getDishes(category, size, currentPage, dispatch)
+            //Если категории нет в location, то откинуть значение id которого не существует для получения всех продуктов
+            DishService.getDishes(category.id, size, currentPage, dispatch)
                 .then((response) => {
                     dispatch(setCurrentPage(currentPage + 1))
                     dispatch(setTotalPage(parseInt(response?.headers['x-total-pages'] ?? '0')))
@@ -63,7 +64,7 @@ const DishesPage: FC = () => {
         } else {
             dispatch(setFetching(false))
         }
-    }, [category, fetching, currentPage]);
+    }, [category.id, fetching, currentPage]);
 
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler)
@@ -79,7 +80,7 @@ const DishesPage: FC = () => {
                 <SearchDishes onSearch={handleSearch}/>
                 <div className="category-section">
                     <div>
-                        <h2 id="category:1">{category}</h2>
+                        <h2 id="category:1">{category.categoryName ? category.categoryName : t('allProductsTitle')}</h2>
                         <ListDishes dishes={listDishes}/>
                         {listDishes?.length === 0 && !fetching && <p className="dishPage__content_p">
                             {t('dishNotFound')}
