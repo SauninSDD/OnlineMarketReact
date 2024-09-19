@@ -1,9 +1,19 @@
-# OnlineMarketReact
+# Интернет-магазин для хозтоваров
 
-Запуск приложения:
-    Backend:
-1)
+На данный момент реализована страница аутентификации, личный кабинет, каталог
 
-    Frontend:
+
+
+
+
+### Запуск приложения:
+#### Backend:
+1) Поднять и сконфигурировать сервер keycloak.
+2) Поднять сервер vault и импортировать json с секретами.
+3) Поднять сервер postgres и подключиться к нему.
+4) Зайти в файл pom.xml и нажать "add maven project".
+5) Запустить проект через CustomerApplication.java
+
+#### Frontend:
 1) npm install --legacy-peer-deps
 2) npm run start
