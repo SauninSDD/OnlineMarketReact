@@ -1,4 +1,13 @@
--- insert into product_category (category_name, parent_id)  values ()
+insert into product_category (category_name)  values ('Метлы');
+insert into product_category (category_name)  values ('Швабры');
+insert into product_category (category_name)  values ('Тапки');
+insert into product_category (category_name)  values ('Вилы');
+insert into product_category (category_name)  values ('Черенки');
+insert into product_category (category_name)  values ('Гвозди');
+insert into product_category (category_name)  values ('Инструменты');
+insert into product_category (category_name)  values ('Пилы');
+insert into product_category (category_name)  values ('Текилы');
+insert into product_category (category_name)  values ('Чебуреки');
 /*1,1,
 2,2,1
 3,3,2
